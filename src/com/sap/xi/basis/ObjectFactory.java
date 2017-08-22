@@ -24,19 +24,19 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _IntegratedConfigurationCheckRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationCheckRequest");
-    private final static QName _IntegratedConfigurationOpenForEditRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationOpenForEditRequest");
-    private final static QName _IntegratedConfigurationOpenForEditResponse_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationOpenForEditResponse");
-    private final static QName _IntegratedConfigurationCreateRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationCreateRequest");
-    private final static QName _IntegratedConfigurationReadRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationReadRequest");
-    private final static QName _IntegratedConfigurationChangeRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationChangeRequest");
-    private final static QName _IntegratedConfigurationRevertRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationRevertRequest");
+    private final static QName _CommunicationPartyReadRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyReadRequest");
+    private final static QName _CommunicationPartyOpenForEditResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyOpenForEditResponse");
+    private final static QName _CommunicationPartyQueryResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyQueryResponse");
+    private final static QName _CommunicationPartyCreateRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyCreateRequest");
+    private final static QName _CommunicationPartyChangeRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyChangeRequest");
+    private final static QName _CommunicationPartyReadResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyReadResponse");
+    private final static QName _CommunicationPartyOpenForEditRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyOpenForEditRequest");
+    private final static QName _CommunicationPartyCheckRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyCheckRequest");
     private final static QName _ConfigurationObjectModifyResponse_QNAME = new QName("http://sap.com/xi/BASIS", "ConfigurationObjectModifyResponse");
-    private final static QName _IntegratedConfigurationReadResponse_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationReadResponse");
+    private final static QName _CommunicationPartyRevertRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyRevertRequest");
     private final static QName _LogMessageCollection_QNAME = new QName("http://sap.com/xi/BASIS", "LogMessageCollection");
-    private final static QName _IntegratedConfigurationQueryResponse_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationQueryResponse");
-    private final static QName _IntegratedConfigurationDeleteRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationDeleteRequest");
-    private final static QName _IntegratedConfigurationQueryRequest_QNAME = new QName("http://sap.com/xi/BASIS", "IntegratedConfigurationQueryRequest");
+    private final static QName _CommunicationPartyDeleteRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyDeleteRequest");
+    private final static QName _CommunicationPartyQueryRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyQueryRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.sap.xi.basis
@@ -46,43 +46,59 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link IntegratedConfigurationIdentifierCollection }
+     * Create an instance of {@link CommunicationPartyReadIn }
      * 
      */
-    public IntegratedConfigurationIdentifierCollection createIntegratedConfigurationIdentifierCollection() {
-        return new IntegratedConfigurationIdentifierCollection();
+    public CommunicationPartyReadIn createCommunicationPartyReadIn() {
+        return new CommunicationPartyReadIn();
     }
 
     /**
-     * Create an instance of {@link IntegratedConfigurationOpenForEditOut }
+     * Create an instance of {@link CommunicationPartyOpenForEditOut }
      * 
      */
-    public IntegratedConfigurationOpenForEditOut createIntegratedConfigurationOpenForEditOut() {
-        return new IntegratedConfigurationOpenForEditOut();
+    public CommunicationPartyOpenForEditOut createCommunicationPartyOpenForEditOut() {
+        return new CommunicationPartyOpenForEditOut();
     }
 
     /**
-     * Create an instance of {@link IntegratedConfigurationDeleteOpenForEditIn }
+     * Create an instance of {@link CommunicationPartyQueryOut }
      * 
      */
-    public IntegratedConfigurationDeleteOpenForEditIn createIntegratedConfigurationDeleteOpenForEditIn() {
-        return new IntegratedConfigurationDeleteOpenForEditIn();
+    public CommunicationPartyQueryOut createCommunicationPartyQueryOut() {
+        return new CommunicationPartyQueryOut();
     }
 
     /**
-     * Create an instance of {@link IntegratedConfigurationReadIn }
+     * Create an instance of {@link CommunicationPartyCreateChangeIn }
      * 
      */
-    public IntegratedConfigurationReadIn createIntegratedConfigurationReadIn() {
-        return new IntegratedConfigurationReadIn();
+    public CommunicationPartyCreateChangeIn createCommunicationPartyCreateChangeIn() {
+        return new CommunicationPartyCreateChangeIn();
     }
 
     /**
-     * Create an instance of {@link IntegratedConfigurationCreateChangeIn }
+     * Create an instance of {@link CommunicationPartyReadOut }
      * 
      */
-    public IntegratedConfigurationCreateChangeIn createIntegratedConfigurationCreateChangeIn() {
-        return new IntegratedConfigurationCreateChangeIn();
+    public CommunicationPartyReadOut createCommunicationPartyReadOut() {
+        return new CommunicationPartyReadOut();
+    }
+
+    /**
+     * Create an instance of {@link CommunicationPartyDeleteOpenForEditIn }
+     * 
+     */
+    public CommunicationPartyDeleteOpenForEditIn createCommunicationPartyDeleteOpenForEditIn() {
+        return new CommunicationPartyDeleteOpenForEditIn();
+    }
+
+    /**
+     * Create an instance of {@link CommunicationPartyIdentifierCollection }
+     * 
+     */
+    public CommunicationPartyIdentifierCollection createCommunicationPartyIdentifierCollection() {
+        return new CommunicationPartyIdentifierCollection();
     }
 
     /**
@@ -102,179 +118,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link IntegratedConfigurationReadOut }
+     * Create an instance of {@link CommunicationPartyQueryIn }
      * 
      */
-    public IntegratedConfigurationReadOut createIntegratedConfigurationReadOut() {
-        return new IntegratedConfigurationReadOut();
-    }
-
-    /**
-     * Create an instance of {@link IntegratedConfigurationQueryOut }
-     * 
-     */
-    public IntegratedConfigurationQueryOut createIntegratedConfigurationQueryOut() {
-        return new IntegratedConfigurationQueryOut();
-    }
-
-    /**
-     * Create an instance of {@link IntegratedConfigurationQueryIn }
-     * 
-     */
-    public IntegratedConfigurationQueryIn createIntegratedConfigurationQueryIn() {
-        return new IntegratedConfigurationQueryIn();
-    }
-
-    /**
-     * Create an instance of {@link IntegratedConfiguration }
-     * 
-     */
-    public IntegratedConfiguration createIntegratedConfiguration() {
-        return new IntegratedConfiguration();
-    }
-
-    /**
-     * Create an instance of {@link InboundProcessing }
-     * 
-     */
-    public InboundProcessing createInboundProcessing() {
-        return new InboundProcessing();
-    }
-
-    /**
-     * Create an instance of {@link GenericTableRowTableCell }
-     * 
-     */
-    public GenericTableRowTableCell createGenericTableRowTableCell() {
-        return new GenericTableRowTableCell();
-    }
-
-    /**
-     * Create an instance of {@link LogMessageCommunicationComponent }
-     * 
-     */
-    public LogMessageCommunicationComponent createLogMessageCommunicationComponent() {
-        return new LogMessageCommunicationComponent();
-    }
-
-    /**
-     * Create an instance of {@link LogMessageItem }
-     * 
-     */
-    public LogMessageItem createLogMessageItem() {
-        return new LogMessageItem();
-    }
-
-    /**
-     * Create an instance of {@link IntegratedConfigurationReceiverInterfaceRule }
-     * 
-     */
-    public IntegratedConfigurationReceiverInterfaceRule createIntegratedConfigurationReceiverInterfaceRule() {
-        return new IntegratedConfigurationReceiverInterfaceRule();
-    }
-
-    /**
-     * Create an instance of {@link ChangeListID }
-     * 
-     */
-    public ChangeListID createChangeListID() {
-        return new ChangeListID();
-    }
-
-    /**
-     * Create an instance of {@link ReceiverDeterminationInclude }
-     * 
-     */
-    public ReceiverDeterminationInclude createReceiverDeterminationInclude() {
-        return new ReceiverDeterminationInclude();
-    }
-
-    /**
-     * Create an instance of {@link RestrictedGenericProperty }
-     * 
-     */
-    public RestrictedGenericProperty createRestrictedGenericProperty() {
-        return new RestrictedGenericProperty();
-    }
-
-    /**
-     * Create an instance of {@link LogMessageChangeList }
-     * 
-     */
-    public LogMessageChangeList createLogMessageChangeList() {
-        return new LogMessageChangeList();
-    }
-
-    /**
-     * Create an instance of {@link IntegratedConfigurationReceiverRule }
-     * 
-     */
-    public IntegratedConfigurationReceiverRule createIntegratedConfigurationReceiverRule() {
-        return new IntegratedConfigurationReceiverRule();
-    }
-
-    /**
-     * Create an instance of {@link MappingParameters }
-     * 
-     */
-    public MappingParameters createMappingParameters() {
-        return new MappingParameters();
-    }
-
-    /**
-     * Create an instance of {@link ChannelProperty }
-     * 
-     */
-    public ChannelProperty createChannelProperty() {
-        return new ChannelProperty();
-    }
-
-    /**
-     * Create an instance of {@link ReceiverDeterminationMapping }
-     * 
-     */
-    public ReceiverDeterminationMapping createReceiverDeterminationMapping() {
-        return new ReceiverDeterminationMapping();
-    }
-
-    /**
-     * Create an instance of {@link ObjectAdministrativeData }
-     * 
-     */
-    public ObjectAdministrativeData createObjectAdministrativeData() {
-        return new ObjectAdministrativeData();
-    }
-
-    /**
-     * Create an instance of {@link GenericTableRow }
-     * 
-     */
-    public GenericTableRow createGenericTableRow() {
-        return new GenericTableRow();
-    }
-
-    /**
-     * Create an instance of {@link AtomicConditionBlock }
-     * 
-     */
-    public AtomicConditionBlock createAtomicConditionBlock() {
-        return new AtomicConditionBlock();
-    }
-
-    /**
-     * Create an instance of {@link OutboundProcessing }
-     * 
-     */
-    public OutboundProcessing createOutboundProcessing() {
-        return new OutboundProcessing();
-    }
-
-    /**
-     * Create an instance of {@link PrefixNamespaceMapping }
-     * 
-     */
-    public PrefixNamespaceMapping createPrefixNamespaceMapping() {
-        return new PrefixNamespaceMapping();
+    public CommunicationPartyQueryIn createCommunicationPartyQueryIn() {
+        return new CommunicationPartyQueryIn();
     }
 
     /**
@@ -286,19 +134,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GenericPropertyTable }
+     * Create an instance of {@link RestrictedCommunicationParty }
      * 
      */
-    public GenericPropertyTable createGenericPropertyTable() {
-        return new GenericPropertyTable();
-    }
-
-    /**
-     * Create an instance of {@link ReceiverInterfaces }
-     * 
-     */
-    public ReceiverInterfaces createReceiverInterfaces() {
-        return new ReceiverInterfaces();
+    public RestrictedCommunicationParty createRestrictedCommunicationParty() {
+        return new RestrictedCommunicationParty();
     }
 
     /**
@@ -318,11 +158,35 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LogMessageCommunicationComponent }
+     * 
+     */
+    public LogMessageCommunicationComponent createLogMessageCommunicationComponent() {
+        return new LogMessageCommunicationComponent();
+    }
+
+    /**
+     * Create an instance of {@link LogMessageItem }
+     * 
+     */
+    public LogMessageItem createLogMessageItem() {
+        return new LogMessageItem();
+    }
+
+    /**
      * Create an instance of {@link LogMessageReceiverRule }
      * 
      */
     public LogMessageReceiverRule createLogMessageReceiverRule() {
         return new LogMessageReceiverRule();
+    }
+
+    /**
+     * Create an instance of {@link CommunicationPartyAdditionalIdentifier }
+     * 
+     */
+    public CommunicationPartyAdditionalIdentifier createCommunicationPartyAdditionalIdentifier() {
+        return new CommunicationPartyAdditionalIdentifier();
     }
 
     /**
@@ -334,14 +198,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link HeaderMapping }
-     * 
-     */
-    public HeaderMapping createHeaderMapping() {
-        return new HeaderMapping();
-    }
-
-    /**
      * Create an instance of {@link LogMessageProcessComponent }
      * 
      */
@@ -350,35 +206,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Extractor }
+     * Create an instance of {@link ChangeListID }
      * 
      */
-    public Extractor createExtractor() {
-        return new Extractor();
+    public ChangeListID createChangeListID() {
+        return new ChangeListID();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartnerExtractor }
+     * Create an instance of {@link LogMessageChangeList }
      * 
      */
-    public CommunicationPartnerExtractor createCommunicationPartnerExtractor() {
-        return new CommunicationPartnerExtractor();
+    public LogMessageChangeList createLogMessageChangeList() {
+        return new LogMessageChangeList();
     }
 
     /**
-     * Create an instance of {@link Condition }
+     * Create an instance of {@link ObjectAdministrativeData }
      * 
      */
-    public Condition createCondition() {
-        return new Condition();
-    }
-
-    /**
-     * Create an instance of {@link IntegerProperty }
-     * 
-     */
-    public IntegerProperty createIntegerProperty() {
-        return new IntegerProperty();
+    public ObjectAdministrativeData createObjectAdministrativeData() {
+        return new ObjectAdministrativeData();
     }
 
     /**
@@ -398,35 +246,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Receivers }
-     * 
-     */
-    public Receivers createReceivers() {
-        return new Receivers();
-    }
-
-    /**
-     * Create an instance of {@link AtomicCondition }
-     * 
-     */
-    public AtomicCondition createAtomicCondition() {
-        return new AtomicCondition();
-    }
-
-    /**
      * Create an instance of {@link LogMessageValueMapping }
      * 
      */
     public LogMessageValueMapping createLogMessageValueMapping() {
         return new LogMessageValueMapping();
-    }
-
-    /**
-     * Create an instance of {@link RestrictedIntegratedConfiguration }
-     * 
-     */
-    public RestrictedIntegratedConfiguration createRestrictedIntegratedConfiguration() {
-        return new RestrictedIntegratedConfiguration();
     }
 
     /**
@@ -438,19 +262,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DesignObjectID }
+     * Create an instance of {@link CommunicationParty }
      * 
      */
-    public DesignObjectID createDesignObjectID() {
-        return new DesignObjectID();
-    }
-
-    /**
-     * Create an instance of {@link AdvancedSettings }
-     * 
-     */
-    public AdvancedSettings createAdvancedSettings() {
-        return new AdvancedSettings();
+    public CommunicationParty createCommunicationParty() {
+        return new CommunicationParty();
     }
 
     /**
@@ -462,14 +278,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GenericProperty }
-     * 
-     */
-    public GenericProperty createGenericProperty() {
-        return new GenericProperty();
-    }
-
-    /**
      * Create an instance of {@link LogMessageConfigurationScenario }
      * 
      */
@@ -478,66 +286,75 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationIdentifierCollection }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyReadIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationCheckRequest")
-    public JAXBElement<IntegratedConfigurationIdentifierCollection> createIntegratedConfigurationCheckRequest(IntegratedConfigurationIdentifierCollection value) {
-        return new JAXBElement<IntegratedConfigurationIdentifierCollection>(_IntegratedConfigurationCheckRequest_QNAME, IntegratedConfigurationIdentifierCollection.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyReadRequest")
+    public JAXBElement<CommunicationPartyReadIn> createCommunicationPartyReadRequest(CommunicationPartyReadIn value) {
+        return new JAXBElement<CommunicationPartyReadIn>(_CommunicationPartyReadRequest_QNAME, CommunicationPartyReadIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationDeleteOpenForEditIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyOpenForEditOut }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationOpenForEditRequest")
-    public JAXBElement<IntegratedConfigurationDeleteOpenForEditIn> createIntegratedConfigurationOpenForEditRequest(IntegratedConfigurationDeleteOpenForEditIn value) {
-        return new JAXBElement<IntegratedConfigurationDeleteOpenForEditIn>(_IntegratedConfigurationOpenForEditRequest_QNAME, IntegratedConfigurationDeleteOpenForEditIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyOpenForEditResponse")
+    public JAXBElement<CommunicationPartyOpenForEditOut> createCommunicationPartyOpenForEditResponse(CommunicationPartyOpenForEditOut value) {
+        return new JAXBElement<CommunicationPartyOpenForEditOut>(_CommunicationPartyOpenForEditResponse_QNAME, CommunicationPartyOpenForEditOut.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationOpenForEditOut }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyQueryOut }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationOpenForEditResponse")
-    public JAXBElement<IntegratedConfigurationOpenForEditOut> createIntegratedConfigurationOpenForEditResponse(IntegratedConfigurationOpenForEditOut value) {
-        return new JAXBElement<IntegratedConfigurationOpenForEditOut>(_IntegratedConfigurationOpenForEditResponse_QNAME, IntegratedConfigurationOpenForEditOut.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyQueryResponse")
+    public JAXBElement<CommunicationPartyQueryOut> createCommunicationPartyQueryResponse(CommunicationPartyQueryOut value) {
+        return new JAXBElement<CommunicationPartyQueryOut>(_CommunicationPartyQueryResponse_QNAME, CommunicationPartyQueryOut.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationCreateChangeIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyCreateChangeIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationCreateRequest")
-    public JAXBElement<IntegratedConfigurationCreateChangeIn> createIntegratedConfigurationCreateRequest(IntegratedConfigurationCreateChangeIn value) {
-        return new JAXBElement<IntegratedConfigurationCreateChangeIn>(_IntegratedConfigurationCreateRequest_QNAME, IntegratedConfigurationCreateChangeIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyCreateRequest")
+    public JAXBElement<CommunicationPartyCreateChangeIn> createCommunicationPartyCreateRequest(CommunicationPartyCreateChangeIn value) {
+        return new JAXBElement<CommunicationPartyCreateChangeIn>(_CommunicationPartyCreateRequest_QNAME, CommunicationPartyCreateChangeIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationReadIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyCreateChangeIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationReadRequest")
-    public JAXBElement<IntegratedConfigurationReadIn> createIntegratedConfigurationReadRequest(IntegratedConfigurationReadIn value) {
-        return new JAXBElement<IntegratedConfigurationReadIn>(_IntegratedConfigurationReadRequest_QNAME, IntegratedConfigurationReadIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyChangeRequest")
+    public JAXBElement<CommunicationPartyCreateChangeIn> createCommunicationPartyChangeRequest(CommunicationPartyCreateChangeIn value) {
+        return new JAXBElement<CommunicationPartyCreateChangeIn>(_CommunicationPartyChangeRequest_QNAME, CommunicationPartyCreateChangeIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationCreateChangeIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyReadOut }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationChangeRequest")
-    public JAXBElement<IntegratedConfigurationCreateChangeIn> createIntegratedConfigurationChangeRequest(IntegratedConfigurationCreateChangeIn value) {
-        return new JAXBElement<IntegratedConfigurationCreateChangeIn>(_IntegratedConfigurationChangeRequest_QNAME, IntegratedConfigurationCreateChangeIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyReadResponse")
+    public JAXBElement<CommunicationPartyReadOut> createCommunicationPartyReadResponse(CommunicationPartyReadOut value) {
+        return new JAXBElement<CommunicationPartyReadOut>(_CommunicationPartyReadResponse_QNAME, CommunicationPartyReadOut.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationIdentifierCollection }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyDeleteOpenForEditIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationRevertRequest")
-    public JAXBElement<IntegratedConfigurationIdentifierCollection> createIntegratedConfigurationRevertRequest(IntegratedConfigurationIdentifierCollection value) {
-        return new JAXBElement<IntegratedConfigurationIdentifierCollection>(_IntegratedConfigurationRevertRequest_QNAME, IntegratedConfigurationIdentifierCollection.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyOpenForEditRequest")
+    public JAXBElement<CommunicationPartyDeleteOpenForEditIn> createCommunicationPartyOpenForEditRequest(CommunicationPartyDeleteOpenForEditIn value) {
+        return new JAXBElement<CommunicationPartyDeleteOpenForEditIn>(_CommunicationPartyOpenForEditRequest_QNAME, CommunicationPartyDeleteOpenForEditIn.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyIdentifierCollection }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyCheckRequest")
+    public JAXBElement<CommunicationPartyIdentifierCollection> createCommunicationPartyCheckRequest(CommunicationPartyIdentifierCollection value) {
+        return new JAXBElement<CommunicationPartyIdentifierCollection>(_CommunicationPartyCheckRequest_QNAME, CommunicationPartyIdentifierCollection.class, null, value);
     }
 
     /**
@@ -550,12 +367,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationReadOut }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyIdentifierCollection }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationReadResponse")
-    public JAXBElement<IntegratedConfigurationReadOut> createIntegratedConfigurationReadResponse(IntegratedConfigurationReadOut value) {
-        return new JAXBElement<IntegratedConfigurationReadOut>(_IntegratedConfigurationReadResponse_QNAME, IntegratedConfigurationReadOut.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyRevertRequest")
+    public JAXBElement<CommunicationPartyIdentifierCollection> createCommunicationPartyRevertRequest(CommunicationPartyIdentifierCollection value) {
+        return new JAXBElement<CommunicationPartyIdentifierCollection>(_CommunicationPartyRevertRequest_QNAME, CommunicationPartyIdentifierCollection.class, null, value);
     }
 
     /**
@@ -568,30 +385,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationQueryOut }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyDeleteOpenForEditIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationQueryResponse")
-    public JAXBElement<IntegratedConfigurationQueryOut> createIntegratedConfigurationQueryResponse(IntegratedConfigurationQueryOut value) {
-        return new JAXBElement<IntegratedConfigurationQueryOut>(_IntegratedConfigurationQueryResponse_QNAME, IntegratedConfigurationQueryOut.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyDeleteRequest")
+    public JAXBElement<CommunicationPartyDeleteOpenForEditIn> createCommunicationPartyDeleteRequest(CommunicationPartyDeleteOpenForEditIn value) {
+        return new JAXBElement<CommunicationPartyDeleteOpenForEditIn>(_CommunicationPartyDeleteRequest_QNAME, CommunicationPartyDeleteOpenForEditIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationDeleteOpenForEditIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyQueryIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationDeleteRequest")
-    public JAXBElement<IntegratedConfigurationDeleteOpenForEditIn> createIntegratedConfigurationDeleteRequest(IntegratedConfigurationDeleteOpenForEditIn value) {
-        return new JAXBElement<IntegratedConfigurationDeleteOpenForEditIn>(_IntegratedConfigurationDeleteRequest_QNAME, IntegratedConfigurationDeleteOpenForEditIn.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IntegratedConfigurationQueryIn }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "IntegratedConfigurationQueryRequest")
-    public JAXBElement<IntegratedConfigurationQueryIn> createIntegratedConfigurationQueryRequest(IntegratedConfigurationQueryIn value) {
-        return new JAXBElement<IntegratedConfigurationQueryIn>(_IntegratedConfigurationQueryRequest_QNAME, IntegratedConfigurationQueryIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyQueryRequest")
+    public JAXBElement<CommunicationPartyQueryIn> createCommunicationPartyQueryRequest(CommunicationPartyQueryIn value) {
+        return new JAXBElement<CommunicationPartyQueryIn>(_CommunicationPartyQueryRequest_QNAME, CommunicationPartyQueryIn.class, null, value);
     }
 
 }

@@ -12,9 +12,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * 
- *                ObjectAdministrativeData
- *                
+ * ObjectAdministrativeData
  * 
  * <p>Java class for ObjectAdministrativeData complex type.
  * 

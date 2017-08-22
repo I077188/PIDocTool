@@ -45,4 +45,12 @@ public class ObjectFactory {
         return new Text();
     }
 
+    /**
+     * Create an instance of {@link LanguageCodeContextElements }
+     * 
+     */
+    public LanguageCodeContextElements createLanguageCodeContextElements() {
+        return new LanguageCodeContextElements();
+    }
+
 }

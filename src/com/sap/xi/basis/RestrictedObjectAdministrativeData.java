@@ -11,9 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * 
- *                ObjectAdministrativeData
- *                
+ * ObjectAdministrativeData
  * 
  * <p>Java class for RestrictedObjectAdministrativeData complex type.
  * 

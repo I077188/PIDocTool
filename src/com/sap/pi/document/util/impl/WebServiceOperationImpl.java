@@ -1,13 +1,17 @@
 package com.sap.pi.document.util.impl;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.ws.BindingProvider;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.sap.pi.document.dao.AdditionalIdentfier;
 import com.sap.pi.document.dao.CommunicationChannel;
+import com.sap.pi.document.dao.CommunicationPartyDao;
 import com.sap.pi.document.dao.InboundProcessing;
 import com.sap.pi.document.dao.Logging;
 import com.sap.pi.document.dao.Sender;
@@ -15,6 +19,12 @@ import com.sap.pi.document.dao.Staging;
 import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.pi.document.util.WebServiceOperation;
 import com.sap.pi.document.util.dao.SetSecurity;
+import com.sap.xi.basis.CommunicationParty;
+import com.sap.xi.basis.CommunicationPartyAdditionalIdentifier;
+import com.sap.xi.basis.CommunicationPartyIn;
+import com.sap.xi.basis.CommunicationPartyInService;
+import com.sap.xi.basis.CommunicationPartyReadIn;
+import com.sap.xi.basis.CommunicationPartyReadOut;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.IntegratedConfigurationIn;
 import com.sap.xi.basis.IntegratedConfigurationInService;
@@ -29,7 +39,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	@Override
 	public IntegratedConfigurationIn getIntegrationPort() {
-		// TODO Auto-generated method stub
+
 		IntegratedConfigurationInService icoInService;
 		SetSecurity setSecurity;
 		icoInService = new IntegratedConfigurationInService();
@@ -50,7 +60,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	@Override
 	public List<MessageHeaderID> getIntegratedConfigurationID() {
-		// TODO Auto-generated method stub
 
 		IntegratedConfigurationIn port = this.getIntegrationPort();
 		IntegratedConfigurationQueryIn queryIn = new IntegratedConfigurationQueryIn();
@@ -83,14 +92,94 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	@Override
 	public Sender getSenderInformation(MessageHeaderID headerID) {
-		// TODO Auto-generated method stub
-		return null;
+		IntegratedConfiguration iConfig = this.getIntegrationConfiguration(headerID);
+
+		MessageHeaderID mHeaderID = iConfig.getIntegratedConfigurationID();
+
+		CommunicationPartyDao communicationParty = null;
+
+		String communicationPartyID = mHeaderID.getSenderPartyID();
+		communicationPartyID = (communicationPartyID == null || communicationPartyID.equals("")) ? "N/A"
+				: communicationPartyID;
+
+		if (!communicationPartyID.equals("N/A")) {
+			// get communicationParty
+			try {
+				communicationParty = getCommunicationParty(communicationPartyID);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			List<AdditionalIdentfier> additionalIdentfiers = new ArrayList<>();
+			additionalIdentfiers.add(new AdditionalIdentfier("N/A", "N/A", "N/A"));
+			communicationParty = new CommunicationPartyDao("N/A", additionalIdentfiers);
+		}
+
+		String communicationComponent = mHeaderID.getSenderComponentID();
+		communicationComponent = (communicationComponent == null || communicationComponent.equals("")) ? "N/A"
+				: communicationComponent;
+
+		String namespace = mHeaderID.getInterfaceNamespace();
+		namespace = (namespace == null || namespace.equals("")) ? "N/A" : namespace;
+
+		String senderInterface = mHeaderID.getInterfaceName();
+		senderInterface = (senderInterface == null || senderInterface.equals("")) ? "N/A" : senderInterface;
+
+		String senderInterfaceSWC = iConfig.getInboundProcessing().getSenderInterfaceSoftwareComponentVersion();
+		senderInterfaceSWC = (senderInterfaceSWC == null || senderInterfaceSWC.equals("")) ? "N/A" : senderInterfaceSWC;
+
+		return new Sender(communicationParty, communicationComponent, senderInterface, namespace, senderInterfaceSWC);
 	}
 
+	private CommunicationPartyDao getCommunicationParty(String communicationPartyID) throws MalformedURLException {
+
+		CommunicationPartyInService cPartyInService = new CommunicationPartyInService();
+		CommunicationPartyIn cPartyIn = cPartyInService.getCommunicationPartyInPort();
+
+		SetSecurity setSecurity = new SetSecurity();
+		try {
+			setSecurity.set_security((BindingProvider) cPartyIn,
+					"/CommunicationPartyInService/CommunicationPartyInImplBean");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		CommunicationPartyReadIn in = new CommunicationPartyReadIn();
+		in.getPartyID().add(communicationPartyID);
+		CommunicationPartyReadOut out = cPartyIn.read(in);
+
+		List<CommunicationParty> parties = out.getParty();
+		List<AdditionalIdentfier> additionalIdentfiers = new ArrayList<>();
+
+		if (parties.size() > 0) {
+			CommunicationParty party = out.getParty().get(0);
+
+			List<CommunicationPartyAdditionalIdentifier> cpAdditionalIdentifiers = party.getAdditionalIdentifier();
+
+			for (int i = 0; i < cpAdditionalIdentifiers.size(); i++) {
+				CommunicationPartyAdditionalIdentifier cpAdditionalIdentifier = cpAdditionalIdentifiers.get(i);
+
+				String schemeID = cpAdditionalIdentifier.getSchemeID();
+				schemeID = (schemeID.equals("") || schemeID == null) ? "N/A" : schemeID;
+
+				String schemeAgencyID = cpAdditionalIdentifier.getSchemeAgencyID();
+				schemeAgencyID = (schemeAgencyID.equals("") || schemeAgencyID == null) ? "N/A" : schemeAgencyID;
+
+				String Name = cpAdditionalIdentifier.getValue();
+				Name = (Name.equals("") || Name == null) ? "N/A" : Name;
+
+				additionalIdentfiers.add(new AdditionalIdentfier(schemeID, schemeAgencyID, Name));
+			}
+		} else {
+			additionalIdentfiers.add(new AdditionalIdentfier("N/A", "N/A", "N/A"));
+		}
+
+		return new CommunicationPartyDao(communicationPartyID, additionalIdentfiers);
+	}
 
 	@Override
 	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID) {
-		// TODO Auto-generated method stub
 
 		IntegratedConfigurationIn port = this.getIntegrationPort();
 		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
