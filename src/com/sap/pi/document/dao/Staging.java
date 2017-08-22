@@ -2,20 +2,20 @@ package com.sap.pi.document.dao;
 
 public class Staging {
 
-	String useGlobalSetting;
+	Boolean useGlobalSetting;
 	String scenarioSpecificConfiguration;
 
-	public Staging(String stagingUseGlobalSetting, String stagingScenarioSpecificConfiguration) {
+	public Staging(Boolean stagingUseGlobalSetting, String stagingScenarioSpecificConfiguration) {
 		this.useGlobalSetting = stagingUseGlobalSetting;
 		this.scenarioSpecificConfiguration = stagingScenarioSpecificConfiguration;
 
 	}
 
-	public String getStagingUseGlobalSetting() {
+	public Boolean getStagingUseGlobalSetting() {
 		return useGlobalSetting;
 	}
 
-	public void setStagingUseGlobalSetting(String stagingUseGlobalSetting) {
+	public void setStagingUseGlobalSetting(Boolean stagingUseGlobalSetting) {
 		this.useGlobalSetting = stagingUseGlobalSetting;
 	}
 

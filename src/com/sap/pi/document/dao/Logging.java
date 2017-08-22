@@ -2,28 +2,28 @@ package com.sap.pi.document.dao;
 
 public class Logging {
 
-	String userGlobalSetting;
-	String scenarioSpecificConfiguration;
+	Boolean userGlobalSetting;
+	Boolean scenarioSpecificConfiguration;
 
-	public Logging(String stagingUseGlobalSetting, String stagingScenarioSpecificConfiguration) {
+	public Logging(Boolean stagingUseGlobalSetting, Boolean stagingScenarioSpecificConfiguration) {
 		this.userGlobalSetting = stagingUseGlobalSetting;
 		this.scenarioSpecificConfiguration = stagingScenarioSpecificConfiguration;
 
 	}
 
-	public String getStagingUseGlobalSetting() {
+	public Boolean getStagingUseGlobalSetting() {
 		return userGlobalSetting;
 	}
 
-	public void setStagingUseGlobalSetting(String stagingUseGlobalSetting) {
+	public void setStagingUseGlobalSetting(Boolean stagingUseGlobalSetting) {
 		this.userGlobalSetting = stagingUseGlobalSetting;
 	}
 
-	public String getStagingScenarioSpecificConfiguration() {
+	public Boolean getStagingScenarioSpecificConfiguration() {
 		return scenarioSpecificConfiguration;
 	}
 
-	public void setStagingScenarioSpecificConfiguration(String stagingScenarioSpecificConfiguration) {
+	public void setStagingScenarioSpecificConfiguration(Boolean stagingScenarioSpecificConfiguration) {
 		this.scenarioSpecificConfiguration = stagingScenarioSpecificConfiguration;
 	}
 
