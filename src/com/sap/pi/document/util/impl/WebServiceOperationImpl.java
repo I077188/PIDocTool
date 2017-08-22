@@ -65,11 +65,13 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	@Override
 	public Staging getStagingInfomation(IntegratedConfiguration integratedConfiguration) {
-		// TODO Auto-generated method stub
 
-		Staging staging = new Staging(integratedConfiguration.getStaging().isUseGlobal(),
-				integratedConfiguration.getStaging().getSpecificConfiguration());
-		return staging;
+		String specificConfig = integratedConfiguration.getStaging().getSpecificConfiguration();
+		if (specificConfig == null) {
+			specificConfig = "N/A";
+		}
+		return new Staging(integratedConfiguration.getStaging().isUseGlobal(), specificConfig);
+
 	}
 
 
@@ -94,10 +96,13 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	@Override
 	public Logging getLoggingInfomation(IntegratedConfiguration integratedConfiguration) {
-		// TODO Auto-generated method stub
-		Logging logging = new Logging(integratedConfiguration.getLogging().isUseGlobal(),
-				integratedConfiguration.getLogging().getSpecificConfiguration());
-		return logging;
+
+		String specificConfig = integratedConfiguration.getLogging().getSpecificConfiguration();
+		if (specificConfig == null) {
+			specificConfig = "N/A";
+		}
+		return new Logging(integratedConfiguration.getLogging().isUseGlobal(),
+				specificConfig);
 	}
 
 }
