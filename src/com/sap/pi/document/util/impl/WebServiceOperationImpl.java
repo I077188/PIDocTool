@@ -7,9 +7,12 @@ import javax.xml.ws.BindingProvider;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.sap.pi.document.dao.CommunicationChannel;
+import com.sap.pi.document.dao.InboundProcessing;
 import com.sap.pi.document.dao.Logging;
 import com.sap.pi.document.dao.Sender;
 import com.sap.pi.document.dao.Staging;
+import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.pi.document.util.WebServiceOperation;
 import com.sap.pi.document.util.dao.SetSecurity;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -66,7 +69,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 
 	@Override
-	public Staging getStagingInfomation(IntegratedConfiguration integratedConfiguration) {
+	public Staging getStagingInformation(IntegratedConfiguration integratedConfiguration) {
 
 		String specificConfig = integratedConfiguration.getStaging().getSpecificConfiguration();
 
@@ -98,7 +101,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	}
 
 	@Override
-	public Logging getLoggingInfomation(IntegratedConfiguration integratedConfiguration) {
+	public Logging getLoggingInformation(IntegratedConfiguration integratedConfiguration) {
 
 		String specificConfig = integratedConfiguration.getLogging().getSpecificConfiguration();
 
@@ -108,6 +111,35 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 		return new Logging(integratedConfiguration.getLogging().isUseGlobal(),
 				specificConfig);
+	}
+
+	@Override
+	public VirtualReceiver getVirtualReceiverInformation(IntegratedConfiguration integratedConfiguration) {
+
+		return null; // Not find the position
+	}
+
+	@Override
+	public InboundProcessing getInboundProcessingInformation(IntegratedConfiguration integratedConfiguration) {
+		InboundProcessing inboundProcessing = null;
+		inboundProcessing.setVirusScan(integratedConfiguration.getInboundProcessing().getVirusScan());
+
+		if (integratedConfiguration.getInboundProcessing().isSchemaValidationIndicator()) {
+			inboundProcessing.setSchemaValidation("Validation By Adapter");
+		} else {
+			inboundProcessing.setSchemaValidation("No Validation");
+		}
+
+		inboundProcessing.setAdapterSpecificAttribute(
+				integratedConfiguration.getInboundProcessing().getAdapterSpecificAttribute());
+		// inboundProcessing.setSenderCommunicationChannel(this.get);
+		return null;
+	}
+
+	@Override
+	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

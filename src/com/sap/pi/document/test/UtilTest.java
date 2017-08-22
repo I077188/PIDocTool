@@ -24,9 +24,9 @@ public class UtilTest {
 
 		/*
 		 * SWCDocDomUtil swcDocDomUtil = new SWCDocDomUtil();
-		 * 
+		 *
 		 * swcDocDomUtil.generateSWCDomFile(CONSTAINTS.DOM_SOFTWARECOMPONENT);
-		 * 
+		 *
 		 * swcDocDomUtil.generateSWCDomGroupFile(CONSTAINTS.DOMGROUP_SOFTWARECOMPONENT);
 		 */
 
@@ -37,8 +37,7 @@ public class UtilTest {
 		for (int i = 0; i < messageHeaderIDs.size(); i++) {
 			IntegratedConfiguration integratedConfiguration = webServiceOperation
 					.getIntegrationConfiguration(messageHeaderIDs.get(i));
-			// Staging staging =
-			// webServiceOperation.getStagingInfomation(integratedConfiguration);
+
 			Logging logging = webServiceOperation.getLoggingInfomation(integratedConfiguration);
 			System.out.println(logging.getStagingScenarioSpecificConfiguration());
 		}
