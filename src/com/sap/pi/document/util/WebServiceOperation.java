@@ -9,12 +9,9 @@ import com.sap.pi.document.dao.Sender;
 import com.sap.pi.document.dao.Staging;
 import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.xi.basis.IntegratedConfiguration;
-import com.sap.xi.basis.IntegratedConfigurationIn;
 import com.sap.xi.basis.MessageHeaderID;
 
 public interface WebServiceOperation {
-
-	public IntegratedConfigurationIn getIntegrationPort();
 
 	public List<MessageHeaderID> getIntegratedConfigurationID(); // Get ID of all the ICO
 

@@ -18,6 +18,7 @@ import com.sap.pi.document.dao.Sender;
 import com.sap.pi.document.dao.Staging;
 import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.pi.document.util.WebServiceOperation;
+import com.sap.pi.document.util.dao.IntegrationPort;
 import com.sap.pi.document.util.dao.SetSecurity;
 import com.sap.xi.basis.CommunicationParty;
 import com.sap.xi.basis.CommunicationPartyAdditionalIdentifier;
@@ -27,7 +28,6 @@ import com.sap.xi.basis.CommunicationPartyReadIn;
 import com.sap.xi.basis.CommunicationPartyReadOut;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.IntegratedConfigurationIn;
-import com.sap.xi.basis.IntegratedConfigurationInService;
 import com.sap.xi.basis.IntegratedConfigurationQueryIn;
 import com.sap.xi.basis.IntegratedConfigurationQueryOut;
 import com.sap.xi.basis.IntegratedConfigurationReadIn;
@@ -38,30 +38,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 
 	@Override
-	public IntegratedConfigurationIn getIntegrationPort() {
-
-		IntegratedConfigurationInService icoInService;
-		SetSecurity setSecurity;
-		icoInService = new IntegratedConfigurationInService();
-		IntegratedConfigurationIn port = icoInService.getIntegratedConfigurationInPort();
-		setSecurity = new SetSecurity();
-
-		try {
-			setSecurity.set_security((BindingProvider) port,
-					"/IntegratedConfigurationInService/IntegratedConfigurationInImplBean");
-			return port;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	@Override
 	public List<MessageHeaderID> getIntegratedConfigurationID() {
 
-		IntegratedConfigurationIn port = this.getIntegrationPort();
+		IntegratedConfigurationIn port = IntegrationPort.getIntegratedConfigurationPort();
 		IntegratedConfigurationQueryIn queryIn = new IntegratedConfigurationQueryIn();
 		queryIn.setAdministrativeData(null);
 		queryIn.setDescription(null);
@@ -181,7 +160,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID) {
 
-		IntegratedConfigurationIn port = this.getIntegrationPort();
+		IntegratedConfigurationIn port = IntegrationPort.getIntegratedConfigurationPort();
 		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
 		readIn.getIntegratedConfigurationID().add(messageHeaderID);
 		IntegratedConfigurationReadOut readOut = port.read(readIn);
