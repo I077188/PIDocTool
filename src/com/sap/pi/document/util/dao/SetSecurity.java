@@ -84,15 +84,16 @@ public class SetSecurity {
 		context.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, host + url_path);
 		context.put(BindingProvider.USERNAME_PROPERTY, user);
 		context.put(BindingProvider.PASSWORD_PROPERTY, password);
-		if (proxy_host == null || proxy_host.length() == 0)
+		if (proxy_host == null || proxy_host.length() == 0) {
 			return;
+		}
 		HTTPControlInterface httpControl = HTTPControlFactory.getInterface(port);
 		httpControl.setHTTPProxy(proxy_host, Integer.parseInt(proxy_port));
 		httpControl.setHTTPProxyUserPass(proxy_user, proxy_password);
 	}
 
 	public void read_properties() throws IOException {
-		FileInputStream in = new FileInputStream("resources/config/Configuration.properties");
+		FileInputStream in = new FileInputStream("resource/config/Configuration.properties");
 		Properties prop = new Properties();
 		prop.load(in);
 		host = prop.getProperty("host");
