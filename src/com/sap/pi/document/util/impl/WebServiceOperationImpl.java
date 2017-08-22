@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.xml.ws.BindingProvider;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.sap.pi.document.dao.Logging;
 import com.sap.pi.document.dao.Sender;
 import com.sap.pi.document.dao.Staging;
@@ -67,7 +69,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	public Staging getStagingInfomation(IntegratedConfiguration integratedConfiguration) {
 
 		String specificConfig = integratedConfiguration.getStaging().getSpecificConfiguration();
-		if (specificConfig == null) {
+
+		if (StringUtils.isBlank(specificConfig)) {
 			specificConfig = "N/A";
 		}
 		return new Staging(integratedConfiguration.getStaging().isUseGlobal(), specificConfig);
@@ -98,9 +101,11 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	public Logging getLoggingInfomation(IntegratedConfiguration integratedConfiguration) {
 
 		String specificConfig = integratedConfiguration.getLogging().getSpecificConfiguration();
-		if (specificConfig == null) {
+
+		if (StringUtils.isBlank(specificConfig)) {
 			specificConfig = "N/A";
 		}
+
 		return new Logging(integratedConfiguration.getLogging().isUseGlobal(),
 				specificConfig);
 	}
