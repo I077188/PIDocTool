@@ -10,14 +10,14 @@ import com.sap.pi.document.dao.Sender;
 import com.sap.pi.document.dao.Staging;
 import com.sap.pi.document.util.WebServiceOperation;
 import com.sap.pi.document.util.dao.SetSecurity;
-import com.sap.xi.basis.global.IntegratedConfiguration;
-import com.sap.xi.basis.global.IntegratedConfigurationIn;
-import com.sap.xi.basis.global.IntegratedConfigurationInService;
-import com.sap.xi.basis.global.IntegratedConfigurationQueryIn;
-import com.sap.xi.basis.global.IntegratedConfigurationQueryOut;
-import com.sap.xi.basis.global.IntegratedConfigurationReadIn;
-import com.sap.xi.basis.global.IntegratedConfigurationReadOut;
-import com.sap.xi.basis.global.MessageHeaderID;
+import com.sap.xi.basis.IntegratedConfiguration;
+import com.sap.xi.basis.IntegratedConfigurationIn;
+import com.sap.xi.basis.IntegratedConfigurationInService;
+import com.sap.xi.basis.IntegratedConfigurationQueryIn;
+import com.sap.xi.basis.IntegratedConfigurationQueryOut;
+import com.sap.xi.basis.IntegratedConfigurationReadIn;
+import com.sap.xi.basis.IntegratedConfigurationReadOut;
+import com.sap.xi.basis.MessageHeaderID;
 
 public class WebServiceOperationImpl implements WebServiceOperation {
 
