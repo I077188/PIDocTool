@@ -7,13 +7,13 @@ import com.sap.xi.basis.VirusScanCode;
 
 public class InboundProcessing {
 
-	SenderCommunicationChannel senderCommunicationChannel;
+	CommunicationChannel senderCommunicationChannel;
 	VirusScanCode virusScan;
 	String schemaValidation;
 	List<GenericProperty> adapterSpecificAttribute;
 	String adapterSpecificTableAttribute;
 
-	public InboundProcessing(SenderCommunicationChannel senderCommunicationChannel, VirusScanCode virusScan,
+	public InboundProcessing(CommunicationChannel senderCommunicationChannel, VirusScanCode virusScan,
 			String schemaValidation, List<GenericProperty> adapterSpecificAttribute,
 			String adapterSpecificTableAttribute) {
 
@@ -24,11 +24,11 @@ public class InboundProcessing {
 		this.adapterSpecificTableAttribute = adapterSpecificTableAttribute;
 	}
 
-	public SenderCommunicationChannel getSenderCommunicationChannel() {
+	public CommunicationChannel getSenderCommunicationChannel() {
 		return senderCommunicationChannel;
 	}
 
-	public void setSenderCommunicationChannel(SenderCommunicationChannel senderCommunicationChannel) {
+	public void setSenderCommunicationChannel(CommunicationChannel senderCommunicationChannel) {
 		this.senderCommunicationChannel = senderCommunicationChannel;
 	}
 

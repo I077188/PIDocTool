@@ -20,6 +20,10 @@ import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.pi.document.util.WebServiceOperation;
 import com.sap.pi.document.util.dao.IntegrationPort;
 import com.sap.pi.document.util.dao.SetSecurity;
+import com.sap.xi.basis.CommunicationChannelID;
+import com.sap.xi.basis.CommunicationChannelIn;
+import com.sap.xi.basis.CommunicationChannelReadIn;
+import com.sap.xi.basis.CommunicationChannelReadOut;
 import com.sap.xi.basis.CommunicationParty;
 import com.sap.xi.basis.CommunicationPartyAdditionalIdentifier;
 import com.sap.xi.basis.CommunicationPartyIn;
@@ -165,6 +169,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		readIn.getIntegratedConfigurationID().add(messageHeaderID);
 		IntegratedConfigurationReadOut readOut = port.read(readIn);
 
+		if (readOut.getIntegratedConfiguration().size() == 0)
+			return null;
 		return readOut.getIntegratedConfiguration().get(0);
 	}
 
@@ -200,13 +206,28 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 		inboundProcessing.setAdapterSpecificAttribute(
 				integratedConfiguration.getInboundProcessing().getAdapterSpecificAttribute());
-		// inboundProcessing.setSenderCommunicationChannel(this.get);
+
+
 		return null;
 	}
 
 	@Override
 	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration) {
 		// TODO Auto-generated method stub
+
+		CommunicationChannelID communicationChannelID = integratedConfiguration.getInboundProcessing()
+				.getCommunicationChannel();
+
+		CommunicationChannelIn port = IntegrationPort.getCommunicationChannelPort();
+		CommunicationChannelReadIn readIn = new CommunicationChannelReadIn();
+		readIn.getCommunicationChannelID().add(communicationChannelID);
+		CommunicationChannelReadOut readOut = port.read(readIn);
+
+		CommunicationChannel communicationChannel = null;
+
+
+
+
 		return null;
 	}
 

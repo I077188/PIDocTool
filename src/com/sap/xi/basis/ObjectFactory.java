@@ -24,19 +24,20 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _CommunicationPartyReadRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyReadRequest");
-    private final static QName _CommunicationPartyOpenForEditResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyOpenForEditResponse");
-    private final static QName _CommunicationPartyQueryResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyQueryResponse");
-    private final static QName _CommunicationPartyCreateRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyCreateRequest");
-    private final static QName _CommunicationPartyChangeRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyChangeRequest");
-    private final static QName _CommunicationPartyReadResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyReadResponse");
-    private final static QName _CommunicationPartyOpenForEditRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyOpenForEditRequest");
-    private final static QName _CommunicationPartyCheckRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyCheckRequest");
+    private final static QName _CommunicationChannelReadResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelReadResponse");
+    private final static QName _CommunicationChannelOpenForEditResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelOpenForEditResponse");
+    private final static QName _CommunicationChannelOpenForEditRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelOpenForEditRequest");
+    private final static QName _CommunicationChannelDeleteRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelDeleteRequest");
+    private final static QName _CommunicationChannelCreateRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelCreateRequest");
+    private final static QName _CommunicationChannelCheckRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelCheckRequest");
+    private final static QName _CommunicationChannelQueryResponse_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelQueryResponse");
+    private final static QName _CommunicationChannelRevertRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelRevertRequest");
+    private final static QName _CommunicationChannelReadRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelReadRequest");
+    private final static QName _CommunicationChannelQueryRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelQueryRequest");
     private final static QName _ConfigurationObjectModifyResponse_QNAME = new QName("http://sap.com/xi/BASIS", "ConfigurationObjectModifyResponse");
-    private final static QName _CommunicationPartyRevertRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyRevertRequest");
     private final static QName _LogMessageCollection_QNAME = new QName("http://sap.com/xi/BASIS", "LogMessageCollection");
-    private final static QName _CommunicationPartyDeleteRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyDeleteRequest");
-    private final static QName _CommunicationPartyQueryRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationPartyQueryRequest");
+    private final static QName _CommunicationChannelCreateFromTemplateRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelCreateFromTemplateRequest");
+    private final static QName _CommunicationChannelChangeRequest_QNAME = new QName("http://sap.com/xi/BASIS", "CommunicationChannelChangeRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.sap.xi.basis
@@ -46,59 +47,67 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyReadIn }
+     * Create an instance of {@link CommunicationChannelOpenForEditOut }
      * 
      */
-    public CommunicationPartyReadIn createCommunicationPartyReadIn() {
-        return new CommunicationPartyReadIn();
+    public CommunicationChannelOpenForEditOut createCommunicationChannelOpenForEditOut() {
+        return new CommunicationChannelOpenForEditOut();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyOpenForEditOut }
+     * Create an instance of {@link CommunicationChannelReadOut }
      * 
      */
-    public CommunicationPartyOpenForEditOut createCommunicationPartyOpenForEditOut() {
-        return new CommunicationPartyOpenForEditOut();
+    public CommunicationChannelReadOut createCommunicationChannelReadOut() {
+        return new CommunicationChannelReadOut();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyQueryOut }
+     * Create an instance of {@link CommunicationChannelDeleteOpenForEditIn }
      * 
      */
-    public CommunicationPartyQueryOut createCommunicationPartyQueryOut() {
-        return new CommunicationPartyQueryOut();
+    public CommunicationChannelDeleteOpenForEditIn createCommunicationChannelDeleteOpenForEditIn() {
+        return new CommunicationChannelDeleteOpenForEditIn();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyCreateChangeIn }
+     * Create an instance of {@link CommunicationChannelCreateChangeIn }
      * 
      */
-    public CommunicationPartyCreateChangeIn createCommunicationPartyCreateChangeIn() {
-        return new CommunicationPartyCreateChangeIn();
+    public CommunicationChannelCreateChangeIn createCommunicationChannelCreateChangeIn() {
+        return new CommunicationChannelCreateChangeIn();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyReadOut }
+     * Create an instance of {@link CommunicationChannelIdentifierCollection }
      * 
      */
-    public CommunicationPartyReadOut createCommunicationPartyReadOut() {
-        return new CommunicationPartyReadOut();
+    public CommunicationChannelIdentifierCollection createCommunicationChannelIdentifierCollection() {
+        return new CommunicationChannelIdentifierCollection();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyDeleteOpenForEditIn }
+     * Create an instance of {@link CommunicationChannelQueryOut }
      * 
      */
-    public CommunicationPartyDeleteOpenForEditIn createCommunicationPartyDeleteOpenForEditIn() {
-        return new CommunicationPartyDeleteOpenForEditIn();
+    public CommunicationChannelQueryOut createCommunicationChannelQueryOut() {
+        return new CommunicationChannelQueryOut();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyIdentifierCollection }
+     * Create an instance of {@link CommunicationChannelReadIn }
      * 
      */
-    public CommunicationPartyIdentifierCollection createCommunicationPartyIdentifierCollection() {
-        return new CommunicationPartyIdentifierCollection();
+    public CommunicationChannelReadIn createCommunicationChannelReadIn() {
+        return new CommunicationChannelReadIn();
+    }
+
+    /**
+     * Create an instance of {@link CommunicationChannelQueryIn }
+     * 
+     */
+    public CommunicationChannelQueryIn createCommunicationChannelQueryIn() {
+        return new CommunicationChannelQueryIn();
     }
 
     /**
@@ -118,43 +127,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyQueryIn }
+     * Create an instance of {@link CommunicationChannelCreateFromTemplateIn }
      * 
      */
-    public CommunicationPartyQueryIn createCommunicationPartyQueryIn() {
-        return new CommunicationPartyQueryIn();
+    public CommunicationChannelCreateFromTemplateIn createCommunicationChannelCreateFromTemplateIn() {
+        return new CommunicationChannelCreateFromTemplateIn();
     }
 
     /**
-     * Create an instance of {@link LogMessageCommunicationParty }
+     * Create an instance of {@link GenericTableRowTableCell }
      * 
      */
-    public LogMessageCommunicationParty createLogMessageCommunicationParty() {
-        return new LogMessageCommunicationParty();
-    }
-
-    /**
-     * Create an instance of {@link RestrictedCommunicationParty }
-     * 
-     */
-    public RestrictedCommunicationParty createRestrictedCommunicationParty() {
-        return new RestrictedCommunicationParty();
-    }
-
-    /**
-     * Create an instance of {@link LogMessageCommunicationChannel }
-     * 
-     */
-    public LogMessageCommunicationChannel createLogMessageCommunicationChannel() {
-        return new LogMessageCommunicationChannel();
-    }
-
-    /**
-     * Create an instance of {@link LogMessageMessageHeader }
-     * 
-     */
-    public LogMessageMessageHeader createLogMessageMessageHeader() {
-        return new LogMessageMessageHeader();
+    public GenericTableRowTableCell createGenericTableRowTableCell() {
+        return new GenericTableRowTableCell();
     }
 
     /**
@@ -174,35 +159,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LogMessageReceiverRule }
+     * Create an instance of {@link ModuleProcess }
      * 
      */
-    public LogMessageReceiverRule createLogMessageReceiverRule() {
-        return new LogMessageReceiverRule();
+    public ModuleProcess createModuleProcess() {
+        return new ModuleProcess();
     }
 
     /**
-     * Create an instance of {@link CommunicationPartyAdditionalIdentifier }
+     * Create an instance of {@link TemplateBasedCommunicationChannel }
      * 
      */
-    public CommunicationPartyAdditionalIdentifier createCommunicationPartyAdditionalIdentifier() {
-        return new CommunicationPartyAdditionalIdentifier();
-    }
-
-    /**
-     * Create an instance of {@link MessageHeaderID }
-     * 
-     */
-    public MessageHeaderID createMessageHeaderID() {
-        return new MessageHeaderID();
-    }
-
-    /**
-     * Create an instance of {@link LogMessageProcessComponent }
-     * 
-     */
-    public LogMessageProcessComponent createLogMessageProcessComponent() {
-        return new LogMessageProcessComponent();
+    public TemplateBasedCommunicationChannel createTemplateBasedCommunicationChannel() {
+        return new TemplateBasedCommunicationChannel();
     }
 
     /**
@@ -211,6 +180,14 @@ public class ObjectFactory {
      */
     public ChangeListID createChangeListID() {
         return new ChangeListID();
+    }
+
+    /**
+     * Create an instance of {@link RestrictedGenericProperty }
+     * 
+     */
+    public RestrictedGenericProperty createRestrictedGenericProperty() {
+        return new RestrictedGenericProperty();
     }
 
     /**
@@ -227,6 +204,94 @@ public class ObjectFactory {
      */
     public ObjectAdministrativeData createObjectAdministrativeData() {
         return new ObjectAdministrativeData();
+    }
+
+    /**
+     * Create an instance of {@link GenericTableRow }
+     * 
+     */
+    public GenericTableRow createGenericTableRow() {
+        return new GenericTableRow();
+    }
+
+    /**
+     * Create an instance of {@link ChannelAdditionalIdentifier }
+     * 
+     */
+    public ChannelAdditionalIdentifier createChannelAdditionalIdentifier() {
+        return new ChannelAdditionalIdentifier();
+    }
+
+    /**
+     * Create an instance of {@link LogMessageCommunicationParty }
+     * 
+     */
+    public LogMessageCommunicationParty createLogMessageCommunicationParty() {
+        return new LogMessageCommunicationParty();
+    }
+
+    /**
+     * Create an instance of {@link ProcessStep }
+     * 
+     */
+    public ProcessStep createProcessStep() {
+        return new ProcessStep();
+    }
+
+    /**
+     * Create an instance of {@link GenericPropertyTable }
+     * 
+     */
+    public GenericPropertyTable createGenericPropertyTable() {
+        return new GenericPropertyTable();
+    }
+
+    /**
+     * Create an instance of {@link LogMessageCommunicationChannel }
+     * 
+     */
+    public LogMessageCommunicationChannel createLogMessageCommunicationChannel() {
+        return new LogMessageCommunicationChannel();
+    }
+
+    /**
+     * Create an instance of {@link LogMessageMessageHeader }
+     * 
+     */
+    public LogMessageMessageHeader createLogMessageMessageHeader() {
+        return new LogMessageMessageHeader();
+    }
+
+    /**
+     * Create an instance of {@link RestrictedCommunicationChannel }
+     * 
+     */
+    public RestrictedCommunicationChannel createRestrictedCommunicationChannel() {
+        return new RestrictedCommunicationChannel();
+    }
+
+    /**
+     * Create an instance of {@link LogMessageReceiverRule }
+     * 
+     */
+    public LogMessageReceiverRule createLogMessageReceiverRule() {
+        return new LogMessageReceiverRule();
+    }
+
+    /**
+     * Create an instance of {@link MessageHeaderID }
+     * 
+     */
+    public MessageHeaderID createMessageHeaderID() {
+        return new MessageHeaderID();
+    }
+
+    /**
+     * Create an instance of {@link LogMessageProcessComponent }
+     * 
+     */
+    public LogMessageProcessComponent createLogMessageProcessComponent() {
+        return new LogMessageProcessComponent();
     }
 
     /**
@@ -262,11 +327,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CommunicationParty }
+     * Create an instance of {@link CommunicationChannel }
      * 
      */
-    public CommunicationParty createCommunicationParty() {
-        return new CommunicationParty();
+    public CommunicationChannel createCommunicationChannel() {
+        return new CommunicationChannel();
+    }
+
+    /**
+     * Create an instance of {@link DesignObjectID }
+     * 
+     */
+    public DesignObjectID createDesignObjectID() {
+        return new DesignObjectID();
     }
 
     /**
@@ -278,6 +351,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ParameterGroup }
+     * 
+     */
+    public ParameterGroup createParameterGroup() {
+        return new ParameterGroup();
+    }
+
+    /**
+     * Create an instance of {@link GenericProperty }
+     * 
+     */
+    public GenericProperty createGenericProperty() {
+        return new GenericProperty();
+    }
+
+    /**
      * Create an instance of {@link LogMessageConfigurationScenario }
      * 
      */
@@ -286,75 +375,93 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyReadIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelReadOut }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyReadRequest")
-    public JAXBElement<CommunicationPartyReadIn> createCommunicationPartyReadRequest(CommunicationPartyReadIn value) {
-        return new JAXBElement<CommunicationPartyReadIn>(_CommunicationPartyReadRequest_QNAME, CommunicationPartyReadIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelReadResponse")
+    public JAXBElement<CommunicationChannelReadOut> createCommunicationChannelReadResponse(CommunicationChannelReadOut value) {
+        return new JAXBElement<CommunicationChannelReadOut>(_CommunicationChannelReadResponse_QNAME, CommunicationChannelReadOut.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyOpenForEditOut }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelOpenForEditOut }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyOpenForEditResponse")
-    public JAXBElement<CommunicationPartyOpenForEditOut> createCommunicationPartyOpenForEditResponse(CommunicationPartyOpenForEditOut value) {
-        return new JAXBElement<CommunicationPartyOpenForEditOut>(_CommunicationPartyOpenForEditResponse_QNAME, CommunicationPartyOpenForEditOut.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelOpenForEditResponse")
+    public JAXBElement<CommunicationChannelOpenForEditOut> createCommunicationChannelOpenForEditResponse(CommunicationChannelOpenForEditOut value) {
+        return new JAXBElement<CommunicationChannelOpenForEditOut>(_CommunicationChannelOpenForEditResponse_QNAME, CommunicationChannelOpenForEditOut.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyQueryOut }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelDeleteOpenForEditIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyQueryResponse")
-    public JAXBElement<CommunicationPartyQueryOut> createCommunicationPartyQueryResponse(CommunicationPartyQueryOut value) {
-        return new JAXBElement<CommunicationPartyQueryOut>(_CommunicationPartyQueryResponse_QNAME, CommunicationPartyQueryOut.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelOpenForEditRequest")
+    public JAXBElement<CommunicationChannelDeleteOpenForEditIn> createCommunicationChannelOpenForEditRequest(CommunicationChannelDeleteOpenForEditIn value) {
+        return new JAXBElement<CommunicationChannelDeleteOpenForEditIn>(_CommunicationChannelOpenForEditRequest_QNAME, CommunicationChannelDeleteOpenForEditIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyCreateChangeIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelDeleteOpenForEditIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyCreateRequest")
-    public JAXBElement<CommunicationPartyCreateChangeIn> createCommunicationPartyCreateRequest(CommunicationPartyCreateChangeIn value) {
-        return new JAXBElement<CommunicationPartyCreateChangeIn>(_CommunicationPartyCreateRequest_QNAME, CommunicationPartyCreateChangeIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelDeleteRequest")
+    public JAXBElement<CommunicationChannelDeleteOpenForEditIn> createCommunicationChannelDeleteRequest(CommunicationChannelDeleteOpenForEditIn value) {
+        return new JAXBElement<CommunicationChannelDeleteOpenForEditIn>(_CommunicationChannelDeleteRequest_QNAME, CommunicationChannelDeleteOpenForEditIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyCreateChangeIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelCreateChangeIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyChangeRequest")
-    public JAXBElement<CommunicationPartyCreateChangeIn> createCommunicationPartyChangeRequest(CommunicationPartyCreateChangeIn value) {
-        return new JAXBElement<CommunicationPartyCreateChangeIn>(_CommunicationPartyChangeRequest_QNAME, CommunicationPartyCreateChangeIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelCreateRequest")
+    public JAXBElement<CommunicationChannelCreateChangeIn> createCommunicationChannelCreateRequest(CommunicationChannelCreateChangeIn value) {
+        return new JAXBElement<CommunicationChannelCreateChangeIn>(_CommunicationChannelCreateRequest_QNAME, CommunicationChannelCreateChangeIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyReadOut }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelIdentifierCollection }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyReadResponse")
-    public JAXBElement<CommunicationPartyReadOut> createCommunicationPartyReadResponse(CommunicationPartyReadOut value) {
-        return new JAXBElement<CommunicationPartyReadOut>(_CommunicationPartyReadResponse_QNAME, CommunicationPartyReadOut.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelCheckRequest")
+    public JAXBElement<CommunicationChannelIdentifierCollection> createCommunicationChannelCheckRequest(CommunicationChannelIdentifierCollection value) {
+        return new JAXBElement<CommunicationChannelIdentifierCollection>(_CommunicationChannelCheckRequest_QNAME, CommunicationChannelIdentifierCollection.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyDeleteOpenForEditIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelQueryOut }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyOpenForEditRequest")
-    public JAXBElement<CommunicationPartyDeleteOpenForEditIn> createCommunicationPartyOpenForEditRequest(CommunicationPartyDeleteOpenForEditIn value) {
-        return new JAXBElement<CommunicationPartyDeleteOpenForEditIn>(_CommunicationPartyOpenForEditRequest_QNAME, CommunicationPartyDeleteOpenForEditIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelQueryResponse")
+    public JAXBElement<CommunicationChannelQueryOut> createCommunicationChannelQueryResponse(CommunicationChannelQueryOut value) {
+        return new JAXBElement<CommunicationChannelQueryOut>(_CommunicationChannelQueryResponse_QNAME, CommunicationChannelQueryOut.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyIdentifierCollection }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelIdentifierCollection }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyCheckRequest")
-    public JAXBElement<CommunicationPartyIdentifierCollection> createCommunicationPartyCheckRequest(CommunicationPartyIdentifierCollection value) {
-        return new JAXBElement<CommunicationPartyIdentifierCollection>(_CommunicationPartyCheckRequest_QNAME, CommunicationPartyIdentifierCollection.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelRevertRequest")
+    public JAXBElement<CommunicationChannelIdentifierCollection> createCommunicationChannelRevertRequest(CommunicationChannelIdentifierCollection value) {
+        return new JAXBElement<CommunicationChannelIdentifierCollection>(_CommunicationChannelRevertRequest_QNAME, CommunicationChannelIdentifierCollection.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelReadIn }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelReadRequest")
+    public JAXBElement<CommunicationChannelReadIn> createCommunicationChannelReadRequest(CommunicationChannelReadIn value) {
+        return new JAXBElement<CommunicationChannelReadIn>(_CommunicationChannelReadRequest_QNAME, CommunicationChannelReadIn.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelQueryIn }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelQueryRequest")
+    public JAXBElement<CommunicationChannelQueryIn> createCommunicationChannelQueryRequest(CommunicationChannelQueryIn value) {
+        return new JAXBElement<CommunicationChannelQueryIn>(_CommunicationChannelQueryRequest_QNAME, CommunicationChannelQueryIn.class, null, value);
     }
 
     /**
@@ -367,15 +474,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyIdentifierCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyRevertRequest")
-    public JAXBElement<CommunicationPartyIdentifierCollection> createCommunicationPartyRevertRequest(CommunicationPartyIdentifierCollection value) {
-        return new JAXBElement<CommunicationPartyIdentifierCollection>(_CommunicationPartyRevertRequest_QNAME, CommunicationPartyIdentifierCollection.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link LogMessageCollection }{@code >}}
      * 
      */
@@ -385,21 +483,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyDeleteOpenForEditIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelCreateFromTemplateIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyDeleteRequest")
-    public JAXBElement<CommunicationPartyDeleteOpenForEditIn> createCommunicationPartyDeleteRequest(CommunicationPartyDeleteOpenForEditIn value) {
-        return new JAXBElement<CommunicationPartyDeleteOpenForEditIn>(_CommunicationPartyDeleteRequest_QNAME, CommunicationPartyDeleteOpenForEditIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelCreateFromTemplateRequest")
+    public JAXBElement<CommunicationChannelCreateFromTemplateIn> createCommunicationChannelCreateFromTemplateRequest(CommunicationChannelCreateFromTemplateIn value) {
+        return new JAXBElement<CommunicationChannelCreateFromTemplateIn>(_CommunicationChannelCreateFromTemplateRequest_QNAME, CommunicationChannelCreateFromTemplateIn.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationPartyQueryIn }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CommunicationChannelCreateChangeIn }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationPartyQueryRequest")
-    public JAXBElement<CommunicationPartyQueryIn> createCommunicationPartyQueryRequest(CommunicationPartyQueryIn value) {
-        return new JAXBElement<CommunicationPartyQueryIn>(_CommunicationPartyQueryRequest_QNAME, CommunicationPartyQueryIn.class, null, value);
+    @XmlElementDecl(namespace = "http://sap.com/xi/BASIS", name = "CommunicationChannelChangeRequest")
+    public JAXBElement<CommunicationChannelCreateChangeIn> createCommunicationChannelChangeRequest(CommunicationChannelCreateChangeIn value) {
+        return new JAXBElement<CommunicationChannelCreateChangeIn>(_CommunicationChannelChangeRequest_QNAME, CommunicationChannelCreateChangeIn.class, null, value);
     }
 
 }
