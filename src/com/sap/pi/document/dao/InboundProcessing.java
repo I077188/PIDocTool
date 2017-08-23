@@ -3,33 +3,34 @@ package com.sap.pi.document.dao;
 import java.util.List;
 
 import com.sap.xi.basis.GenericProperty;
+import com.sap.xi.basis.GenericPropertyTable;
 import com.sap.xi.basis.VirusScanCode;
 
 public class InboundProcessing {
 
-	CommunicationChannel senderCommunicationChannel;
+	CommunicationChannel communicationChannel;
 	VirusScanCode virusScan;
 	String schemaValidation;
 	List<GenericProperty> adapterSpecificAttribute;
-	String adapterSpecificTableAttribute;
+	List<GenericPropertyTable> adapterSpecificTableAttribute;
 
 	public InboundProcessing(CommunicationChannel senderCommunicationChannel, VirusScanCode virusScan,
 			String schemaValidation, List<GenericProperty> adapterSpecificAttribute,
-			String adapterSpecificTableAttribute) {
+			List<GenericPropertyTable> adapterSpecificTableAttribute) {
 
-		this.senderCommunicationChannel = senderCommunicationChannel;
+		this.communicationChannel = senderCommunicationChannel;
 		this.virusScan = virusScan;
 		this.schemaValidation = schemaValidation;
 		this.adapterSpecificAttribute = adapterSpecificAttribute;
 		this.adapterSpecificTableAttribute = adapterSpecificTableAttribute;
 	}
 
-	public CommunicationChannel getSenderCommunicationChannel() {
-		return senderCommunicationChannel;
+	public CommunicationChannel getCommunicationChannel() {
+		return communicationChannel;
 	}
 
 	public void setSenderCommunicationChannel(CommunicationChannel senderCommunicationChannel) {
-		this.senderCommunicationChannel = senderCommunicationChannel;
+		this.communicationChannel = senderCommunicationChannel;
 	}
 
 	public VirusScanCode getVirusScan() {
@@ -54,6 +55,14 @@ public class InboundProcessing {
 
 	public void setAdapterSpecificAttribute(List<GenericProperty> adapterSpecificAttribute) {
 		this.adapterSpecificAttribute = adapterSpecificAttribute;
+	}
+
+	public List<GenericPropertyTable> getAdapterSpecificTableAttribute() {
+		return adapterSpecificTableAttribute;
+	}
+
+	public void setAdapterSpecificTableAttribute(List<GenericPropertyTable> adapterSpecificTableAttribute) {
+		this.adapterSpecificTableAttribute = adapterSpecificTableAttribute;
 	}
 
 }

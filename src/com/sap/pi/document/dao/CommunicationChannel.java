@@ -1,17 +1,20 @@
 package com.sap.pi.document.dao;
 
+import java.util.List;
+
+import com.sap.xi.basis.global.LONGDescription;
 
 public class CommunicationChannel {
 
 	String Party;
 	String ComponentID;
 	String ChannelID;
-	String Description;
+	List<LONGDescription> Description;
 	Parameters Parameters;
 	Identifiers identifiers;
 	Module module;
 
-	public CommunicationChannel(String party, String componentID, String channelID, String description,
+	public CommunicationChannel(String party, String componentID, String channelID, List<LONGDescription> description,
 			com.sap.pi.document.dao.Parameters parameters, Identifiers identifiers, Module module) {
 
 		Party = party;
@@ -47,11 +50,11 @@ public class CommunicationChannel {
 		ChannelID = channelID;
 	}
 
-	public String getDescription() {
+	public List<LONGDescription> getDescription() {
 		return Description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(List<LONGDescription> description) {
 		Description = description;
 	}
 

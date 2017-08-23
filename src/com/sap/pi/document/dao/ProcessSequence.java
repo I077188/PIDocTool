@@ -1,13 +1,15 @@
 package com.sap.pi.document.dao;
 
+import com.sap.xi.basis.ModuleTypeCode;
+
 public class ProcessSequence {
 
-	String number;
+	Integer number;
 	String moduleName;
-	String type;
+	ModuleTypeCode type;
 	String moduleKey;
 
-	public ProcessSequence(String number, String moduleName, String type, String moduleKey) {
+	public ProcessSequence(Integer number, String moduleName, ModuleTypeCode type, String moduleKey) {
 		super();
 		this.number = number;
 		this.moduleName = moduleName;
@@ -15,11 +17,11 @@ public class ProcessSequence {
 		this.moduleKey = moduleKey;
 	}
 
-	public String getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
@@ -31,11 +33,11 @@ public class ProcessSequence {
 		this.moduleName = moduleName;
 	}
 
-	public String getType() {
+	public ModuleTypeCode getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(ModuleTypeCode type) {
 		this.type = type;
 	}
 

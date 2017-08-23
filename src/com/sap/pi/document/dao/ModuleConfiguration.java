@@ -1,16 +1,24 @@
 package com.sap.pi.document.dao;
 
+import java.util.List;
+
 public class ModuleConfiguration {
 
 	String moduleKey;
-	String parameterName;
-	String parameterValue;
 
-	public ModuleConfiguration(String moduleKey, String parameterName, String parameterValue) {
-		super();
+	public List<ModuleConfigurationParameters> parameters;
+
+	public ModuleConfiguration(String moduleKey, List<ModuleConfigurationParameters> parameters) {
 		this.moduleKey = moduleKey;
-		this.parameterName = parameterName;
-		this.parameterValue = parameterValue;
+		this.parameters = parameters;
+	}
+
+	public List<ModuleConfigurationParameters> getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(List<ModuleConfigurationParameters> parameters) {
+		this.parameters = parameters;
 	}
 
 	public String getModuleKey() {
@@ -20,21 +28,4 @@ public class ModuleConfiguration {
 	public void setModuleKey(String moduleKey) {
 		this.moduleKey = moduleKey;
 	}
-
-	public String getParameterName() {
-		return parameterName;
-	}
-
-	public void setParameterName(String parameterName) {
-		this.parameterName = parameterName;
-	}
-
-	public String getParameterValue() {
-		return parameterValue;
-	}
-
-	public void setParameterValue(String parameterValue) {
-		this.parameterValue = parameterValue;
-	}
-
 }

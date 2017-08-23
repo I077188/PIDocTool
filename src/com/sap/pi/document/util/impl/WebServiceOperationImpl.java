@@ -9,17 +9,25 @@ import javax.xml.ws.BindingProvider;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.sap.pi.document.dao.AdapterType;
 import com.sap.pi.document.dao.AdditionalIdentfier;
 import com.sap.pi.document.dao.CommunicationChannel;
 import com.sap.pi.document.dao.CommunicationPartyDao;
+import com.sap.pi.document.dao.Identifiers;
 import com.sap.pi.document.dao.InboundProcessing;
 import com.sap.pi.document.dao.Logging;
+import com.sap.pi.document.dao.Module;
+import com.sap.pi.document.dao.ModuleConfiguration;
+import com.sap.pi.document.dao.ModuleConfigurationParameters;
+import com.sap.pi.document.dao.Parameters;
+import com.sap.pi.document.dao.ProcessSequence;
 import com.sap.pi.document.dao.Sender;
 import com.sap.pi.document.dao.Staging;
 import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.pi.document.util.WebServiceOperation;
 import com.sap.pi.document.util.dao.IntegrationPort;
 import com.sap.pi.document.util.dao.SetSecurity;
+import com.sap.xi.basis.CommunicationChannelDirection;
 import com.sap.xi.basis.CommunicationChannelID;
 import com.sap.xi.basis.CommunicationChannelIn;
 import com.sap.xi.basis.CommunicationChannelReadIn;
@@ -30,13 +38,23 @@ import com.sap.xi.basis.CommunicationPartyIn;
 import com.sap.xi.basis.CommunicationPartyInService;
 import com.sap.xi.basis.CommunicationPartyReadIn;
 import com.sap.xi.basis.CommunicationPartyReadOut;
+import com.sap.xi.basis.DesignObjectID;
+import com.sap.xi.basis.GenericProperty;
+import com.sap.xi.basis.GenericPropertyTable;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.IntegratedConfigurationIn;
+import com.sap.xi.basis.IntegratedConfigurationInService;
 import com.sap.xi.basis.IntegratedConfigurationQueryIn;
 import com.sap.xi.basis.IntegratedConfigurationQueryOut;
 import com.sap.xi.basis.IntegratedConfigurationReadIn;
 import com.sap.xi.basis.IntegratedConfigurationReadOut;
 import com.sap.xi.basis.MessageHeaderID;
+import com.sap.xi.basis.ModuleProcess;
+import com.sap.xi.basis.ModuleTypeCode;
+import com.sap.xi.basis.ParameterGroup;
+import com.sap.xi.basis.ProcessStep;
+import com.sap.xi.basis.VirusScanCode;
+import com.sap.xi.basis.global.LONGDescription;
 
 public class WebServiceOperationImpl implements WebServiceOperation {
 
@@ -58,6 +76,38 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return headerIDs;
 	}
 
+	public IntegratedConfigurationIn getIntegratedConfigurationPort() {
+
+		IntegratedConfigurationInService icoInService;
+		SetSecurity setSecurity;
+		icoInService = new IntegratedConfigurationInService();
+		IntegratedConfigurationIn port = icoInService.getIntegratedConfigurationInPort();
+		setSecurity = new SetSecurity();
+
+		try {
+			setSecurity.set_security((BindingProvider) port,
+					"/IntegratedConfigurationInService/IntegratedConfigurationInImplBean");
+			return port;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Override
+	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID) {
+
+		IntegratedConfigurationIn port = this.getIntegratedConfigurationPort();
+		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
+		readIn.getIntegratedConfigurationID().add(messageHeaderID);
+		IntegratedConfigurationReadOut readOut = port.read(readIn);
+
+		if (readOut.getIntegratedConfiguration().size() == 0)
+			return null;
+		return readOut.getIntegratedConfiguration().get(0);
+	}
 
 
 	@Override
@@ -161,18 +211,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return new CommunicationPartyDao(communicationPartyID, additionalIdentfiers);
 	}
 
-	@Override
-	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID) {
-
-		IntegratedConfigurationIn port = IntegrationPort.getIntegratedConfigurationPort();
-		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
-		readIn.getIntegratedConfigurationID().add(messageHeaderID);
-		IntegratedConfigurationReadOut readOut = port.read(readIn);
-
-		if (readOut.getIntegratedConfiguration().size() == 0)
-			return null;
-		return readOut.getIntegratedConfiguration().get(0);
-	}
 
 	@Override
 	public Logging getLoggingInformation(IntegratedConfiguration integratedConfiguration) {
@@ -193,42 +231,147 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return null; // Not find the position
 	}
 
+
 	@Override
 	public InboundProcessing getInboundProcessingInformation(IntegratedConfiguration integratedConfiguration) {
-		InboundProcessing inboundProcessing = null;
-		inboundProcessing.setVirusScan(integratedConfiguration.getInboundProcessing().getVirusScan());
 
+		VirusScanCode virusScan = integratedConfiguration.getInboundProcessing().getVirusScan();
+
+		String schemaValidation = null;
 		if (integratedConfiguration.getInboundProcessing().isSchemaValidationIndicator()) {
-			inboundProcessing.setSchemaValidation("Validation By Adapter");
+			schemaValidation = "Validation By Adapter";
 		} else {
-			inboundProcessing.setSchemaValidation("No Validation");
+			schemaValidation = "No Validation";
 		}
 
-		inboundProcessing.setAdapterSpecificAttribute(
-				integratedConfiguration.getInboundProcessing().getAdapterSpecificAttribute());
+		List<GenericProperty> adapterSpecificAttribute;
+		adapterSpecificAttribute = integratedConfiguration.getInboundProcessing().getAdapterSpecificAttribute();
 
+		List<GenericPropertyTable> adapterSpecificTableAttribute;
+		adapterSpecificTableAttribute = integratedConfiguration.getInboundProcessing()
+				.getAdapterSpecificTableAttribute();
 
-		return null;
-	}
-
-	@Override
-	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration) {
-		// TODO Auto-generated method stub
 
 		CommunicationChannelID communicationChannelID = integratedConfiguration.getInboundProcessing()
 				.getCommunicationChannel();
+
+		CommunicationChannel communicationChannel = this.getCommunicationChannelInformation(communicationChannelID);
+
+		return new InboundProcessing(communicationChannel, virusScan, schemaValidation, adapterSpecificAttribute,
+				adapterSpecificTableAttribute);
+	}
+
+	@Override
+	public CommunicationChannel getCommunicationChannelInformation(CommunicationChannelID communicationChannelID) {
+
 
 		CommunicationChannelIn port = IntegrationPort.getCommunicationChannelPort();
 		CommunicationChannelReadIn readIn = new CommunicationChannelReadIn();
 		readIn.getCommunicationChannelID().add(communicationChannelID);
 		CommunicationChannelReadOut readOut = port.read(readIn);
 
-		CommunicationChannel communicationChannel = null;
+		com.sap.xi.basis.CommunicationChannel originalChannel = (com.sap.xi.basis.CommunicationChannel) readOut.getCommunicationChannel();
+		List<LONGDescription> description = originalChannel.getDescription();
 
+		Parameters parameters = this.getParametersInformation(originalChannel);
+		Identifiers identifiers = this.getIdentifiersInformation(originalChannel);
+		Module module = this.getModuleInformation(originalChannel.getModuleProcess());
 
-
-
-		return null;
+		return new CommunicationChannel(communicationChannelID.getPartyID(), communicationChannelID.getChannelID(),
+				communicationChannelID.getComponentID(), description, parameters, identifiers, module);
 	}
 
+
+	@Override
+	public Parameters getParametersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel)
+	{
+
+		AdapterType adapterType = this.getAdapterTypeInformation(communicationChannel.getAdapterMetadata());
+		CommunicationChannelDirection direction = communicationChannel.getDirection();
+		String transportProtocol = communicationChannel.getTransportProtocol();
+		String messageProtocol = communicationChannel.getMessageProtocol();
+		String adapterEngine = communicationChannel.getAdapterEngineName();
+		List<GenericProperty> adapterSpecific = communicationChannel.getAdapterSpecificAttribute();
+
+		return new Parameters(adapterType, direction, transportProtocol, messageProtocol, adapterEngine,
+				adapterSpecific);
+	}
+
+	@Override
+	public AdapterType getAdapterTypeInformation(DesignObjectID adapterMetadata) {
+
+		String name = adapterMetadata.getName();
+		String nameSpace = adapterMetadata.getNamespace();
+		String softwarecomponent = adapterMetadata.getSoftwareComponentVersionID();
+		return new AdapterType(name, nameSpace, softwarecomponent);
+	}
+
+	@Override
+	public Identifiers getIdentifiersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel) {
+
+		String senderAgency = communicationChannel.getSenderIdentifier().getSchemeAgencyID();
+		String senderSchema = communicationChannel.getSenderIdentifier().getSchemeID();
+		String receiverAgency = communicationChannel.getReceiverIdentifier().getSchemeAgencyID();
+		String receiverSchema = communicationChannel.getReceiverIdentifier().getSchemeID();
+		return new Identifiers(senderAgency, senderSchema, receiverAgency, receiverSchema);
+	}
+
+	@Override
+	public Module getModuleInformation(ModuleProcess moduleProcess) {
+
+		List<ProcessSequence> processSequence = this.getProcessSequenceInformation(moduleProcess.getProcessStep());
+		List<ModuleConfiguration> moduleConfigurations = this.getModuleConfiguration(moduleProcess.getParameterGroup());
+		return new Module(processSequence, moduleConfigurations);
+	}
+
+
+	@SuppressWarnings("null")
+	@Override
+	public List<ProcessSequence> getProcessSequenceInformation(List<ProcessStep> processStep) {
+
+		List<ProcessSequence> processSequencesList = null;
+		for (int i = 0; i < processStep.size(); i++) {
+			processSequencesList.add(this.getProcessSequenceInformation((processStep).get(i), i));
+		}
+
+		return processSequencesList;
+	}
+
+	@Override
+	public ProcessSequence getProcessSequenceInformation(ProcessStep processStep,Integer number) {
+
+		String moduleName = processStep.getModuleName();
+		ModuleTypeCode type = processStep.getModuleType();
+		String moduleKey = processStep.getParameterGroupID();
+
+		return new ProcessSequence(number, moduleName, type, moduleKey);
+	}
+
+	@SuppressWarnings("null")
+	@Override
+	public List<ModuleConfiguration> getModuleConfiguration(List<ParameterGroup> parameterGroup) {
+
+		List<ModuleConfiguration> moduleConfigurationsList = null;
+		for(int i =0; i< parameterGroup.size();i++) {
+			moduleConfigurationsList.add(this.getModuleConfiguration(parameterGroup.get(i)));
+		}
+
+		return moduleConfigurationsList;
+	}
+
+	@SuppressWarnings("null")
+	@Override
+	public ModuleConfiguration getModuleConfiguration(ParameterGroup parameterGroup) {
+
+		String moduleKey = parameterGroup.getParameterGroupID();
+		List<ModuleConfigurationParameters> parameters = null;
+		ModuleConfigurationParameters parameter = null;
+
+		for (int i = 0; i < parameterGroup.getParameter().size(); i++) {
+			parameter.setParameterName(parameterGroup.getParameter().get(i).getName());
+			parameter.setParameterValue(parameterGroup.getParameter().get(i).getValue());
+			parameters.add(parameter);
+		}
+		return new ModuleConfiguration(moduleKey, parameters);
+	}
 }
