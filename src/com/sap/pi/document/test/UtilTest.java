@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.xmlbeans.XmlException;
 
+import com.sap.pi.document.dao.InboundProcessing;
 import com.sap.pi.document.util.WebServiceOperation;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.dao.Item;
@@ -29,23 +30,32 @@ public class UtilTest {
 		 * swcDocDomUtil.generateSWCDomGroupFile(CONSTAINTS.DOMGROUP_SOFTWARECOMPONENT);
 		 */
 
+		UtilTest utilTest = null;
+		utilTest.PO8test();
+
 		WebServiceOperation webServiceOperation = new WebServiceOperationImpl();
 
 		List<MessageHeaderID> messageHeaderIDs = webServiceOperation.getIntegratedConfigurationID();
 
-		/*
-		 * for (int i = 1; i < 10; i++) { IntegratedConfiguration
-		 * integratedConfiguration = webServiceOperation
-		 * .getIntegrationConfiguration(messageHeaderIDs.get(i));
-		 * 
-		 * InboundProcessing inboundProcessing = webServiceOperation
-		 * .getInboundProcessingInformation(integratedConfiguration);
-		 * 
-		 * System.out.println(inboundProcessing.getSchemaValidation());
-		 * System.out.println(inboundProcessing.getCommunicationChannel().getChannelID()
-		 * ); }
-		 */
 
+		for (int i = 1; i < 10; i++) {
+			IntegratedConfiguration integratedConfiguration = webServiceOperation
+					.getIntegrationConfiguration(messageHeaderIDs.get(i));
+
+			InboundProcessing inboundProcessing = webServiceOperation
+					.getInboundProcessingInformation(integratedConfiguration);
+
+			System.out.println(inboundProcessing.getSchemaValidation());
+			System.out.println(inboundProcessing.getCommunicationChannel().getChannelID());
+		}
+
+
+
+	}
+
+	public static void PO8test() {
+
+		WebServiceOperation webServiceOperation = new WebServiceOperationImpl();
 		MessageHeaderID messageHeaderID = new MessageHeaderID();
 		messageHeaderID.setInterfaceName("SI_Srudent_OUT");
 		messageHeaderID.setInterfaceNamespace("http://kelly.fistModel");

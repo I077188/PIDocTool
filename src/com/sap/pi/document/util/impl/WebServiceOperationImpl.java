@@ -43,7 +43,6 @@ import com.sap.xi.basis.GenericProperty;
 import com.sap.xi.basis.GenericPropertyTable;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.IntegratedConfigurationIn;
-import com.sap.xi.basis.IntegratedConfigurationInService;
 import com.sap.xi.basis.IntegratedConfigurationQueryIn;
 import com.sap.xi.basis.IntegratedConfigurationQueryOut;
 import com.sap.xi.basis.IntegratedConfigurationReadIn;
@@ -76,30 +75,11 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return headerIDs;
 	}
 
-	public IntegratedConfigurationIn getIntegratedConfigurationPort() {
-
-		IntegratedConfigurationInService icoInService;
-		SetSecurity setSecurity;
-		icoInService = new IntegratedConfigurationInService();
-		IntegratedConfigurationIn port = icoInService.getIntegratedConfigurationInPort();
-		setSecurity = new SetSecurity();
-
-		try {
-			setSecurity.set_security((BindingProvider) port,
-					"/IntegratedConfigurationInService/IntegratedConfigurationInImplBean");
-			return port;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
-	}
 
 	@Override
 	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID) {
 
-		IntegratedConfigurationIn port = this.getIntegratedConfigurationPort();
+		IntegratedConfigurationIn port = IntegrationPort.getIntegratedConfigurationPort();
 		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
 		readIn.getIntegratedConfigurationID().add(messageHeaderID);
 		IntegratedConfigurationReadOut readOut = port.read(readIn);
@@ -270,8 +250,10 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		readIn.getCommunicationChannelID().add(communicationChannelID);
 		CommunicationChannelReadOut readOut = port.read(readIn);
 
-		com.sap.xi.basis.CommunicationChannel originalChannel = (com.sap.xi.basis.CommunicationChannel) readOut.getCommunicationChannel();
-		List<LONGDescription> description = originalChannel.getDescription();
+		if (readOut.getCommunicationChannel().size() == 0)
+			return null;
+		com.sap.xi.basis.CommunicationChannel originalChannel = readOut.getCommunicationChannel().get(0);
+		List<LONGDescription> description = readOut.getCommunicationChannel().get(0).getDescription();
 
 		Parameters parameters = this.getParametersInformation(originalChannel);
 		Identifiers identifiers = this.getIdentifiersInformation(originalChannel);
@@ -286,6 +268,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	public Parameters getParametersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel)
 	{
 
+		if (communicationChannel == null)
+			return null;
 		AdapterType adapterType = this.getAdapterTypeInformation(communicationChannel.getAdapterMetadata());
 		CommunicationChannelDirection direction = communicationChannel.getDirection();
 		String transportProtocol = communicationChannel.getTransportProtocol();
@@ -300,6 +284,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public AdapterType getAdapterTypeInformation(DesignObjectID adapterMetadata) {
 
+		if (adapterMetadata == null)
+			return null;
 		String name = adapterMetadata.getName();
 		String nameSpace = adapterMetadata.getNamespace();
 		String softwarecomponent = adapterMetadata.getSoftwareComponentVersionID();
@@ -309,6 +295,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public Identifiers getIdentifiersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel) {
 
+		if (communicationChannel == null)
+			return null;
 		String senderAgency = communicationChannel.getSenderIdentifier().getSchemeAgencyID();
 		String senderSchema = communicationChannel.getSenderIdentifier().getSchemeID();
 		String receiverAgency = communicationChannel.getReceiverIdentifier().getSchemeAgencyID();
@@ -319,19 +307,23 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public Module getModuleInformation(ModuleProcess moduleProcess) {
 
+		if (moduleProcess == null)
+			return null;
 		List<ProcessSequence> processSequence = this.getProcessSequenceInformation(moduleProcess.getProcessStep());
 		List<ModuleConfiguration> moduleConfigurations = this.getModuleConfiguration(moduleProcess.getParameterGroup());
 		return new Module(processSequence, moduleConfigurations);
 	}
 
 
-	@SuppressWarnings("null")
 	@Override
 	public List<ProcessSequence> getProcessSequenceInformation(List<ProcessStep> processStep) {
 
-		List<ProcessSequence> processSequencesList = null;
+		List<ProcessSequence> processSequencesList = new ArrayList<>();
+
 		for (int i = 0; i < processStep.size(); i++) {
-			processSequencesList.add(this.getProcessSequenceInformation((processStep).get(i), i));
+			ProcessSequence processSequence = this.getProcessSequenceInformation((processStep).get(i), i);
+			if (processSequence != null)
+				processSequencesList.add(processSequence);
 		}
 
 		return processSequencesList;
@@ -347,11 +339,13 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return new ProcessSequence(number, moduleName, type, moduleKey);
 	}
 
-	@SuppressWarnings("null")
+
 	@Override
 	public List<ModuleConfiguration> getModuleConfiguration(List<ParameterGroup> parameterGroup) {
 
-		List<ModuleConfiguration> moduleConfigurationsList = null;
+		if (parameterGroup.size() == 0)
+			return null;
+		List<ModuleConfiguration> moduleConfigurationsList = new ArrayList<>();
 		for(int i =0; i< parameterGroup.size();i++) {
 			moduleConfigurationsList.add(this.getModuleConfiguration(parameterGroup.get(i)));
 		}
@@ -359,15 +353,19 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return moduleConfigurationsList;
 	}
 
-	@SuppressWarnings("null")
+
 	@Override
 	public ModuleConfiguration getModuleConfiguration(ParameterGroup parameterGroup) {
 
+		if (parameterGroup == null)
+			return null;
 		String moduleKey = parameterGroup.getParameterGroupID();
-		List<ModuleConfigurationParameters> parameters = null;
-		ModuleConfigurationParameters parameter = null;
+		List<ModuleConfigurationParameters> parameters = new ArrayList<>();
+		ModuleConfigurationParameters parameter = new ModuleConfigurationParameters(
+				parameterGroup.getParameter().get(0).getName(), parameterGroup.getParameter().get(0).getValue());
+		parameters.add(parameter);
 
-		for (int i = 0; i < parameterGroup.getParameter().size(); i++) {
+		for (int i = 1; i < parameterGroup.getParameter().size(); i++) {
 			parameter.setParameterName(parameterGroup.getParameter().get(i).getName());
 			parameter.setParameterValue(parameterGroup.getParameter().get(i).getValue());
 			parameters.add(parameter);
