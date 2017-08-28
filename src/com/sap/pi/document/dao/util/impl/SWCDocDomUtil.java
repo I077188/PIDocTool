@@ -19,7 +19,7 @@ public class SWCDocDomUtil {
 	DocDomGroupUtil domGroupUtil = new DocDomGroupUtilImpl();
 
 	public void generateSWCDomFile(File templateFile) {
-		
+
 		List<SoftwareComponent> swcs = getInfo.getSCWInfo();
 
 		System.out.println("Start generate dom file...");
@@ -43,7 +43,7 @@ public class SWCDocDomUtil {
 	public void generateSWCDomGroupFile(File templateFile) {
 		System.out.println("Start generate dom group file...");
 		List<Item> items = new ArrayList<>();
-		domGroupUtil.generateDomGroupFile(templateFile, items);
+		domGroupUtil.generateDomGroupFile(templateFile, items, "", false);
 		System.out.println("Finished!");
 	}
 

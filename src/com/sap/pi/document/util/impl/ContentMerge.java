@@ -16,9 +16,9 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
 
 /**
  * Only support text/ table
- * 
+ *
  * Picture should do more investigation
- * 
+ *
  */
 public class ContentMerge {
 
@@ -27,22 +27,26 @@ public class ContentMerge {
 	private static FileInputStream fips;
 	private static FileOutputStream fops;
 
+	// hasLocation - has the specific location for the input, current the
+	// function is not supported, use false
+
 	public static void mergeContent(List<File> sourceFiles, File target, boolean hasLocation)
 			throws InvalidFormatException, IOException, XmlException {
+		hasLocation = false;
 		List<DGFile> fileInputs = new ArrayList<>();
 		fops = new FileOutputStream(target, true);
-		
+
 		String location = "";
 		for (int i = 0; i < sourceFiles.size(); i++) {
-			
+
 			if (i > 0) {
 				// get location
 				// docGroup files are named like
 				// docDomGroup_<type>_<domGroupName>.docx
 				String fileName = sourceFiles.get(i).getName();
-				
+
 				fileName = fileName.substring(fileName.indexOf("_") + 1);
-				
+
 				String type = fileName.substring(0, fileName.indexOf("_"));
 				switch (type) {
 				case "SCV":
@@ -51,7 +55,7 @@ public class ContentMerge {
 				case "SI":
 					location = "Service Interface";
 					break;
-					
+
 				default:
 					break;
 				}
@@ -67,11 +71,11 @@ public class ContentMerge {
 			OPCPackage src1Package = OPCPackage.open(fileInputs.get(0).getFips());
 			src1Document = new XWPFDocument(src1Package);
 			CTBody src1Body = src1Document.getDocument().getBody();
-			
+
 			for (int i = 1; i < fileInputs.size(); i++) {
 				fips = fileInputs.get(i).getFips();
 				OPCPackage src2Package = OPCPackage.open(fips);
-				
+
 				src2Document = new XWPFDocument(src2Package);
 				CTBody src2Body = src2Document.getDocument().getBody();
 
@@ -107,6 +111,7 @@ public class ContentMerge {
 		src.set(makeBody);
 	}
 
+	// current not working
 	private static void appendBodyAtDefinedPart(CTBody src, CTBody append, String appendLocation) throws XmlException {
 
 		XmlOptions optionsOuter = new XmlOptions();
@@ -134,12 +139,6 @@ public class ContentMerge {
 
 		src.set(makeBody);
 	}
-
-	/*
-	 * private static void appendMedia() {
-	 * 
-	 * }
-	 */
 
 	public static void close() {
 		try {

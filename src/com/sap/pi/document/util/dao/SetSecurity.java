@@ -1,5 +1,6 @@
 package com.sap.pi.document.util.dao;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -93,7 +94,8 @@ public class SetSecurity {
 	}
 
 	public void read_properties() throws IOException {
-		FileInputStream in = new FileInputStream("resource/config/Configuration.properties");
+		FileInputStream in = new FileInputStream(
+				CONSTAINTS.resourcePath + File.separator + "config" + File.separator + "Configuration.properties");
 		Properties prop = new Properties();
 		prop.load(in);
 		host = prop.getProperty("host");

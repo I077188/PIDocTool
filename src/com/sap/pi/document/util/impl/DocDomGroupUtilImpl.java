@@ -28,7 +28,7 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 	private FileOutputStream fops;
 
 	@Override
-	public void generateDomGroupFile(File templateFile, List<Item> items) {
+	public void generateDomGroupFile(File templateFile, List<Item> items, String targetType, boolean move2Dom) {
 
 		// initial parameters
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -115,9 +115,8 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 				if (!file.isDirectory()) {
 					String fileName = file.getName();
 
-					fileName = fileName.substring(fileName.indexOf("_") + 1);
+					if (fileName.indexOf("_" + type + "_") >= 0) {
 
-					if (type.equalsIgnoreCase(fileName.substring(0, fileName.indexOf("_")))) {
 						sourceFiles.add(file);
 					}
 
@@ -127,6 +126,11 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			// merge content to the domGroup file
 			try {
 				ContentMerge.mergeContent(sourceFiles, domGroupFile, false);
+
+				if (move2Dom) {
+					move2Dom(targetType, domGroupFile);
+				}
+
 			} catch (InvalidFormatException | XmlException e) {
 				e.printStackTrace();
 			}
@@ -145,6 +149,32 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 		} finally {
 			close();
 		}
+	}
+
+	private void move2Dom(String type, File file) {
+		String fileName = file.getName();
+		System.out.println("before:\t" + fileName);
+
+		// original file type
+		// name like domGroup_<original type>_$Main_Name_<tags>.docx
+		// target file type
+		// name like dom_<target type>_$Main_Name_<tags>.docx
+
+		fileName = fileName.replaceAll(fileName.substring(0, fileName.indexOf("_")), "dom");
+
+		System.out.println(fileName);
+		fileName = fileName.replaceAll(fileName.substring(fileName.indexOf("_") + 1).substring(0,
+				fileName.substring(fileName.indexOf("_") + 1).indexOf("_")), type);
+
+		System.out.println("after:\t" + fileName);
+
+		File targeFile = new File(CONSTAINTS.temptDomPath + fileName);
+
+		if (targeFile.exists()) {
+			targeFile.delete();
+		}
+
+		file.renameTo(targeFile);
 	}
 
 	/**
