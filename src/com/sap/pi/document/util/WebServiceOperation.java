@@ -9,6 +9,7 @@ import com.sap.pi.document.dao.InboundProcessing;
 import com.sap.pi.document.dao.Logging;
 import com.sap.pi.document.dao.Module;
 import com.sap.pi.document.dao.ModuleConfiguration;
+import com.sap.pi.document.dao.OperationMapping;
 import com.sap.pi.document.dao.Parameters;
 import com.sap.pi.document.dao.ProcessSequence;
 import com.sap.pi.document.dao.Sender;
@@ -24,10 +25,11 @@ import com.sap.xi.basis.ProcessStep;
 
 public interface WebServiceOperation {
 
-	public List<MessageHeaderID> getIntegratedConfigurationID(); // Get ID of all the ICO
+	// Get ID of all the ICO
+	public List<MessageHeaderID> getIntegratedConfigurationID();
 
-	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID); // Get ICO by
-																									// messageID
+	// Get ICO by messageID
+	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID);
 
 	public Sender getSenderInformation(MessageHeaderID headerID);
 
@@ -56,4 +58,9 @@ public interface WebServiceOperation {
 	public List<ModuleConfiguration> getModuleConfiguration(List<ParameterGroup> parameterGroup);
 
 	public ModuleConfiguration getModuleConfiguration(ParameterGroup parameterGroup);
+
+	public List<OperationMapping> getOperationMappings(IntegratedConfiguration integratedConfiguration);
+
+	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration);
+
 }

@@ -19,6 +19,7 @@ import com.sap.pi.document.dao.Logging;
 import com.sap.pi.document.dao.Module;
 import com.sap.pi.document.dao.ModuleConfiguration;
 import com.sap.pi.document.dao.ModuleConfigurationParameters;
+import com.sap.pi.document.dao.OperationMapping;
 import com.sap.pi.document.dao.Parameters;
 import com.sap.pi.document.dao.ProcessSequence;
 import com.sap.pi.document.dao.Sender;
@@ -27,6 +28,7 @@ import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.pi.document.util.WebServiceOperation;
 import com.sap.pi.document.util.dao.IntegrationPort;
 import com.sap.pi.document.util.dao.SetSecurity;
+import com.sap.xi.basis.ChannelProperty;
 import com.sap.xi.basis.CommunicationChannelDirection;
 import com.sap.xi.basis.CommunicationChannelID;
 import com.sap.xi.basis.CommunicationChannelIn;
@@ -41,22 +43,28 @@ import com.sap.xi.basis.CommunicationPartyReadOut;
 import com.sap.xi.basis.DesignObjectID;
 import com.sap.xi.basis.GenericProperty;
 import com.sap.xi.basis.GenericPropertyTable;
+import com.sap.xi.basis.IntegerProperty;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.IntegratedConfigurationIn;
 import com.sap.xi.basis.IntegratedConfigurationQueryIn;
 import com.sap.xi.basis.IntegratedConfigurationQueryOut;
 import com.sap.xi.basis.IntegratedConfigurationReadIn;
 import com.sap.xi.basis.IntegratedConfigurationReadOut;
+import com.sap.xi.basis.IntegratedConfigurationReceiverInterfaceRule;
+import com.sap.xi.basis.MappingParameters;
 import com.sap.xi.basis.MessageHeaderID;
 import com.sap.xi.basis.ModuleProcess;
 import com.sap.xi.basis.ModuleTypeCode;
 import com.sap.xi.basis.ParameterGroup;
 import com.sap.xi.basis.ProcessStep;
+import com.sap.xi.basis.ReceiverDeterminationMapping;
+import com.sap.xi.basis.ReceiverInterfaces;
+import com.sap.xi.basis.Receivers;
+import com.sap.xi.basis.RestrictedGenericProperty;
 import com.sap.xi.basis.VirusScanCode;
 import com.sap.xi.basis.global.LONGDescription;
 
 public class WebServiceOperationImpl implements WebServiceOperation {
-
 
 	@Override
 	public List<MessageHeaderID> getIntegratedConfigurationID() {
@@ -75,19 +83,168 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return headerIDs;
 	}
 
-
 	@Override
 	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID) {
 
 		IntegratedConfigurationIn port = IntegrationPort.getIntegratedConfigurationPort();
 		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
 		readIn.getIntegratedConfigurationID().add(messageHeaderID);
+
 		IntegratedConfigurationReadOut readOut = port.read(readIn);
 
-		if (readOut.getIntegratedConfiguration().size() == 0)
+		List<IntegratedConfiguration> integratedConfigurations = readOut.getIntegratedConfiguration();
+
+		if (integratedConfigurations.size() > 0) {
+			return integratedConfigurations.get(0);
+		} else {
 			return null;
-		return readOut.getIntegratedConfiguration().get(0);
+		}
 	}
+
+	private List<MappingParameters> getOperationMappingParameters(
+			IntegratedConfigurationReceiverInterfaceRule interfaceRule) {
+
+		List<MappingParameters> operationMappingParameters = new ArrayList<>();
+		MappingParameters mappingParameters = new MappingParameters();
+
+		// get mapping parameters
+		MappingParameters tempt = interfaceRule.getMappingParameters();
+		List<IntegerProperty> integers = tempt.getInteger();
+		List<RestrictedGenericProperty> strings = tempt.getString();
+		List<ChannelProperty> channelProperties = tempt.getChannel();
+
+		if (integers.size() > 0 || strings.size() > 0 || channelProperties.size() > 0) {
+			if (integers.size() > 0) {
+				mappingParameters.getInteger().addAll(integers);
+			}
+
+			if (strings.size() > 0) {
+				mappingParameters.getString().addAll(strings);
+			}
+
+			if (channelProperties.size() > 0) {
+				mappingParameters.getChannel().addAll(channelProperties);
+			}
+			// create new OperationMappingParameter
+			operationMappingParameters.add(mappingParameters);
+		}
+
+		return operationMappingParameters;
+	}
+
+	@Override
+	public List<OperationMapping> getOperationMappings(IntegratedConfiguration integratedConfiguration) {
+
+		List<OperationMapping> operationMappings = new ArrayList<>();
+		if (integratedConfiguration != null) {
+			List<ReceiverInterfaces> receiverInterfaces = integratedConfiguration.getReceiverInterfaces();
+			if (receiverInterfaces.size() > 0) {
+				for (int i = 0; i < receiverInterfaces.size(); i++) {
+					ReceiverInterfaces interfaces = receiverInterfaces.get(i);
+
+					// get interface rules
+					List<IntegratedConfigurationReceiverInterfaceRule> interfaceRules = interfaces
+							.getReceiverInterfaceRule();
+
+					if (interfaceRules.size() > 0) {
+						for (int j = 0; j < interfaceRules.size(); j++) {
+							IntegratedConfigurationReceiverInterfaceRule interfaceRule = interfaceRules.get(j);
+
+							// get Mappings
+							DesignObjectID mapping = interfaceRule.getMapping();
+
+							String name = mapping.getName();
+							name = (name.equals("") || name == null) ? "N/A" : name;
+
+							String namespace = mapping.getNamespace();
+							namespace = (namespace.equals("") || namespace == null) ? "N/A" : namespace;
+
+							String softwareComponentVersionID = mapping.getSoftwareComponentVersionID();
+							softwareComponentVersionID = (softwareComponentVersionID.equals("")
+									|| softwareComponentVersionID == null) ? "N/A" : softwareComponentVersionID;
+
+							if (!(name.equals("N/A") && namespace.equals("N/A")
+									&& softwareComponentVersionID.equals("N/A"))) {
+
+								// get mapping parameters
+								operationMappings.add(new OperationMapping(name, namespace, softwareComponentVersionID,
+										getOperationMappingParameters(interfaceRule)));
+							}
+						}
+					}
+				}
+			}
+
+			return operationMappings;
+		}
+
+		return null;
+	}
+
+	public List<ReceiverDeterminationMapping> getDynamicRecevierRule(IntegratedConfiguration integratedConfiguration) {
+
+		List<ReceiverDeterminationMapping> dyReRule = new ArrayList<>();
+
+		Receivers receivers = integratedConfiguration.getReceivers();
+
+		dyReRule = receivers.getDynamicReceiverRule();
+
+		if (dyReRule.size() > 0) {
+			for (int i = 0; i < dyReRule.size(); i++) {
+				ReceiverDeterminationMapping rdMapping = dyReRule.get(i);
+
+				String operation = rdMapping.getOperation();
+				operation = (operation.equals("") || operation == null) ? "N/A" : operation;
+
+			}
+		}
+		return dyReRule;
+
+	}
+
+	@Override
+	public Sender getSenderInformation(MessageHeaderID headerID) {
+		IntegratedConfiguration iConfig = this.getIntegrationConfiguration(headerID);
+
+		if (iConfig != null) {
+			MessageHeaderID mHeaderID = iConfig.getIntegratedConfigurationID();
+
+			CommunicationPartyDao communicationParty = null;
+
+			String communicationPartyID = mHeaderID.getSenderPartyID();
+			communicationPartyID = (communicationPartyID == null || communicationPartyID.equals("")) ? "N/A"
+					: communicationPartyID;
+
+			if (!communicationPartyID.equals("N/A")) {
+				// get communicationParty
+				try {
+					communicationParty = getCommunicationParty(communicationPartyID);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+
+				String communicationComponent = mHeaderID.getSenderComponentID();
+				communicationComponent = (communicationComponent == null || communicationComponent.equals("")) ? "N/A"
+						: communicationComponent;
+
+				String namespace = mHeaderID.getInterfaceNamespace();
+				namespace = (namespace == null || namespace.equals("")) ? "N/A" : namespace;
+
+				String senderInterface = mHeaderID.getInterfaceName();
+				senderInterface = (senderInterface == null || senderInterface.equals("")) ? "N/A" : senderInterface;
+
+				String senderInterfaceSWC = iConfig.getInboundProcessing().getSenderInterfaceSoftwareComponentVersion();
+				senderInterfaceSWC = (senderInterfaceSWC == null || senderInterfaceSWC.equals("")) ? "N/A"
+						: senderInterfaceSWC;
+
+				return new Sender(communicationParty, communicationComponent, senderInterface, namespace,
+						senderInterfaceSWC);
+			}
+		}
+		return null;
+
+	}
+
 
 
 	@Override
@@ -100,49 +257,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		}
 		return new Staging(integratedConfiguration.getStaging().isUseGlobal(), specificConfig);
 
-	}
-
-
-	@Override
-	public Sender getSenderInformation(MessageHeaderID headerID) {
-		IntegratedConfiguration iConfig = this.getIntegrationConfiguration(headerID);
-
-		MessageHeaderID mHeaderID = iConfig.getIntegratedConfigurationID();
-
-		CommunicationPartyDao communicationParty = null;
-
-		String communicationPartyID = mHeaderID.getSenderPartyID();
-		communicationPartyID = (communicationPartyID == null || communicationPartyID.equals("")) ? "N/A"
-				: communicationPartyID;
-
-		if (!communicationPartyID.equals("N/A")) {
-			// get communicationParty
-			try {
-				communicationParty = getCommunicationParty(communicationPartyID);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
-
-		} else {
-			List<AdditionalIdentfier> additionalIdentfiers = new ArrayList<>();
-			additionalIdentfiers.add(new AdditionalIdentfier("N/A", "N/A", "N/A"));
-			communicationParty = new CommunicationPartyDao("N/A", additionalIdentfiers);
-		}
-
-		String communicationComponent = mHeaderID.getSenderComponentID();
-		communicationComponent = (communicationComponent == null || communicationComponent.equals("")) ? "N/A"
-				: communicationComponent;
-
-		String namespace = mHeaderID.getInterfaceNamespace();
-		namespace = (namespace == null || namespace.equals("")) ? "N/A" : namespace;
-
-		String senderInterface = mHeaderID.getInterfaceName();
-		senderInterface = (senderInterface == null || senderInterface.equals("")) ? "N/A" : senderInterface;
-
-		String senderInterfaceSWC = iConfig.getInboundProcessing().getSenderInterfaceSoftwareComponentVersion();
-		senderInterfaceSWC = (senderInterfaceSWC == null || senderInterfaceSWC.equals("")) ? "N/A" : senderInterfaceSWC;
-
-		return new Sender(communicationParty, communicationComponent, senderInterface, namespace, senderInterfaceSWC);
 	}
 
 	private CommunicationPartyDao getCommunicationParty(String communicationPartyID) throws MalformedURLException {
@@ -250,8 +364,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		readIn.getCommunicationChannelID().add(communicationChannelID);
 		CommunicationChannelReadOut readOut = port.read(readIn);
 
-		if (readOut.getCommunicationChannel().size() == 0)
+		if (readOut.getCommunicationChannel().size() == 0) {
 			return null;
+		}
 		com.sap.xi.basis.CommunicationChannel originalChannel = readOut.getCommunicationChannel().get(0);
 		List<LONGDescription> description = readOut.getCommunicationChannel().get(0).getDescription();
 
@@ -268,8 +383,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	public Parameters getParametersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel)
 	{
 
-		if (communicationChannel == null)
+		if (communicationChannel == null) {
 			return null;
+		}
 		AdapterType adapterType = this.getAdapterTypeInformation(communicationChannel.getAdapterMetadata());
 		CommunicationChannelDirection direction = communicationChannel.getDirection();
 		String transportProtocol = communicationChannel.getTransportProtocol();
@@ -284,8 +400,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public AdapterType getAdapterTypeInformation(DesignObjectID adapterMetadata) {
 
-		if (adapterMetadata == null)
+		if (adapterMetadata == null) {
 			return null;
+		}
 		String name = adapterMetadata.getName();
 		String nameSpace = adapterMetadata.getNamespace();
 		String softwarecomponent = adapterMetadata.getSoftwareComponentVersionID();
@@ -295,8 +412,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public Identifiers getIdentifiersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel) {
 
-		if (communicationChannel == null)
+		if (communicationChannel == null) {
 			return null;
+		}
 		String senderAgency = communicationChannel.getSenderIdentifier().getSchemeAgencyID();
 		String senderSchema = communicationChannel.getSenderIdentifier().getSchemeID();
 		String receiverAgency = communicationChannel.getReceiverIdentifier().getSchemeAgencyID();
@@ -307,8 +425,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public Module getModuleInformation(ModuleProcess moduleProcess) {
 
-		if (moduleProcess == null)
+		if (moduleProcess == null) {
 			return null;
+		}
 		List<ProcessSequence> processSequence = this.getProcessSequenceInformation(moduleProcess.getProcessStep());
 		List<ModuleConfiguration> moduleConfigurations = this.getModuleConfiguration(moduleProcess.getParameterGroup());
 		return new Module(processSequence, moduleConfigurations);
@@ -322,8 +441,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 		for (int i = 0; i < processStep.size(); i++) {
 			ProcessSequence processSequence = this.getProcessSequenceInformation((processStep).get(i), i);
-			if (processSequence != null)
+			if (processSequence != null) {
 				processSequencesList.add(processSequence);
+			}
 		}
 
 		return processSequencesList;
@@ -343,8 +463,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public List<ModuleConfiguration> getModuleConfiguration(List<ParameterGroup> parameterGroup) {
 
-		if (parameterGroup.size() == 0)
+		if (parameterGroup.size() == 0) {
 			return null;
+		}
 		List<ModuleConfiguration> moduleConfigurationsList = new ArrayList<>();
 		for(int i =0; i< parameterGroup.size();i++) {
 			moduleConfigurationsList.add(this.getModuleConfiguration(parameterGroup.get(i)));
@@ -357,8 +478,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public ModuleConfiguration getModuleConfiguration(ParameterGroup parameterGroup) {
 
-		if (parameterGroup == null)
+		if (parameterGroup == null) {
 			return null;
+		}
 		String moduleKey = parameterGroup.getParameterGroupID();
 		List<ModuleConfigurationParameters> parameters = new ArrayList<>();
 		ModuleConfigurationParameters parameter = new ModuleConfigurationParameters(
@@ -371,5 +493,11 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 			parameters.add(parameter);
 		}
 		return new ModuleConfiguration(moduleKey, parameters);
+	}
+
+	@Override
+	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
