@@ -28,8 +28,10 @@ import com.sap.pi.document.util.dao.CONSTAINTS;
 
 public class HttpOperation {
 	public List<String[]> sendPostRequestWithParameters(List<NameValuePair> vPairs) {
+
 		HttpClient client = HttpClientBuilder.create().build();
-		HttpPost post = new HttpPost("http://cndt5008po73.pvgl.sap.corp:50000/rep/support/SimpleQuery?j_username="
+		HttpPost post = new HttpPost("http://" + CONSTAINTS.host + ":" + CONSTAINTS.port
+				+ "/rep/support/SimpleQuery?j_username="
 				+ CONSTAINTS.userName + "&j_password=" + CONSTAINTS.password);
 
 		List<String[]> results = new ArrayList<String[]>();
@@ -37,7 +39,7 @@ public class HttpOperation {
 		try {
 			post.setEntity(new UrlEncodedFormEntity(vPairs));
 			HttpResponse response = client.execute(post);
-			
+
 			BufferedReader bfReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
 			List<InputStream> ins = new ArrayList<>();
@@ -46,12 +48,12 @@ public class HttpOperation {
 			boolean copy = false;
 
 			while ((line = bfReader.readLine()) != null) {
-				
+
 				if (line.indexOf("<table ") >= 0) {
 					line = "<table>";
 					copy = true;
 				}
-				
+
 				if (copy) {
 					// in.read(line.getBytes("UTF-8"));
 					ins.add(new ByteArrayInputStream(line.getBytes("UTF-8")));
@@ -112,4 +114,5 @@ public class HttpOperation {
 		return results;
 
 	}
+
 }

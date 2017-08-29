@@ -87,6 +87,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	public IntegratedConfiguration getIntegrationConfiguration(MessageHeaderID messageHeaderID) {
 
 		IntegratedConfigurationIn port = IntegrationPort.getIntegratedConfigurationPort();
+
 		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
 		readIn.getIntegratedConfigurationID().add(messageHeaderID);
 
@@ -245,8 +246,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	}
 
-
-
 	@Override
 	public Staging getStagingInformation(IntegratedConfiguration integratedConfiguration) {
 
@@ -305,7 +304,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return new CommunicationPartyDao(communicationPartyID, additionalIdentfiers);
 	}
 
-
 	@Override
 	public Logging getLoggingInformation(IntegratedConfiguration integratedConfiguration) {
 
@@ -324,7 +322,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 		return null; // Not find the position
 	}
-
 
 	@Override
 	public InboundProcessing getInboundProcessingInformation(IntegratedConfiguration integratedConfiguration) {
@@ -377,7 +374,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return new CommunicationChannel(communicationChannelID.getPartyID(), communicationChannelID.getChannelID(),
 				communicationChannelID.getComponentID(), description, parameters, identifiers, module);
 	}
-
 
 	@Override
 	public Parameters getParametersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel)
@@ -433,7 +429,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return new Module(processSequence, moduleConfigurations);
 	}
 
-
 	@Override
 	public List<ProcessSequence> getProcessSequenceInformation(List<ProcessStep> processStep) {
 
@@ -473,7 +468,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 		return moduleConfigurationsList;
 	}
-
 
 	@Override
 	public ModuleConfiguration getModuleConfiguration(ParameterGroup parameterGroup) {

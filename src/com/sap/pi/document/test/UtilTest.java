@@ -3,6 +3,7 @@ package com.sap.pi.document.test;
 import java.util.List;
 
 import com.sap.pi.document.dao.OperationMapping;
+import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.MessageHeaderID;
@@ -10,6 +11,8 @@ import com.sap.xi.basis.MessageHeaderID;
 public class UtilTest {
 
 	public static void main(String[] args) {
+
+		CONSTAINTS.initial();
 
 		WebServiceOperationImpl webServiceOperation = new WebServiceOperationImpl();
 

@@ -1,6 +1,9 @@
 package com.sap.pi.document.util.dao;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -55,12 +58,31 @@ public class CONSTAINTS {
 	public static String temptDomPath = temptPath + "dom" + File.separator;
 	public static String temptDomGroupPath = temptPath + "domGroup" + File.separator;
 
-	public static String userName = "I888888";
-	public static String password = "Abcd1234";
+	public static String userName;
+	public static String password;
+	public static String host;
+	public static String port;
 
 	public static void addNewLine(XWPFDocument document) {
 		XWPFParagraph paragraph = document.createParagraph();
 		XWPFRun run = paragraph.createRun();
 		run.setText("");
+	}
+
+	// initial parameters
+	// must be scheduled in Main
+	public static void initial() {
+		try {
+			FileInputStream in = new FileInputStream(
+					CONSTAINTS.resourcePath + File.separator + "config" + File.separator + "Configuration.properties");
+			Properties prop = new Properties();
+			prop.load(in);
+			host = prop.getProperty("host");
+			port = prop.getProperty("port");
+			userName = prop.getProperty("user");
+			password = prop.getProperty("password");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
