@@ -5,11 +5,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 public class CONSTAINTS {
+
+	public static Logger LOG = LogManager.getLogger("CONSTAINTS.class");
+	public static String logFolderPath = System.getProperty("user.dir") + File.separator + "log" + File.separator;
+	public static String logFilePath = logFolderPath + "Execution.log";
 
 	public static String resourcePath = System.getProperty("user.dir") + File.separator + "resources" + File.separator;
 
