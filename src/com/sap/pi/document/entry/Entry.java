@@ -2,6 +2,7 @@ package com.sap.pi.document.entry;
 
 import java.util.List;
 
+import com.sap.pi.document.dao.util.impl.ICODocDomUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -26,10 +27,11 @@ public class Entry {
 		// for each ICO ID generated document
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
+		ICODocDomUtil icoDoc = new ICODocDomUtil();
 		for (int i = 0; i < messageHeaderIDs.size(); i++) {
 			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderIDs.get(i));
 			// generated document
-
+			icoDoc.generateICODoc(integratedConfiguration);
 		}
 
 		Long end = System.currentTimeMillis();
