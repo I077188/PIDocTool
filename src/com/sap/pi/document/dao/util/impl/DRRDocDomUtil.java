@@ -7,6 +7,7 @@ import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.dao.Item;
 import com.sap.pi.document.util.impl.DocDomGroupUtilImpl;
 import com.sap.pi.document.util.impl.DocDomUtilImpl;
+import com.sap.pi.document.util.impl.OtherUtil;
 import com.sap.xi.basis.ChannelProperty;
 import com.sap.xi.basis.CommunicationChannelID;
 import com.sap.xi.basis.DesignObjectID;
@@ -38,18 +39,14 @@ public class DRRDocDomUtil {
 				ReceiverDeterminationMapping dtReceiverRule = dyReceiverRules.get(i);
 
 				// get operation name
-				String operation = dtReceiverRule.getOperation();
-				operation = (operation.equals("") || operation == null) ? "N/A" : operation;
+				String operation = OtherUtil.getValue(dtReceiverRule.getOperation());
 
 				DesignObjectID mapping = dtReceiverRule.getMapping();
-				String mappingName = mapping.getName();
-				mappingName = (mappingName == null || mapping.equals("")) ? "N/A" : mappingName;
+				String mappingName = OtherUtil.getValue(mapping.getName());
 
-				String mappingNameSpace = mapping.getNamespace();
-				mappingNameSpace = (mappingNameSpace == null || mappingNameSpace.equals("")) ? "N/A" : mappingNameSpace;
+				String mappingNameSpace = OtherUtil.getValue(mapping.getNamespace());
 
-				String mappingSWCV = mapping.getSoftwareComponentVersionID();
-				mappingSWCV = (mappingSWCV == null || mappingSWCV.equals("")) ? "N/A" : mappingSWCV;
+				String mappingSWCV = OtherUtil.getValue(mapping.getSoftwareComponentVersionID());
 
 				MappingParameters mappingParameters = dtReceiverRule.getMappingParamters();
 
@@ -75,14 +72,14 @@ public class DRRDocDomUtil {
 					integerDomItems.add(new Item("$Name_Value", name));
 					integerDomItems.add(new Item("$Value_Value", valueString));
 
-					domUtil.generateDomFile(CONSTAINTS.DOM_DRR_OMP_INTEGER, integerDomItems, name);
+					domUtil.generateDomFile(CONSTAINTS.DOM_OMP_INTEGER, integerDomItems, name);
 				}
 
 				List<Item> integerDomGroupItems = new ArrayList<>();
 				integerDomGroupItems.add(new Item("$Operation_Name", operation));
 				integerDomGroupItems.add(new Item("$Main_Name", "integersParameterSAP"));
-				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_DRR_OMP_INTEGER, integerDomGroupItems,
-						"DRROMP", true);
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OMP_INTEGER, integerDomGroupItems,
+						"OMP", true);
 
 				// generate String related domGroup and dom file, move required
 				for (int j = 0; j < strings.size(); j++) {
@@ -99,14 +96,14 @@ public class DRRDocDomUtil {
 					stringDomItems.add(new Item("$Name_Value", name));
 					stringDomItems.add(new Item("$Value_Value", value));
 
-					domUtil.generateDomFile(CONSTAINTS.DOM_DRR_OMP_STRING, stringDomItems, name);
+					domUtil.generateDomFile(CONSTAINTS.DOM_OMP_STRING, stringDomItems, name);
 				}
 				List<Item> stringDomGroupItems = new ArrayList<>();
 				stringDomGroupItems.add(new Item("$Operation_Name", operation));
 				stringDomGroupItems.add(new Item("$Main_Name", "stringsParameterSAP"));
 
-				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_DRR_OMP_STRING, stringDomGroupItems,
-						"DRROMP", true);
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OMP_STRING, stringDomGroupItems,
+						"OMP", true);
 
 				// generate Chanel related domGroup and dom file, move required
 				for (int j = 0; j < channels.size(); j++) {
@@ -137,19 +134,18 @@ public class DRRDocDomUtil {
 					channelDomItems.add(new Item("$ComponentID_Value", valueComponentID));
 					channelDomItems.add(new Item("$ChannelID_Value", valueChannelID));
 
-					domUtil.generateDomFile(CONSTAINTS.DOM_DRR_OMP_CHANEL, channelDomItems, channelName);
+					domUtil.generateDomFile(CONSTAINTS.DOM_OMP_CHANEL, channelDomItems, channelName);
 				}
 				List<Item> channelDomGroupItems = new ArrayList<>();
 				channelDomGroupItems.add(new Item("$Operation_Name", operation));
 				channelDomGroupItems.add(new Item("$Main_Name", "channelsParameterSAP"));
-				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_DRR_OMP_CHANEL, channelDomGroupItems, "DRROMP",
-						true);
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OMP_CHANEL, channelDomGroupItems, "OMP", true);
 
 				// generate domGroup and dom file of operation Mapping parameter
 				List<Item> drrIMPItems = new ArrayList<>();
 				drrIMPItems.add(new Item("$Operation_Name", operation));
 				drrIMPItems.add(new Item("$Main_Name", "ompParameterSAP"));
-				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_DRR_OMP, drrIMPItems, "DRR", true);
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OMP, drrIMPItems, "DRR", true);
 
 				// generate domGroup and dom file of operation mapping
 				List<Item> omDomItems = new ArrayList<>();
@@ -157,13 +153,13 @@ public class DRRDocDomUtil {
 				omDomItems.add(new Item("$NameSpace_Value", mappingNameSpace));
 				omDomItems.add(new Item("$ComponentID_Value", mappingSWCV));
 
-				domUtil.generateDomFile(CONSTAINTS.DOM_DRR_OM, omDomItems, mappingName);
+				domUtil.generateDomFile(CONSTAINTS.DOM_OM, omDomItems, mappingName);
 
 				List<Item> omDomGroupItems = new ArrayList<>();
 				drrIMPItems.add(new Item("$Operation_Name", operation));
 				drrIMPItems.add(new Item("$Main_Name", "omParameterSAP"));
 				// write back to receiver determination
-				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_DRR_OM, omDomGroupItems, "RD", true);
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomGroupItems, "RD", true);
 			}
 		}
 

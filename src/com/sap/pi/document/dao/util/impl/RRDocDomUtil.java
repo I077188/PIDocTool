@@ -35,11 +35,11 @@ public class RRDocDomUtil {
 
 			// for condition
 			ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
-			conditionDocDomUtil.generateConditionDomFile(receiverRuleDao.getCondtionDao(), "RR");
+			conditionDocDomUtil.generateConditionDomFile(receiverRuleDao.getCondtionDao(), "RR", true);
 
 			// for receiverDao
 			ReceiverDaoDocDomUtil receiverDaoDocDomUtil = new ReceiverDaoDocDomUtil();
-			receiverDaoDocDomUtil.generateConditionDomFile(receiverRuleDao.getReceiverDao(), "RR");
+			receiverDaoDocDomUtil.generateReceiverDomFile(receiverRuleDao.getReceiverDao(), "RR", true);
 
 		}
 

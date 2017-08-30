@@ -40,20 +40,20 @@ public class CONSTAINTS {
 	public static File DOMGROUP_SOFTWARECOMPONENT = new File(templateDomGroupPath + "SWC.docx");
 
 	// Dynamic Receiver Rule - operation mapping parameter channel
-	public static File DOM_DRR_OMP_INTEGER = new File(templateDomPath + "DRROMPINTEGER.docx");
-	public static File DOMGROUP_DRR_OMP_INTEGER = new File(templateDomGroupPath + "DRROMPINTEGER.docx");
+	public static File DOM_OMP_INTEGER = new File(templateDomPath + "OMPINTEGER.docx");
+	public static File DOMGROUP_OMP_INTEGER = new File(templateDomGroupPath + "OMPINTEGER.docx");
 
-	public static File DOM_DRR_OMP_STRING = new File(templateDomPath + "DRROMPSTRING.docx");
-	public static File DOMGROUP_DRR_OMP_STRING = new File(templateDomGroupPath + "DRROMPSTRING.docx");
+	public static File DOM_OMP_STRING = new File(templateDomPath + "OMPSTRING.docx");
+	public static File DOMGROUP_OMP_STRING = new File(templateDomGroupPath + "OMPSTRING.docx");
 
-	public static File DOM_DRR_OMP_CHANEL = new File(templateDomPath + "DRROMPCHANEL.docx");
-	public static File DOMGROUP_DRR_OMP_CHANEL = new File(templateDomGroupPath + "DRROMPCHANEL.docx");
+	public static File DOM_OMP_CHANEL = new File(templateDomPath + "OMPCHANEL.docx");
+	public static File DOMGROUP_OMP_CHANEL = new File(templateDomGroupPath + "OMPCHANEL.docx");
 
-	public static File DOMGROUP_DRR_OMP = new File(templateDomGroupPath + "DRROMP.docx");
-	public static File DOM_DRR_OMP = new File(templateDomPath + "DRROMP.docx");
+	public static File DOMGROUP_OMP = new File(templateDomGroupPath + "OMP.docx");
+	public static File DOM_OMP = new File(templateDomPath + "OMP.docx");
 
-	public static File DOMGROUP_DRR_OM = new File(templateDomGroupPath + "DRROM.docx");
-	public static File DOM_DRR_OM = new File(templateDomPath + "DRROM.docx");
+	public static File DOMGROUP_OM = new File(templateDomGroupPath + "OM.docx");
+	public static File DOM_OM = new File(templateDomPath + "OM.docx");
 
 	public static File DOMGROUP_DRR = new File(templateDomGroupPath + "DRR.docx");
 	public static File DOMGROUP_SENDER = new File(templateDomGroupPath + "SENDER.docx");
@@ -65,6 +65,10 @@ public class CONSTAINTS {
 
 	public static File DOM_RECEIVER = new File(templateDomPath + "RECEIVER.docx");
 	public static File DOMGROUP_RECEIVER = new File(templateDomGroupPath + "RECEIVER.docx");
+	public static File DOMGROUP_RECEIVERRULE = new File(templateDomGroupPath + "RECEIVERRULE.docx");
+	public static File DOMGROUP_RECEIVERINTERFACE = new File(templateDomGroupPath + "RECEIVERINTERFACE.docx");
+	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
+	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
 
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;

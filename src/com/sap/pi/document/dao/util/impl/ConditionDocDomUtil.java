@@ -18,7 +18,7 @@ public class ConditionDocDomUtil {
 	DocDomGroupUtilImpl docDomGroupUtilImpl = new DocDomGroupUtilImpl();
 	DocDomUtilImpl docDomUtilImpl = new DocDomUtilImpl();
 
-	public void generateConditionDomFile(Condition condition, String type) {
+	public void generateConditionDomFile(Condition condition, String type, boolean move2dom) {
 		// AtomicConditionBlock
 		List<AtomicConditionBlock> atomicConditionBlocks = condition.getAtomicConditionBlock();
 
@@ -90,7 +90,7 @@ public class ConditionDocDomUtil {
 
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "ATOCONDITIONBLOCK"));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ATO_CONDITION_BLOCK, items, type, true);
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ATO_CONDITION_BLOCK, items, type, move2dom);
 		}
 	}
 
