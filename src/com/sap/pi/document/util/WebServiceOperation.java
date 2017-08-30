@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sap.pi.document.dao.AdapterType;
 import com.sap.pi.document.dao.CommunicationChannel;
+import com.sap.pi.document.dao.ExternalReceiverRule;
 import com.sap.pi.document.dao.Identifiers;
 import com.sap.pi.document.dao.InboundProcessing;
 import com.sap.pi.document.dao.Logging;
@@ -62,5 +63,9 @@ public interface WebServiceOperation {
 	public List<OperationMapping> getOperationMappings(IntegratedConfiguration integratedConfiguration);
 
 	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration);
+
+	public List<ExternalReceiverRule> getExternalReceiverRules(IntegratedConfiguration integratedConfiguration);
+
+	public List<ExternalReceiverRule> getExternalReceiverRuleInfomation(List<String> externalRuleId);
 
 }

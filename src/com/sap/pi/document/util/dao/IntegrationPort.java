@@ -10,6 +10,8 @@ import com.sap.xi.basis.CommunicationPartyIn;
 import com.sap.xi.basis.CommunicationPartyInService;
 import com.sap.xi.basis.IntegratedConfigurationIn;
 import com.sap.xi.basis.IntegratedConfigurationInService;
+import com.sap.xi.basis.ReceiverRuleIn;
+import com.sap.xi.basis.ReceiverRuleInService;
 
 public class IntegrationPort {
 
@@ -62,6 +64,24 @@ public class IntegrationPort {
 		try {
 			setSecurity.set_security((BindingProvider) port,
 					"/CommunicationPartyInService/CommunicationPartyInImplBean");
+			return port;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static ReceiverRuleIn getReceiverRulePort() {
+		ReceiverRuleInService icoInService;
+		SetSecurity setSecurity;
+		icoInService = new ReceiverRuleInService();
+		ReceiverRuleIn port = icoInService.getReceiverRuleInPort();
+		setSecurity = new SetSecurity();
+
+		try {
+			setSecurity.set_security((BindingProvider) port, "/ReceiverRuleInService/ReceiverRuleInImplBean");
 			return port;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

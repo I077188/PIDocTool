@@ -70,6 +70,13 @@ public class CONSTAINTS {
 	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
 	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
 
+	// External Receiver Rule - operation mapping parameter channel
+	public static File DOM_ERR = new File(templateDomPath + "ERR.docx");
+	public static File DOMGROUP__ERR = new File(templateDomPath + "ERR.docx");
+	public static File DOM_ERR_RULR = new File(templateDomPath + "ERRRULE.docx");
+	public static File DOMGROUP__ERR_RULE = new File(templateDomPath + "ERRRULE.docx");
+	public static File DOM_ERR_RULR_RECEIVER = new File(templateDomPath + "ERRRULERECEIVER.docx");
+
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;
 
