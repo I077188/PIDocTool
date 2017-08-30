@@ -8,7 +8,7 @@ import com.sap.pi.document.util.dao.Item;
 import com.sap.pi.document.util.impl.DocUtilImp;
 import com.sap.xi.basis.IntegratedConfiguration;
 
-public class ICODocDomUtil {
+public class ICODocUtil {
 
 	public void generateICODoc(IntegratedConfiguration integratedConfiguration) {
 		DocUtilImp docUtilImp = new DocUtilImp();

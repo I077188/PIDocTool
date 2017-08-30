@@ -8,7 +8,7 @@ import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.dao.Item;
 import com.sap.pi.document.util.impl.DocDomGroupUtilImpl;
 
-public class SenderDocDomUtil {
+public class SenderDocDomGroupUtil {
 
 	DocDomGroupUtilImpl domGroupUtil = new DocDomGroupUtilImpl();
 	public void generateSenderDomGroupFile(Sender sender) {

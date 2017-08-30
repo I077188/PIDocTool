@@ -58,6 +58,14 @@ public class CONSTAINTS {
 	public static File DOMGROUP_DRR = new File(templateDomGroupPath + "DRR.docx");
 	public static File DOMGROUP_SENDER = new File(templateDomGroupPath + "SENDER.docx");
 
+	public static File DOMGROUP_RR = new File(templateDomGroupPath + "RR.docx");
+
+	public static File DOM_ATO_CONDITION = new File(templateDomPath + "ATOCONDITION.docx");
+	public static File DOMGROUP_ATO_CONDITION_BLOCK = new File(templateDomGroupPath + "ATOCONDITIONBLOCK.docx");
+
+	public static File DOM_RECEIVER = new File(templateDomPath + "RECEIVER.docx");
+	public static File DOMGROUP_RECEIVER = new File(templateDomGroupPath + "RECEIVER.docx");
+
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;
 
