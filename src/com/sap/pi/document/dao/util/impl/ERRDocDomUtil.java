@@ -25,6 +25,7 @@ public class ERRDocDomUtil {
 
 	DocDomUtilImpl domUtil = new DocDomUtilImpl();
 	DocDomGroupUtilImpl domGroupUtil = new DocDomGroupUtilImpl();
+
 	// generate Dom file
 	public void generateERRDomFile(IntegratedConfiguration integratedConfiguration) {
 
@@ -45,7 +46,8 @@ public class ERRDocDomUtil {
 
 				List<String> etReceiverRuleIds = etReceiverRule.getReceiverRuleID();
 
-				// generate RULR related domGroup and dom file, move required(Contain
+				// generate RULR related domGroup and dom file, move
+				// required(Contain
 				// condition(1) and receiver(n))
 				for (int j = 0; j < etReceiverRuleIds.size(); j++) {
 
@@ -53,11 +55,13 @@ public class ERRDocDomUtil {
 					ReceiverRuleReadIn readIn = new ReceiverRuleReadIn();
 
 					readIn.getReceiverRuleID().add(etReceiverRuleIds.get(i));
-					ReceiverRuleReadOut	readOut = port.read(readIn);
+					ReceiverRuleReadOut readOut = port.read(readIn);
 
-
-					if(readOut.getReceiverRule().size()>0) {
-						//Notice: There may be several rules under one external receiver rule ID, this time only considered there is only one rule !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					if (readOut.getReceiverRule().size() > 0) {
+						// Notice: There may be several rules under one external
+						// receiver rule ID, this time only considered there is
+						// only one rule
+						// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 						ReceiverRulePart externalReceiverRule = readOut.getReceiverRule().get(0).getRule().get(0);
 						String condition = this.getCondition(externalReceiverRule.getCondition()).substring(5);
 						condition = (condition == null || condition.equals("")) ? "N/A" : condition;
@@ -78,8 +82,7 @@ public class ERRDocDomUtil {
 					}
 				}
 				List<Item> integerDomGroupItems = new ArrayList<>();
-				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP__ERR, integerDomGroupItems, "ERRRULE",
-						true);
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP__ERR, integerDomGroupItems, "ERRRULE", true);
 			}
 		}
 	}
@@ -111,7 +114,7 @@ public class ERRDocDomUtil {
 	public String getCondition(Condition condition) {
 		// TODO Auto-generated method stub
 		StringBuilder conditionString = new StringBuilder();
-		for(int i =0; i<condition.getAtomicConditionBlock().size();i++) {
+		for (int i = 0; i < condition.getAtomicConditionBlock().size(); i++) {
 			AtomicConditionBlock atomicConditionBlock = condition.getAtomicConditionBlock().get(i);
 			conditionString.append(" OR ");
 			for (int j = 0; j < atomicConditionBlock.getAtomicCondition().size(); j++) {
@@ -134,7 +137,5 @@ public class ERRDocDomUtil {
 		}
 		return conditionString.toString();
 	}
-
-
 
 }

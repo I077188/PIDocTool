@@ -2,5 +2,6 @@
 /CommunicationPartyInImplBean.wsdl
 /IntegratedConfigurationInImplBean.wsdl
 /META-INF/
+/ReceiverRuleInImplBean.wsdl
 /com/
 /log4j2.xml

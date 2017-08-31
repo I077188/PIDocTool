@@ -13,6 +13,7 @@ import com.sap.pi.document.dao.AdapterType;
 import com.sap.pi.document.dao.AdditionalIdentfier;
 import com.sap.pi.document.dao.CommunicationChannel;
 import com.sap.pi.document.dao.CommunicationPartyDao;
+import com.sap.pi.document.dao.ExternalReceiverRule;
 import com.sap.pi.document.dao.Identifiers;
 import com.sap.pi.document.dao.InboundProcessing;
 import com.sap.pi.document.dao.Logging;
@@ -313,8 +314,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 			specificConfig = "N/A";
 		}
 
-		return new Logging(integratedConfiguration.getLogging().isUseGlobal(),
-				specificConfig);
+		return new Logging(integratedConfiguration.getLogging().isUseGlobal(), specificConfig);
 	}
 
 	@Override
@@ -342,7 +342,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		adapterSpecificTableAttribute = integratedConfiguration.getInboundProcessing()
 				.getAdapterSpecificTableAttribute();
 
-
 		CommunicationChannelID communicationChannelID = integratedConfiguration.getInboundProcessing()
 				.getCommunicationChannel();
 
@@ -354,7 +353,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	@Override
 	public CommunicationChannel getCommunicationChannelInformation(CommunicationChannelID communicationChannelID) {
-
 
 		CommunicationChannelIn port = IntegrationPort.getCommunicationChannelPort();
 		CommunicationChannelReadIn readIn = new CommunicationChannelReadIn();
@@ -376,8 +374,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	}
 
 	@Override
-	public Parameters getParametersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel)
-	{
+	public Parameters getParametersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel) {
 
 		if (communicationChannel == null) {
 			return null;
@@ -445,7 +442,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	}
 
 	@Override
-	public ProcessSequence getProcessSequenceInformation(ProcessStep processStep,Integer number) {
+	public ProcessSequence getProcessSequenceInformation(ProcessStep processStep, Integer number) {
 
 		String moduleName = processStep.getModuleName();
 		ModuleTypeCode type = processStep.getModuleType();
@@ -454,7 +451,6 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return new ProcessSequence(number, moduleName, type, moduleKey);
 	}
 
-
 	@Override
 	public List<ModuleConfiguration> getModuleConfiguration(List<ParameterGroup> parameterGroup) {
 
@@ -462,7 +458,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 			return null;
 		}
 		List<ModuleConfiguration> moduleConfigurationsList = new ArrayList<>();
-		for(int i =0; i< parameterGroup.size();i++) {
+		for (int i = 0; i < parameterGroup.size(); i++) {
 			moduleConfigurationsList.add(this.getModuleConfiguration(parameterGroup.get(i)));
 		}
 
@@ -491,6 +487,18 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	@Override
 	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ExternalReceiverRule> getExternalReceiverRules(IntegratedConfiguration integratedConfiguration) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ExternalReceiverRule> getExternalReceiverRuleInfomation(List<String> externalRuleId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
