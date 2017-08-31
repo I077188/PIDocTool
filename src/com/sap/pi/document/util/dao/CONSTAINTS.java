@@ -83,6 +83,11 @@ public class CONSTAINTS {
 	// Receiver Destination
 	public static File DOMGROUP_RD = new File(templateDomGroupPath + "RD.docx");
 
+	// Staging Destination
+	public static File DOMGROUP_STAG = new File(templateDomGroupPath + "STAGING.docx");
+
+	// Loging Destination
+	public static File DOMGROUP_LOG = new File(templateDomGroupPath + "LOGGING.docx");
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;
 
