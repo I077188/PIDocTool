@@ -10,7 +10,7 @@ import com.sap.xi.basis.IntegratedConfiguration;
 
 public class ICODocUtil {
 
-	public void generateICODoc(IntegratedConfiguration integratedConfiguration) {
+	public void generateICODoc(IntegratedConfiguration integratedConfiguration, String ICOName) {
 		DocUtilImp docUtilImp = new DocUtilImp();
 
 		// generate domGroup file of sender
@@ -40,6 +40,7 @@ public class ICODocUtil {
 		outboundProcessingDocDomUtil.generateOutboundProcessingDomGroupFile(integratedConfiguration);
 
 		List<Item> items = new ArrayList<>();
+		items.add(new Item("$ICO_Value", ICOName));
 		docUtilImp.generateDocFile(CONSTAINTS.DOCUMENT, items);
 
 	}

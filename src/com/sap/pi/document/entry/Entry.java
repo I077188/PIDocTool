@@ -29,7 +29,9 @@ public class Entry {
 
 		ICODocUtil icoDoc = new ICODocUtil();
 		for (int i = 0; i < messageHeaderIDs.size(); i++) {
-			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderIDs.get(i));
+			MessageHeaderID messageHeaderID = messageHeaderIDs.get(i);
+
+			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 			// generated document
 			icoDoc.generateICODoc(integratedConfiguration);
 		}
@@ -37,6 +39,11 @@ public class Entry {
 		Long end = System.currentTimeMillis();
 		CONSTAINTS.LOG.info("Program ended!");
 		CONSTAINTS.LOG.info("Time wasted:\t" + (end - start) + " (ms)");
+	}
+
+	private String generateICOName(MessageHeaderID messageHeaderID) {
+		return "";
+
 	}
 
 }
