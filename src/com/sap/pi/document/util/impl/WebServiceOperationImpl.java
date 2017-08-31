@@ -485,21 +485,46 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		return new ModuleConfiguration(moduleKey, parameters);
 	}
 
-	@Override
-	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/*
+	 * @Override public CommunicationChannel
+	 * communicationChannel(IntegratedConfiguration integratedConfiguration) { //
+	 * TODO Auto-generated method stub return null; }
+	 */
 
 	@Override
 	public List<ExternalReceiverRule> getExternalReceiverRules(IntegratedConfiguration integratedConfiguration) {
 		// TODO Auto-generated method stub
-		return null;
+		if (integratedConfiguration == null
+				|| integratedConfiguration.getReceivers().getExternalReceiverRule().size() == 0)
+			return null;
+		List<ExternalReceiverRule> externalReceiverRuleList = new ArrayList<>();
+		for (int i = 0; i < integratedConfiguration.getReceivers().getExternalReceiverRule().size(); i++) {
+			List<ExternalReceiverRule> externalReceiverRule = this.getExternalReceiverRuleInfomation(
+					integratedConfiguration.getReceivers().getExternalReceiverRule().get(i).getReceiverRuleID());
+			externalReceiverRuleList.addAll(externalReceiverRule);
+		}
+
+		return externalReceiverRuleList;
 	}
 
 	@Override
 	public List<ExternalReceiverRule> getExternalReceiverRuleInfomation(List<String> externalRuleId) {
-		// TODO Auto-generated method stub
+
+		/*
+		 * if(externalRuleId.size()==0) return null;
+		 *
+		 * ReceiverRuleIn port = IntegrationPort.getReceiverRulePort();
+		 * ReceiverRuleReadIn readIn = new ReceiverRuleReadIn();
+		 *
+		 *
+		 * for(int i =0; i< externalRuleId.size();i++) {
+		 * readIn.getReceiverRuleID().add(externalRuleId.get(i)); ReceiverRuleReadOut
+		 * readOut = port.read(readIn);
+		 *
+		 * ExternalReceiverRule externalReceiverRule = readOut.getReceiverRule(); }
+		 */
 		return null;
 	}
+
+
 }

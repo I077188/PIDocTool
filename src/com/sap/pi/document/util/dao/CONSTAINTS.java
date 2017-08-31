@@ -70,12 +70,18 @@ public class CONSTAINTS {
 	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
 	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
 
-	// External Receiver Rule - operation mapping parameter channel
-	public static File DOM_ERR = new File(templateDomPath + "ERR.docx");
-	public static File DOMGROUP__ERR = new File(templateDomPath + "ERR.docx");
-	public static File DOM_ERR_RULR = new File(templateDomPath + "ERRRULE.docx");
-	public static File DOMGROUP__ERR_RULE = new File(templateDomPath + "ERRRULE.docx");
+	// External Receiver Rule
+	public static File DOMGROUP_ERR_CONDITION = new File(templateDomGroupPath + "ERRRULECONDITION.docx");
 	public static File DOM_ERR_RULR_RECEIVER = new File(templateDomPath + "ERRRULERECEIVER.docx");
+	public static File DOMGROUP_ERR_RULR_RECEIVER = new File(templateDomGroupPath + "ERRRULERECEIVER.docx");
+	public static File DOMGROUP_ERR_RULE_PARTSUNIT = new File(templateDomGroupPath + "ERRRULEUNIT.docx");
+	public static File DOMGROUP_ERR_RULEPARTS = new File(templateDomGroupPath + "ERRRULE.docx");
+	public static File DOMGROUP_ERR_RECEIVERRULE = new File(templateDomGroupPath + "ERRRECEIVERRULE.docx");
+	public static File DOMGROUP_ERR_RULEID = new File(templateDomGroupPath + "ERRRULEID.docx");
+	public static File DOMGROUP_ERR = new File(templateDomGroupPath + "ERR.docx");
+
+	// Receiver Destination
+	public static File DOMGROUP_RD = new File(templateDomGroupPath + "RD.docx");
 
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;
