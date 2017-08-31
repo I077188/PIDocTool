@@ -326,29 +326,32 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	@Override
 	public InboundProcessing getInboundProcessingInformation(IntegratedConfiguration integratedConfiguration) {
 
-		VirusScanCode virusScan = integratedConfiguration.getInboundProcessing().getVirusScan();
+		com.sap.xi.basis.InboundProcessing inboundProcessing = integratedConfiguration.getInboundProcessing();
 
-		String schemaValidation = null;
-		if (integratedConfiguration.getInboundProcessing().isSchemaValidationIndicator()) {
-			schemaValidation = "Validation By Adapter";
-		} else {
-			schemaValidation = "No Validation";
+		if (inboundProcessing != null) {
+			VirusScanCode virusScan = inboundProcessing.getVirusScan();
+
+			String schemaValidation = null;
+			if (inboundProcessing.isSchemaValidationIndicator()) {
+				schemaValidation = "Validation By Adapter";
+			} else {
+				schemaValidation = "No Validation";
+			}
+
+			List<GenericProperty> adapterSpecificAttribute;
+			adapterSpecificAttribute = inboundProcessing.getAdapterSpecificAttribute();
+
+			List<GenericPropertyTable> adapterSpecificTableAttribute = inboundProcessing
+					.getAdapterSpecificTableAttribute();
+
+			CommunicationChannelID communicationChannelID = inboundProcessing.getCommunicationChannel();
+
+			CommunicationChannel communicationChannel = getCommunicationChannelInformation(communicationChannelID);
+
+			return new InboundProcessing(communicationChannel, virusScan, schemaValidation, adapterSpecificAttribute,
+					adapterSpecificTableAttribute);
 		}
-
-		List<GenericProperty> adapterSpecificAttribute;
-		adapterSpecificAttribute = integratedConfiguration.getInboundProcessing().getAdapterSpecificAttribute();
-
-		List<GenericPropertyTable> adapterSpecificTableAttribute;
-		adapterSpecificTableAttribute = integratedConfiguration.getInboundProcessing()
-				.getAdapterSpecificTableAttribute();
-
-		CommunicationChannelID communicationChannelID = integratedConfiguration.getInboundProcessing()
-				.getCommunicationChannel();
-
-		CommunicationChannel communicationChannel = this.getCommunicationChannelInformation(communicationChannelID);
-
-		return new InboundProcessing(communicationChannel, virusScan, schemaValidation, adapterSpecificAttribute,
-				adapterSpecificTableAttribute);
+		return null;
 	}
 
 	@Override
@@ -362,6 +365,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		if (readOut.getCommunicationChannel().size() == 0) {
 			return null;
 		}
+
 		com.sap.xi.basis.CommunicationChannel originalChannel = readOut.getCommunicationChannel().get(0);
 		List<LONGDescription> description = readOut.getCommunicationChannel().get(0).getDescription();
 

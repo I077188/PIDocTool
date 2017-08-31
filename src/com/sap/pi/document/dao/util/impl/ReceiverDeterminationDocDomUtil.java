@@ -4,7 +4,7 @@ import com.sap.xi.basis.IntegratedConfiguration;
 
 public class ReceiverDeterminationDocDomUtil {
 
-	public void generateRDDomFile(IntegratedConfiguration integratedConfiguration) {
+	public void generateRDDomGroupFile(IntegratedConfiguration integratedConfiguration) {
 
 		// generate Receiver Rule Part
 		ReceiverRuleDocDomUtil rrDocDomUtil = new ReceiverRuleDocDomUtil();

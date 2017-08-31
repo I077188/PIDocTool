@@ -68,4 +68,5 @@ public interface WebServiceOperation {
 
 	public List<ExternalReceiverRule> getExternalReceiverRuleInfomation(List<String> externalRuleId);
 
+
 }

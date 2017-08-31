@@ -56,7 +56,14 @@ public class CONSTAINTS {
 	public static File DOM_OM = new File(templateDomPath + "OM.docx");
 
 	public static File DOMGROUP_DRR = new File(templateDomGroupPath + "DRR.docx");
+
+	// sender
 	public static File DOMGROUP_SENDER = new File(templateDomGroupPath + "SENDER.docx");
+
+	public static File DOM_ADDITIONALIDENTIFIER = new File(templateDomPath + "ADDITIONALIDENTIFIER.docx");
+	public static File DOMGROUP_ADDITIONALIDENTIFIER = new File(templateDomGroupPath + "ADDITIONALIDENTIFIER.docx");
+
+	public static File DOMGROUP_COMMUNICATIONPARTY = new File(templateDomGroupPath + "COMMUNICATIONPARTY.docx");
 
 	public static File DOMGROUP_RR = new File(templateDomGroupPath + "RR.docx");
 
@@ -70,12 +77,32 @@ public class CONSTAINTS {
 	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
 	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
 
+	public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "INBOUNDPROCESSING.docx");
+	public static File DOMGROUP_OUTBOUNDPROCESSING = new File(templateDomGroupPath + "OUTBOUNDPROCESSING.docx");
+
+	// communication channel
+	public static File DOMGROUP_LONGDESCRIPTION = new File(templateDomGroupPath + "LONGDESCRIPTION.docx");
+	public static File DOMGROUP_PARAMTER = new File(templateDomGroupPath + "LONGDESCRIPTION.docx");
+	public static File DOMGROUP_IDENTIFIER = new File(templateDomGroupPath + "IDENTIFIER.docx");
+
 	// External Receiver Rule - operation mapping parameter channel
 	public static File DOM_ERR = new File(templateDomPath + "ERR.docx");
 	public static File DOMGROUP__ERR = new File(templateDomPath + "ERR.docx");
 	public static File DOM_ERR_RULR = new File(templateDomPath + "ERRRULE.docx");
 	public static File DOMGROUP__ERR_RULE = new File(templateDomPath + "ERRRULE.docx");
 	public static File DOM_ERR_RULR_RECEIVER = new File(templateDomPath + "ERRRULERECEIVER.docx");
+
+	public static File DOM_MODULECONFIG = new File(templateDomPath + "MODULECONFIG.docx");
+	public static File DOM_MODULEPROCESSSEQUENCE = new File(templateDomPath + "MODULEPROCESSSEQUENCE.docx");
+	public static File DOMGROUP_MODULEPROCESSSEQUENCE = new File(templateDomGroupPath + "MODULEPROCESSSEQUENCE.docx");
+	public static File DOMGROUP_MODULECONFIGURATION = new File(templateDomGroupPath + "MODULECONFIGURATION.docx");
+
+	public static File DOMGROUP_MODULE = new File(templateDomGroupPath + "MODULE.docx");
+	public static File DOMGROUP_COMMUNICATIONCHANNEL = new File(templateDomGroupPath + "COMMUNICATIONCHANNEL.docx");
+
+	public static File DOMGROUP_ADAPTERSPECIFICATTRIBUTE = new File(
+			templateDomGroupPath + "ADAPTERSPECIFICATTRIBUTE.docx");
+	public static File DOM_ADAPTERSPECIFICATTRIBUTE = new File(templateDomPath + "ADAPTERSPECIFICATTRIBUTE.docx");
 
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;

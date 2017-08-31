@@ -13,8 +13,29 @@ public class ICODocUtil {
 	public void generateICODoc(IntegratedConfiguration integratedConfiguration) {
 		DocUtilImp docUtilImp = new DocUtilImp();
 
-		List<Item> items = new ArrayList<>();
+		// generate domGroup file of sender
+		SenderDocDomGroupUtil senderDocDomGroupUtil = new SenderDocDomGroupUtil();
+		senderDocDomGroupUtil.generateSenderDomGroupFile(integratedConfiguration);
 
+		// generate domGroup file of virtual receiver
+
+		// generate domGroup file of logging
+
+		// generate domGroup file of staging
+
+		// generate domGroup file of Inbound Processing
+		InboundProcessingDocDomUtil inboundProcessingDocDomUtil = new InboundProcessingDocDomUtil();
+		inboundProcessingDocDomUtil.generateInboundProcessingDomGroupFile(integratedConfiguration);
+
+		// generate domGroup file of Receiver Determination
+		ReceiverDeterminationDocDomUtil receiverDeterminationDocDomUtil = new ReceiverDeterminationDocDomUtil();
+		receiverDeterminationDocDomUtil.generateRDDomGroupFile(integratedConfiguration);
+
+		// generate domGroup file of Outbound Processing
+		OutboundProcessingDocDomUtil outboundProcessingDocDomUtil = new OutboundProcessingDocDomUtil();
+		outboundProcessingDocDomUtil.generateOutboundProcessingDomGroupFile(integratedConfiguration);
+
+		List<Item> items = new ArrayList<>();
 		docUtilImp.generateDocFile(CONSTAINTS.DOCUMENT, items);
 
 	}

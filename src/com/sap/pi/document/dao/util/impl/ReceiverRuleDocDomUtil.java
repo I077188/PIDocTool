@@ -32,7 +32,6 @@ public class ReceiverRuleDocDomUtil {
 			ReceiverRuleDao receiverRuleDao = receiverRuleDaos.get(i);
 
 			// for each receiverRuleDao require to generate dom file
-
 			// for condition
 			ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
 			conditionDocDomUtil.generateConditionDomFile(receiverRuleDao.getCondtionDao(), "RR", true);
