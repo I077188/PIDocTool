@@ -29,7 +29,7 @@ public class ReceiverDeterminationDocDomUtil {
 		DocDomGroupUtilImpl domGroupUtil = new DocDomGroupUtilImpl();
 		List<Item> rDestinationDomGroupItems = new ArrayList<>();
 		rDestinationDomGroupItems.add(new Item("$Main_Name", "receiverDestination"));
-		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RD, rDestinationDomGroupItems, "ICO", true);
+		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RD, rDestinationDomGroupItems, "ICO", false);
 	}
 
 }

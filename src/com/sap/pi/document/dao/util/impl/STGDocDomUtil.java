@@ -18,7 +18,7 @@ public class STGDocDomUtil {
 	DocDomGroupUtilImpl domGroupUtil = new DocDomGroupUtilImpl();
 
 	// generate Dom file
-	public void generateERRDomFile(IntegratedConfiguration integratedConfiguration) {
+	public void generateERRDomGroupFile(IntegratedConfiguration integratedConfiguration) {
 
 		// get informations from the integrated configuration
 		AdvancedSettings staging = integratedConfiguration.getStaging();
@@ -40,7 +40,7 @@ public class STGDocDomUtil {
 			stagDomGroupItems.add(new Item("$IsGlobalSetting_Value", useGlobal));
 			stagDomGroupItems.add(new Item("$SpecificConfiguration_Value", specificConfig));
 
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_STAG, stagDomGroupItems, "ICO", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_STAG, stagDomGroupItems, "ICO", false);
 
 		}
 	}

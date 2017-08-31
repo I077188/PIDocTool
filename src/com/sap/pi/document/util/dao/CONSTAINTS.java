@@ -77,7 +77,6 @@ public class CONSTAINTS {
 	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
 	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
 
-<<<<<<< HEAD
 	public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "INBOUNDPROCESSING.docx");
 	public static File DOMGROUP_OUTBOUNDPROCESSING = new File(templateDomGroupPath + "OUTBOUNDPROCESSING.docx");
 
@@ -91,10 +90,8 @@ public class CONSTAINTS {
 	public static File DOMGROUP__ERR = new File(templateDomPath + "ERR.docx");
 	public static File DOM_ERR_RULR = new File(templateDomPath + "ERRRULE.docx");
 	public static File DOMGROUP__ERR_RULE = new File(templateDomPath + "ERRRULE.docx");
-=======
 	// External Receiver Rule
 	public static File DOMGROUP_ERR_CONDITION = new File(templateDomGroupPath + "ERRRULECONDITION.docx");
->>>>>>> 5aed3ca83278fe6ee5b4c2c49d577d6c46f5e00b
 	public static File DOM_ERR_RULR_RECEIVER = new File(templateDomPath + "ERRRULERECEIVER.docx");
 	public static File DOMGROUP_ERR_RULR_RECEIVER = new File(templateDomGroupPath + "ERRRULERECEIVER.docx");
 	public static File DOMGROUP_ERR_RULE_PARTSUNIT = new File(templateDomGroupPath + "ERRRULEUNIT.docx");
@@ -103,7 +100,6 @@ public class CONSTAINTS {
 	public static File DOMGROUP_ERR_RULEID = new File(templateDomGroupPath + "ERRRULEID.docx");
 	public static File DOMGROUP_ERR = new File(templateDomGroupPath + "ERR.docx");
 
-<<<<<<< HEAD
 	public static File DOM_MODULECONFIG = new File(templateDomPath + "MODULECONFIG.docx");
 	public static File DOM_MODULEPROCESSSEQUENCE = new File(templateDomPath + "MODULEPROCESSSEQUENCE.docx");
 	public static File DOMGROUP_MODULEPROCESSSEQUENCE = new File(templateDomGroupPath + "MODULEPROCESSSEQUENCE.docx");
@@ -116,7 +112,6 @@ public class CONSTAINTS {
 			templateDomGroupPath + "ADAPTERSPECIFICATTRIBUTE.docx");
 	public static File DOM_ADAPTERSPECIFICATTRIBUTE = new File(templateDomPath + "ADAPTERSPECIFICATTRIBUTE.docx");
 
-=======
 	// Receiver Destination
 	public static File DOMGROUP_RD = new File(templateDomGroupPath + "RD.docx");
 
@@ -125,7 +120,6 @@ public class CONSTAINTS {
 
 	// Loging Destination
 	public static File DOMGROUP_LOG = new File(templateDomGroupPath + "LOGGING.docx");
->>>>>>> 5aed3ca83278fe6ee5b4c2c49d577d6c46f5e00b
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;
 

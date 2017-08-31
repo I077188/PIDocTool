@@ -20,8 +20,12 @@ public class ICODocUtil {
 		// generate domGroup file of virtual receiver
 
 		// generate domGroup file of logging
+		LOGDocDomUtil logDocDomUtil = new LOGDocDomUtil();
+		logDocDomUtil.generateLOGDomGroupFile(integratedConfiguration);
 
 		// generate domGroup file of staging
+		STGDocDomUtil stgDocDomUtil = new STGDocDomUtil();
+		stgDocDomUtil.generateSTGomGroupFile(integratedConfiguration);
 
 		// generate domGroup file of Inbound Processing
 		InboundProcessingDocDomUtil inboundProcessingDocDomUtil = new InboundProcessingDocDomUtil();
