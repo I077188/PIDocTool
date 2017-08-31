@@ -18,7 +18,7 @@ public class STGDocDomUtil {
 	DocDomGroupUtilImpl domGroupUtil = new DocDomGroupUtilImpl();
 
 	// generate Dom file
-	public void generateERRDomGroupFile(IntegratedConfiguration integratedConfiguration) {
+	public void generateSTGDomGroupFile(IntegratedConfiguration integratedConfiguration) {
 
 		// get informations from the integrated configuration
 		AdvancedSettings staging = integratedConfiguration.getStaging();

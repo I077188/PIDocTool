@@ -41,7 +41,8 @@ public class ERRDocDomUtil {
 				ReceiverDeterminationInclude etReceiverRule = etReceiverRules.get(i);
 
 				// get operation name
-				String operation = OtherUtil.getValue(etReceiverRule.getOperation());
+				// String operation =
+				// OtherUtil.getValue(etReceiverRule.getOperation());
 
 				List<String> etReceiverRuleIds = etReceiverRule.getReceiverRuleID();
 

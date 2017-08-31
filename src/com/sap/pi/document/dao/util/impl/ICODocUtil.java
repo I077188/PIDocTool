@@ -25,7 +25,7 @@ public class ICODocUtil {
 
 		// generate domGroup file of staging
 		STGDocDomUtil stgDocDomUtil = new STGDocDomUtil();
-		stgDocDomUtil.generateSTGomGroupFile(integratedConfiguration);
+		stgDocDomUtil.generateSTGDomGroupFile(integratedConfiguration);
 
 		// generate domGroup file of Inbound Processing
 		InboundProcessingDocDomUtil inboundProcessingDocDomUtil = new InboundProcessingDocDomUtil();
