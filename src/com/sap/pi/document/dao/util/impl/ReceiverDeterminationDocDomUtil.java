@@ -7,7 +7,7 @@ public class ReceiverDeterminationDocDomUtil {
 	public void generateRDDomFile(IntegratedConfiguration integratedConfiguration) {
 
 		// generate Receiver Rule Part
-		RRDocDomUtil rrDocDomUtil = new RRDocDomUtil();
+		ReceiverRuleDocDomUtil rrDocDomUtil = new ReceiverRuleDocDomUtil();
 		rrDocDomUtil.generateRRDomFile(integratedConfiguration);
 
 		// generate external Receiver Rule Part

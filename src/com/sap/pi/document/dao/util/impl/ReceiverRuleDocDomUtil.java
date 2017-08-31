@@ -16,7 +16,7 @@ import com.sap.xi.basis.IntegratedConfigurationReceiverRule;
 import com.sap.xi.basis.ReceiverInterfaces;
 import com.sap.xi.basis.Receivers;
 
-public class RRDocDomUtil {
+public class ReceiverRuleDocDomUtil {
 
 	DocDomGroupUtilImpl docDomGroupUtilImpl = new DocDomGroupUtilImpl();
 	// generate the dom file of Receiver Rule
