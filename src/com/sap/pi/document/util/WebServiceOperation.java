@@ -62,7 +62,8 @@ public interface WebServiceOperation {
 
 	public List<OperationMapping> getOperationMappings(IntegratedConfiguration integratedConfiguration);
 
-	public CommunicationChannel communicationChannel(IntegratedConfiguration integratedConfiguration);
+	// public CommunicationChannel communicationChannel(IntegratedConfiguration
+	// integratedConfiguration);
 
 	public List<ExternalReceiverRule> getExternalReceiverRules(IntegratedConfiguration integratedConfiguration);
 
