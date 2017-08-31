@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sap.pi.document.dao.util.impl.ICODocUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
+import com.sap.pi.document.util.impl.OtherUtil;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.MessageHeaderID;
@@ -30,10 +31,11 @@ public class Entry {
 		ICODocUtil icoDoc = new ICODocUtil();
 		for (int i = 0; i < messageHeaderIDs.size(); i++) {
 			MessageHeaderID messageHeaderID = messageHeaderIDs.get(i);
+			String name = generateICOName(messageHeaderID);
 
 			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 			// generated document
-			icoDoc.generateICODoc(integratedConfiguration);
+			icoDoc.generateICODoc(integratedConfiguration, name);
 		}
 
 		Long end = System.currentTimeMillis();
@@ -41,8 +43,22 @@ public class Entry {
 		CONSTAINTS.LOG.info("Time wasted:\t" + (end - start) + " (ms)");
 	}
 
-	private String generateICOName(MessageHeaderID messageHeaderID) {
-		return "";
+	private static String generateICOName(MessageHeaderID messageHeaderID) {
+
+		String senderPartyID = OtherUtil.getValue(messageHeaderID.getSenderPartyID());
+		String senderComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());
+		String interfaceName = OtherUtil.getValue(messageHeaderID.getInterfaceName());
+		String interfaceNameSpaceTT = OtherUtil.getValue(messageHeaderID.getInterfaceNamespace());
+		String receiverPartyID = OtherUtil.getValue(messageHeaderID.getReceiverPartyID());
+		String receiverComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());
+
+		String interfaceNameSpace = "N/A";
+		if (!interfaceNameSpaceTT.equals("N/A")) {
+			interfaceNameSpace = interfaceName.replaceAll("http://", "");
+		}
+
+		return senderPartyID + "$" + senderComponentID + "$" + interfaceName + "$" + interfaceNameSpace + "$"
+				+ receiverPartyID + "$" + receiverComponentID;
 
 	}
 

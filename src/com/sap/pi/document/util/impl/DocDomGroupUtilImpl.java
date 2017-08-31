@@ -49,10 +49,10 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			// docDomGroup_<type>_tempt.docx
 			String domGroupTemptFilePath = "";
 
-			if (parameters.get("$Group_Name") != null && parameters.get("$Group_Name") != ""
-					&& parameters.get("$Group_Name").toLowerCase() != "null") {
+			if (parameters.get("$Main_Name") != null && parameters.get("$Main_Name") != ""
+					&& parameters.get("$Main_Name").toLowerCase() != "null") {
 				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_"
-						+ parameters.get("$Group_Name") + "_tempt.docx";
+						+ parameters.get("$Main_Name") + "_tempt.docx";
 			} else {
 				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_tempt.docx";
 			}
