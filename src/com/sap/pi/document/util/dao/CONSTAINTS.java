@@ -78,7 +78,11 @@ public class CONSTAINTS {
 	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
 
 	public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "INBOUNDPROCESSING.docx");
+
 	public static File DOMGROUP_OUTBOUNDPROCESSING = new File(templateDomGroupPath + "OUTBOUNDPROCESSING.docx");
+	public static File DOMGROUP_OUTBOUNDPROCESSINGS = new File(templateDomGroupPath + "OUTBOUNDPROCESSINGS.docx");
+
+	public static File DOMGROUP_HEADERMAPPING = new File(templateDomGroupPath + "HEADERMAPPING.docx");
 
 	// communication channel
 	public static File DOMGROUP_LONGDESCRIPTION = new File(templateDomGroupPath + "LONGDESCRIPTION.docx");

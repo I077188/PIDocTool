@@ -11,6 +11,7 @@ import com.sap.pi.document.dao.Logging;
 import com.sap.pi.document.dao.Module;
 import com.sap.pi.document.dao.ModuleConfiguration;
 import com.sap.pi.document.dao.OperationMapping;
+import com.sap.pi.document.dao.OutboundProcessing;
 import com.sap.pi.document.dao.Parameters;
 import com.sap.pi.document.dao.ProcessSequence;
 import com.sap.pi.document.dao.Sender;
@@ -42,6 +43,8 @@ public interface WebServiceOperation {
 
 	public InboundProcessing getInboundProcessingInformation(IntegratedConfiguration integratedConfiguration);
 
+	public List<OutboundProcessing> getOutboundProcessingInformation(IntegratedConfiguration integratedConfiguration);
+
 	public CommunicationChannel getCommunicationChannelInformation(CommunicationChannelID communicationChannelID);
 
 	public Parameters getParametersInformation(com.sap.xi.basis.CommunicationChannel communicationChannel);
@@ -68,6 +71,5 @@ public interface WebServiceOperation {
 	public List<ExternalReceiverRule> getExternalReceiverRules(IntegratedConfiguration integratedConfiguration);
 
 	public List<ExternalReceiverRule> getExternalReceiverRuleInfomation(List<String> externalRuleId);
-
 
 }

@@ -21,6 +21,7 @@ import com.sap.pi.document.dao.Module;
 import com.sap.pi.document.dao.ModuleConfiguration;
 import com.sap.pi.document.dao.ModuleConfigurationParameters;
 import com.sap.pi.document.dao.OperationMapping;
+import com.sap.pi.document.dao.OutboundProcessing;
 import com.sap.pi.document.dao.Parameters;
 import com.sap.pi.document.dao.ProcessSequence;
 import com.sap.pi.document.dao.Sender;
@@ -44,6 +45,7 @@ import com.sap.xi.basis.CommunicationPartyReadOut;
 import com.sap.xi.basis.DesignObjectID;
 import com.sap.xi.basis.GenericProperty;
 import com.sap.xi.basis.GenericPropertyTable;
+import com.sap.xi.basis.HeaderMapping;
 import com.sap.xi.basis.IntegerProperty;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.IntegratedConfigurationIn;
@@ -355,6 +357,44 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	}
 
 	@Override
+	public List<OutboundProcessing> getOutboundProcessingInformation(IntegratedConfiguration integratedConfiguration) {
+
+		List<com.sap.xi.basis.OutboundProcessing> outboundProcessings = integratedConfiguration.getOutboundProcessing();
+		List<OutboundProcessing> outboundProcessingDaos = new ArrayList<>();
+
+		for (int i = 0; i < outboundProcessings.size(); i++) {
+			com.sap.xi.basis.OutboundProcessing outboundProcessing = outboundProcessings.get(i);
+
+			VirusScanCode virusScan = outboundProcessing.getVirusScan();
+
+			String schemaValidation = null;
+			if (outboundProcessing.isSchemaValidationIndicator()) {
+				schemaValidation = "Validation By Adapter";
+			} else {
+				schemaValidation = "No Validation";
+			}
+
+			HeaderMapping headerMapping = outboundProcessing.getHeaderMapping();
+
+			List<GenericProperty> adapterSpecificAttribute;
+			adapterSpecificAttribute = outboundProcessing.getAdapterSpecificAttribute();
+
+			List<GenericPropertyTable> adapterSpecificTableAttribute = outboundProcessing
+					.getAdapterSpecificTableAttribute();
+
+			CommunicationChannelID communicationChannelID = outboundProcessing.getCommunicationChannel();
+
+			CommunicationChannel communicationChannel = getCommunicationChannelInformation(communicationChannelID);
+
+			OutboundProcessing outboundProcessingDao = new OutboundProcessing(communicationChannel, virusScan,
+					schemaValidation, adapterSpecificAttribute, adapterSpecificTableAttribute, headerMapping);
+			outboundProcessingDaos.add(outboundProcessingDao);
+		}
+
+		return outboundProcessingDaos;
+	}
+
+	@Override
 	public CommunicationChannel getCommunicationChannelInformation(CommunicationChannelID communicationChannelID) {
 
 		CommunicationChannelIn port = IntegrationPort.getCommunicationChannelPort();
@@ -499,8 +539,9 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 	public List<ExternalReceiverRule> getExternalReceiverRules(IntegratedConfiguration integratedConfiguration) {
 		// TODO Auto-generated method stub
 		if (integratedConfiguration == null
-				|| integratedConfiguration.getReceivers().getExternalReceiverRule().size() == 0)
+				|| integratedConfiguration.getReceivers().getExternalReceiverRule().size() == 0) {
 			return null;
+		}
 		List<ExternalReceiverRule> externalReceiverRuleList = new ArrayList<>();
 		for (int i = 0; i < integratedConfiguration.getReceivers().getExternalReceiverRule().size(); i++) {
 			List<ExternalReceiverRule> externalReceiverRule = this.getExternalReceiverRuleInfomation(
