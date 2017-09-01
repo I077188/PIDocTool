@@ -25,53 +25,57 @@ public class InboundProcessingDocDomUtil {
 
 		InboundProcessing inboundProcessing = webService.getInboundProcessingInformation(integratedConfiguration);
 
-		String virusScan = OtherUtil.getValue(inboundProcessing.getVirusScan().value());
+		if (inboundProcessing != null) {
+			String virusScan = OtherUtil.getValue(inboundProcessing.getVirusScan().value());
 
-		String schemaValidation = OtherUtil.getValue(inboundProcessing.getSchemaValidation());
+			String schemaValidation = OtherUtil.getValue(inboundProcessing.getSchemaValidation());
 
-		// get sender communication channel
-		CommunicationChannel communicationChannel = inboundProcessing.getCommunicationChannel();
+			// get sender communication channel
+			CommunicationChannel communicationChannel = inboundProcessing.getCommunicationChannel();
 
-		// get Adapter specific Attribute
-		List<GenericProperty> adapterSpecAttr = inboundProcessing.getAdapterSpecificAttribute();
-		// List<GenericPropertyTable> adapterSpecAttrTab =
-		// inboundProcessing.getAdapterSpecificTableAttribute();
+			// get Adapter specific Attribute
+			List<GenericProperty> adapterSpecAttr = inboundProcessing.getAdapterSpecificAttribute();
+			// List<GenericPropertyTable> adapterSpecAttrTab =
+			// inboundProcessing.getAdapterSpecificTableAttribute();
 
-		// generate dom and domGroup file of communication channel
-		CommunicationChannelDocDomUtil ccIDocUtil = new CommunicationChannelDocDomUtil();
-		ccIDocUtil.generateCommunicationChannelDomFile(communicationChannel, "INBOUNDPROCESSING", true);
+			// generate dom and domGroup file of communication channel
+			CommunicationChannelDocDomUtil ccIDocUtil = new CommunicationChannelDocDomUtil();
+			ccIDocUtil.generateCommunicationChannelDomFile(communicationChannel, "INBOUNDPROCESSING", true);
 
-		// generate dom and domGroup file of adapterSepcAttr
-		for (int i = 0; i < adapterSpecAttr.size(); i++) {
-			GenericProperty gProperty = adapterSpecAttr.get(i);
-			String name = OtherUtil.getValue(gProperty.getName());
-			String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
-			String value = OtherUtil.getValue(gProperty.getValue());
+			// generate dom and domGroup file of adapterSepcAttr
+			for (int i = 0; i < adapterSpecAttr.size(); i++) {
+				GenericProperty gProperty = adapterSpecAttr.get(i);
+				String name = OtherUtil.getValue(gProperty.getName());
+				String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
+				String value = OtherUtil.getValue(gProperty.getValue());
 
-			// generate dom file of adapter sepecific Attribute
+				// generate dom file of adapter sepecific Attribute
+				List<Item> items = new ArrayList<>();
+				items.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
+				items.add(new Item("$Name_Value", name));
+				items.add(new Item("$NameSpace_Value", nameSpace));
+				items.add(new Item("$Value_Value", value));
+
+				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items, name + nameSpace);
+			}
+
+			List<Item> adapterSpecAttrItems = new ArrayList<>();
+			adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE, adapterSpecAttrItems,
+					"INBOUNDPROCESSING", true);
+
+			// generate dom and domGroup file of adapterSepcAttrTable
+
+			// generate domGroup file of inboundProcessing file, needn't write
+			// back
 			List<Item> items = new ArrayList<>();
-			items.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
-			items.add(new Item("$Name_Value", name));
-			items.add(new Item("$NameSpace_Value", nameSpace));
-			items.add(new Item("$Value_Value", value));
+			items.add(new Item("$Main_Name", "InboundProcessingSAP"));
+			items.add(new Item("$VirusScan_Value", virusScan));
+			items.add(new Item("$SchemaValidation_Value", schemaValidation));
 
-			docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items, name + nameSpace);
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_INBOUNDPROCESSING, items, "ICO", false);
 		}
 
-		List<Item> adapterSpecAttrItems = new ArrayList<>();
-		adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE, adapterSpecAttrItems,
-				"INBOUNDPROCESSING", true);
-
-		// generate dom and domGroup file of adapterSepcAttrTable
-
-		// generate domGroup file of inboundProcessing file, needn't write back
-		List<Item> items = new ArrayList<>();
-		items.add(new Item("$Main_Name", "InboundProcessingSAP"));
-		items.add(new Item("$VirusScan_Value", virusScan));
-		items.add(new Item("$SchemaValidation_Value", schemaValidation));
-
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_INBOUNDPROCESSING, items, "ICO", false);
 	}
 
 }

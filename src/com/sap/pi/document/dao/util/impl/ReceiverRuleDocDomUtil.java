@@ -61,19 +61,17 @@ public class ReceiverRuleDocDomUtil {
 		// get receiver rule * n
 		List<IntegratedConfigurationReceiverRule> receiverRules = receivers.getReceiverRule();
 
-		if (receiverRules.size() > 0) {
-			for (int j = 0; j < receiverRules.size(); j++) {
-				IntegratedConfigurationReceiverRule receiverRule = receiverRules.get(j);
+		for (int j = 0; j < receiverRules.size(); j++) {
+			IntegratedConfigurationReceiverRule receiverRule = receiverRules.get(j);
 
-				// get condition
-				Condition condition = receiverRule.getCondition();
-				// get ReceiverDao
-				List<ReceiverDao> receiverDaos = getReceiverDao(receiverRule, receiverInterfaces);
+			// get condition
+			Condition condition = receiverRule.getCondition();
+			// get ReceiverDao
+			List<ReceiverDao> receiverDaos = getReceiverDao(receiverRule, receiverInterfaces);
 
-				// generate receiver rule daos
-				if (condition != null && receiverDaos.size() > 0) {
-					receiverRuleDaos.add(new ReceiverRuleDao(condition, receiverDaos));
-				}
+			// generate receiver rule daos
+			if (condition != null && receiverDaos.size() > 0) {
+				receiverRuleDaos.add(new ReceiverRuleDao(condition, receiverDaos));
 			}
 		}
 
@@ -91,42 +89,40 @@ public class ReceiverRuleDocDomUtil {
 		// get receiver list in the receiver rule
 		List<CommunicationComponentID> receiversInRR = receiverRule.getReceiver();
 
-		if (receiversInRR.size() > 0) {
-			for (int i = 0; i < receiversInRR.size(); i++) {
-				// for each receiver get the key
-				// get receiver
-				CommunicationComponentID receiverInRR = receiversInRR.get(i);
+		for (int i = 0; i < receiversInRR.size(); i++) {
+			// for each receiver get the key
+			// get receiver
+			CommunicationComponentID receiverInRR = receiversInRR.get(i);
 
-				String partyID = OtherUtil.getValue(receiverInRR.getPartyID());
-				String componentID = OtherUtil.getValue(receiverInRR.getComponentID());
-				keyInRR = partyID + "-" + componentID;
+			String partyID = OtherUtil.getValue(receiverInRR.getPartyID());
+			String componentID = OtherUtil.getValue(receiverInRR.getComponentID());
+			keyInRR = partyID + "-" + componentID;
 
-				if (!keyInRR.equals("N/A-N/A")) {
-					// loop interface to add interface part for each receiver
-					if (receiverInterfaces.size() > 0) {
-						// generate receiverRuleDao
-						// get receiver Interface in receiver interface
-						// part
-						List<ReceiverInterfaces> reInterfacesInRI = new ArrayList<>();
-						for (int l = 0; l < receiverInterfaces.size(); l++) {
-							ReceiverInterfaces receiverInterface = receiverInterfaces.get(l);
-							CommunicationComponentID receiverInRI = receiverInterface.getReceiver();
+			if (!keyInRR.equals("N/A-N/A")) {
+				// loop interface to add interface part for each receiver
+				if (receiverInterfaces.size() > 0) {
+					// generate receiverRuleDao
+					// get receiver Interface in receiver interface
+					// part
+					List<ReceiverInterfaces> reInterfacesInRI = new ArrayList<>();
+					for (int l = 0; l < receiverInterfaces.size(); l++) {
+						ReceiverInterfaces receiverInterface = receiverInterfaces.get(l);
+						CommunicationComponentID receiverInRI = receiverInterface.getReceiver();
 
-							if (receiverInRI != null) {
+						if (receiverInRI != null) {
 
-								String partyIDInRI = OtherUtil.getValue(receiverInRI.getPartyID());
-								String componentIDInRI = OtherUtil.getValue(receiverInRI.getComponentID());
-								keyInRI = partyIDInRI + "-" + componentIDInRI;
+							String partyIDInRI = OtherUtil.getValue(receiverInRI.getPartyID());
+							String componentIDInRI = OtherUtil.getValue(receiverInRI.getComponentID());
+							keyInRI = partyIDInRI + "-" + componentIDInRI;
 
-								if (keyInRI.equals(keyInRR)) {
-									reInterfacesInRI.add(receiverInterface);
-								}
+							if (keyInRI.equals(keyInRR)) {
+								reInterfacesInRI.add(receiverInterface);
 							}
 						}
-						ReceiverDao receiverDao = new ReceiverDao(receiverInRR, reInterfacesInRI);
-
-						receiverDaos.add(receiverDao);
 					}
+					ReceiverDao receiverDao = new ReceiverDao(receiverInRR, reInterfacesInRI);
+
+					receiverDaos.add(receiverDao);
 				}
 			}
 		}

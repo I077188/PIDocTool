@@ -35,92 +35,96 @@ public class ERRDocDomUtil {
 		Receivers receivers = integratedConfiguration.getReceivers();
 		List<ReceiverDeterminationInclude> etReceiverRules = receivers.getExternalReceiverRule();
 
-		if (etReceiverRules.size() > 0) {
+		for (int i = 0; i < etReceiverRules.size(); i++) {
+			ReceiverDeterminationInclude etReceiverRule = etReceiverRules.get(i);
 
-			for (int i = 0; i < etReceiverRules.size(); i++) {
-				ReceiverDeterminationInclude etReceiverRule = etReceiverRules.get(i);
+			// get operation name
+			// String operation =
+			// OtherUtil.getValue(etReceiverRule.getOperation());
 
-				// get operation name
-				// String operation =
-				// OtherUtil.getValue(etReceiverRule.getOperation());
+			List<String> etReceiverRuleIds = etReceiverRule.getReceiverRuleID();
 
-				List<String> etReceiverRuleIds = etReceiverRule.getReceiverRuleID();
+			// generate RULR related domGroup and dom file, move
+			// required(Contain
+			// condition(1) and receiver(n))
+			for (int j = 0; j < etReceiverRuleIds.size(); j++) {
 
-				// generate RULR related domGroup and dom file, move required(Contain
-				// condition(1) and receiver(n))
-				for (int j = 0; j < etReceiverRuleIds.size(); j++) {
+				ReceiverRuleIn port = IntegrationPort.getReceiverRulePort();
+				ReceiverRuleReadIn readIn = new ReceiverRuleReadIn();
 
-					ReceiverRuleIn port = IntegrationPort.getReceiverRulePort();
-					ReceiverRuleReadIn readIn = new ReceiverRuleReadIn();
+				readIn.getReceiverRuleID().add(etReceiverRuleIds.get(i));
+				ReceiverRuleReadOut readOut = port.read(readIn);
 
-					readIn.getReceiverRuleID().add(etReceiverRuleIds.get(i));
-					ReceiverRuleReadOut readOut = port.read(readIn);
+				List<ReceiverRule> receiverRules = readOut.getReceiverRule();
 
-					List<ReceiverRule> receiverRules = readOut.getReceiverRule();
+				for (int n = 0; n < receiverRules.size(); n++) {
 
-					for (int n = 0; n < receiverRules.size(); n++) {
+					ReceiverRule receverRule = readOut.getReceiverRule().get(n);
+					List<ReceiverRulePart> ruleParts = receverRule.getRule();
 
-						ReceiverRule receverRule = readOut.getReceiverRule().get(n);
-						List<ReceiverRulePart> ruleParts = receverRule.getRule();
+					for (int m = 0; m < ruleParts.size(); m++) { // For each
+																	// Rule
+						ReceiverRulePart externalReceiverRule = ruleParts.get(m);
 
-						for (int m = 0; m < ruleParts.size(); m++) { // For each Rule
-							ReceiverRulePart externalReceiverRule = ruleParts.get(m);
+						String condition = this.getCondition(externalReceiverRule.getCondition());
+						condition = OtherUtil.getValue(condition);
 
-							String condition = this.getCondition(externalReceiverRule.getCondition());
-							condition = OtherUtil.getValue(condition);
+						// generate condition related dom and dom Group file,
+						// write back to rule UNIT
+						List<Item> conditionDomItems = new ArrayList<>();
+						conditionDomItems.add(new Item("$Main_Name", etReceiverRuleIds.get(j)));
+						// conditionDomItems.add(new
+						// Item("$ExternalRuleId_Value",
+						// etReceiverRuleIds.get(j)));
+						conditionDomItems.add(new Item("$Condition_Value", condition));
+						domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_CONDITION, conditionDomItems,
+								"RULEPARTSUNIT", true);
 
-							// generate condition related dom and dom Group file, write back to rule UNIT
-							List<Item> conditionDomItems = new ArrayList<>();
-							conditionDomItems.add(new Item("$Main_Name", etReceiverRuleIds.get(j)));
-							// conditionDomItems.add(new Item("$ExternalRuleId_Value",
-							// etReceiverRuleIds.get(j)));
-							conditionDomItems.add(new Item("$Condition_Value", condition));
-							domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_CONDITION, conditionDomItems,
-									"RULEPARTSUNIT", true);
-
-							// GENERATE RECEIVER related dom and domGroup file
-							List<CommunicationPartnerExtractor> extractors = externalReceiverRule.getReceiver();
-							for (int k = 0; k < extractors.size(); k++) {
-								this.generateERRRULERECEIVERDomFile(extractors.get(k), String.valueOf(k));
-							}
-
-							// write back to dom, type RULEPARTSUNIT
-							List<Item> receiverDomGroupItems = new ArrayList<>();
-							receiverDomGroupItems.add(new Item("$Main_Name", "ruleReceiver"));
-							domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULR_RECEIVER,
-									receiverDomGroupItems, "RULEPARTSUNIT", true);
-
-							// generate domGroup for rule part unit, write back type rule part
-							List<Item> errRuleUnitItems = new ArrayList<>();
-							receiverDomGroupItems.add(new Item("$Main_Name", "ruleUnit"));
-							domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULE_PARTSUNIT, errRuleUnitItems,
-									"RULEPART", true);
-
+						// GENERATE RECEIVER related dom and domGroup file
+						List<CommunicationPartnerExtractor> extractors = externalReceiverRule.getReceiver();
+						for (int k = 0; k < extractors.size(); k++) {
+							this.generateERRRULERECEIVERDomFile(extractors.get(k), String.valueOf(k));
 						}
-						// generate rule domGROUP file with rule part, write back receiver rule
-						List<Item> ruleDomGroupItems = new ArrayList<>();
-						ruleDomGroupItems.add(new Item("$Main_Name", "rule"));
-						domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULEPARTS, ruleDomGroupItems,
-								"RECEIVERRULE", true);
+
+						// write back to dom, type RULEPARTSUNIT
+						List<Item> receiverDomGroupItems = new ArrayList<>();
+						receiverDomGroupItems.add(new Item("$Main_Name", "ruleReceiver"));
+						domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULR_RECEIVER, receiverDomGroupItems,
+								"RULEPARTSUNIT", true);
+
+						// generate domGroup for rule part unit, write back type
+						// rule part
+						List<Item> errRuleUnitItems = new ArrayList<>();
+						receiverDomGroupItems.add(new Item("$Main_Name", "ruleUnit"));
+						domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULE_PARTSUNIT, errRuleUnitItems,
+								"RULEPART", true);
+
 					}
-					// generate receiver rule domGROUP file with rule part, write back rule ID
+					// generate rule domGROUP file with rule part, write back
+					// receiver rule
 					List<Item> ruleDomGroupItems = new ArrayList<>();
 					ruleDomGroupItems.add(new Item("$Main_Name", "rule"));
-					domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RECEIVERRULE, ruleDomGroupItems, "RULEID",
-							true);
+					domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULEPARTS, ruleDomGroupItems,
+							"RECEIVERRULE", true);
 				}
-
-				// generate ruleID domGROUP file
-				List<Item> ruleIdDomGroupItems = new ArrayList<>();
-				ruleIdDomGroupItems.add(new Item("$Main_Name", "ruleId"));
-				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULEID, ruleIdDomGroupItems, "ERR", true);
+				// generate receiver rule domGROUP file with rule part, write
+				// back rule ID
+				List<Item> ruleDomGroupItems = new ArrayList<>();
+				ruleDomGroupItems.add(new Item("$Main_Name", "rule"));
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RECEIVERRULE, ruleDomGroupItems, "RULEID",
+						true);
 			}
 
-			// generate ExternalRule domGROUP file
+			// generate ruleID domGROUP file
 			List<Item> ruleIdDomGroupItems = new ArrayList<>();
-			ruleIdDomGroupItems.add(new Item("$Main_Name", "externalRule"));
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR, ruleIdDomGroupItems, "RD", true);
+			ruleIdDomGroupItems.add(new Item("$Main_Name", "ruleId"));
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULEID, ruleIdDomGroupItems, "ERR", true);
 		}
+
+		// generate ExternalRule domGROUP file
+		List<Item> ruleIdDomGroupItems = new ArrayList<>();
+		ruleIdDomGroupItems.add(new Item("$Main_Name", "externalRule"));
+		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR, ruleIdDomGroupItems, "RD", true);
 	}
 
 	// generate receiver(external rule -->..--> rule-->receiver ) dom file
