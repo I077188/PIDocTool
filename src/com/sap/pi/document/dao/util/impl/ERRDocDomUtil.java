@@ -162,18 +162,18 @@ public class ERRDocDomUtil {
 			for (int j = 0; j < atomicConditionBlock.getAtomicCondition().size(); j++) {
 				AtomicCondition atomicCondition = atomicConditionBlock.getAtomicCondition().get(j);
 				String operator = atomicCondition.getOperator();
-				if (operator == "EQ") {
+				if (operator.equals("EQ")) {
 					operator = "=";
-				} else if (operator == "NE") {
+				} else if (operator.equals("NE")) {
 					operator = "!=";
-				} else if (operator == "CP") {
+				} else if (operator.equals("CP")) {
 					operator = "~";
 				}
 				String leftExtrator = atomicCondition.getLeftExtractor().getContextObjectName();
 				String rightExtrator = atomicCondition.getRightExtractor().getValue();
 				String oneCondition = leftExtrator + " " + operator + " " + rightExtrator;
 				conditionString.append(oneCondition);
-				if (i < condition.getAtomicConditionBlock().size()) {
+				if (j < (atomicConditionBlock.getAtomicCondition().size() - 2)) {
 					conditionString.append(" AND ");
 				}
 
