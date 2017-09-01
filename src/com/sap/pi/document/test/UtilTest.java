@@ -1,6 +1,9 @@
 package com.sap.pi.document.test;
 
 import com.sap.pi.document.dao.util.impl.InboundProcessingDocDomUtil;
+import com.sap.pi.document.dao.util.impl.LOGDocDomUtil;
+import com.sap.pi.document.dao.util.impl.STGDocDomUtil;
+import com.sap.pi.document.dao.util.impl.SenderDocDomGroupUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -28,6 +31,20 @@ public class UtilTest {
 		messageHeaderID.setInterfaceNamespace("http://opint.demo.sap.com/ip");
 
 		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
+
+		// generate domGroup file of sender
+		SenderDocDomGroupUtil senderDocDomGroupUtil = new SenderDocDomGroupUtil();
+		senderDocDomGroupUtil.generateSenderDomGroupFile(integratedConfiguration);
+
+		// generate domGroup file of virtual receiver
+
+		// generate domGroup file of logging
+		LOGDocDomUtil logDocDomUtil = new LOGDocDomUtil();
+		logDocDomUtil.generateLOGDomGroupFile(integratedConfiguration);
+
+		// generate domGroup file of staging
+		STGDocDomUtil stgDocDomUtil = new STGDocDomUtil();
+		stgDocDomUtil.generateSTGDomGroupFile(integratedConfiguration);
 
 		// generate domGroup file of Inbound Processing
 		InboundProcessingDocDomUtil inboundProcessingDocDomUtil = new InboundProcessingDocDomUtil();

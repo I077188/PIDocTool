@@ -56,8 +56,10 @@ public class InboundProcessingDocDomUtil {
 				items.add(new Item("$Name_Value", name));
 				items.add(new Item("$NameSpace_Value", nameSpace));
 				items.add(new Item("$Value_Value", value));
-
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items, name + nameSpace);
+				if (!(name.equals("N/A") && nameSpace.equals("N/A") && value.equals("N/A"))) {
+					docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items,
+							OtherUtil.formatName(name + nameSpace));
+				}
 			}
 
 			List<Item> adapterSpecAttrItems = new ArrayList<>();

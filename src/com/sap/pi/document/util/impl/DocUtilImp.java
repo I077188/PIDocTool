@@ -43,7 +43,8 @@ public class DocUtilImp implements DocUtil {
 
 			// create tempt file for document domGroup, named like
 			// docDomGroup_<type>_<domName>_tempt.docx
-			String icoTemptDocPath = CONSTAINTS.resultPath + "ICO_" + parameters.get("$ICO_Value") + "_tempt.docx";
+			String icoTemptDocPath = CONSTAINTS.resultPath + "ICO_" + OtherUtil.formatName(parameters.get("$ICO_Value"))
+					+ "_tempt.docx";
 
 			File icoTemptDoc = new File(icoTemptDocPath);
 
@@ -77,7 +78,8 @@ public class DocUtilImp implements DocUtil {
 			close();
 
 			// copy all the information from dom and domgroup tempt files
-			String icoDocPath = CONSTAINTS.resultPath + "ICO_" + parameters.get("$ICO_Value") + ".docx";
+			String icoDocPath = CONSTAINTS.resultPath + "ICO_" + OtherUtil.formatName(parameters.get("$ICO_Value"))
+					+ ".docx";
 
 			File icoDoc = new File(icoDocPath);
 			if (icoDoc.exists()) {
@@ -137,11 +139,15 @@ public class DocUtilImp implements DocUtil {
 
 	private void close() {
 		try {
-			fips.close();
-			fops.flush();
-			fops.close();
-			document.close();
+			if (fips != null) {
+				fops.flush();
+				fips.close();
+			}
+			if (document != null) {
+				document.close();
+			}
 		} catch (IOException e) {
+			CONSTAINTS.LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}

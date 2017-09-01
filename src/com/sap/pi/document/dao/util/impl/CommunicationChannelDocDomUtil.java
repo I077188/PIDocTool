@@ -103,89 +103,99 @@ public class CommunicationChannelDocDomUtil {
 			String receiverSchema = OtherUtil.getValue(identifier.getReceiverSchema());
 
 			List<Item> identifierItems = new ArrayList<>();
-			identifierItems.add(new Item("$Main_Name", id + "IDENTIFIERSAP"));
+			identifierItems.add(new Item("$Main_Name", id.replaceAll("_", "") + "IDENTIFIERSAP"));
 			identifierItems.add(new Item("$SenderAgency_Value", senderAgency));
 			identifierItems.add(new Item("$SenderSchema_Value", senderSchema));
 			identifierItems.add(new Item("$ReceiverAgency_Value", receiverAgency));
 			identifierItems.add(new Item("$ReceiverSchema_Value", receiverSchema));
 
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IDENTIFIER, identifierItems,
-					"COMMUNICATIONCHANNEL", true);
+			if (!(senderAgency.equals("N/A") && senderSchema.equals("N/A") && receiverAgency.equals("N/A")
+					&& receiverSchema.equals("N/A"))) {
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IDENTIFIER, identifierItems,
+						"COMMUNICATIONCHANNEL", true);
+			}
 		}
 
 		if (module != null) {
 			List<ProcessSequence> processSequences = module.getProcessSequence();
 			List<ModuleConfiguration> moduleConfigurations = module.getModuleConfigurations();
 
-			for (int i = 0; i < processSequences.size(); i++) {
-				ProcessSequence processSequence = processSequences.get(i);
-				Integer tempt = processSequence.getNumber();
-				String number = "N/A";
+			if (processSequences != null) {
 
-				if (tempt != null) {
-					number = tempt.toString();
+				for (int i = 0; i < processSequences.size(); i++) {
+					ProcessSequence processSequence = processSequences.get(i);
+					Integer tempt = processSequence.getNumber();
+					String number = "N/A";
+
+					if (tempt != null) {
+						number = tempt.toString();
+					}
+
+					String name = OtherUtil.getValue(processSequence.getModuleName());
+					String key = OtherUtil.getValue(processSequence.getModuleKey());
+
+					ModuleTypeCode moduleTypeCode = processSequence.getType();
+					String moduleType = "N/A";
+					if (moduleTypeCode != null) {
+						moduleType = OtherUtil.getValue(moduleTypeCode.value());
+					}
+
+					// generate dom
+					List<Item> items = new ArrayList<>();
+					items.add(new Item("$Main_Name", "PROCESSSEQUENCESAP"));
+					items.add(new Item("$Number_Value", number));
+					items.add(new Item("$Key_Value", key));
+					items.add(new Item("$Name_Value", name));
+					items.add(new Item("$ModuleType_Value", moduleType));
+
+					docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_MODULEPROCESSSEQUENCE, items,
+							OtherUtil.formatName(moduleType + key + name));
+
 				}
 
-				String name = OtherUtil.getValue(processSequence.getModuleName());
-				String key = OtherUtil.getValue(processSequence.getModuleKey());
+				// generate domGroup and write back as module type
+				List<Item> processSeqItems = new ArrayList<>();
+				processSeqItems.add(new Item("$Main_Name", "MODULEPROCESSSEQUENCEPARTSAP"));
 
-				ModuleTypeCode moduleTypeCode = processSequence.getType();
-				String moduleType = "N/A";
-				if (moduleTypeCode != null) {
-					type = OtherUtil.getValue(moduleTypeCode.value());
-				}
-
-				// generate dom
-				List<Item> items = new ArrayList<>();
-				items.add(new Item("$Main_Name", "PROCESSSEQUENCESAP"));
-				items.add(new Item("$Number_Value", number));
-				items.add(new Item("$Key_Value", key));
-				items.add(new Item("$Name_Value", name));
-				items.add(new Item("$ModuleType_Value", moduleType));
-
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_MODULEPROCESSSEQUENCE, items, moduleType + key + name);
-
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_MODULEPROCESSSEQUENCE, processSeqItems,
+						"MODULE", true);
 			}
 
-			// generate domGroup and write back as module type
-			List<Item> processSeqItems = new ArrayList<>();
-			processSeqItems.add(new Item("$Main_Name", "MODULEPROCESSSEQUENCEPARTSAP"));
 
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_MODULEPROCESSSEQUENCE, processSeqItems,
-					"MODULE", true);
+			if (moduleConfigurations != null) {
+				for (int i = 0; i < moduleConfigurations.size(); i++) {
+					// generate dom
+					ModuleConfiguration configuration = moduleConfigurations.get(i);
+					String key = OtherUtil.getValue(configuration.getModuleKey());
+					List<ModuleConfigurationParameters> parameters = configuration.getParameters();
 
-			for (int i = 0; i < moduleConfigurations.size(); i++) {
-				// generate dom
-				ModuleConfiguration configuration = moduleConfigurations.get(i);
-				String key = OtherUtil.getValue(configuration.getModuleKey());
-				List<ModuleConfigurationParameters> parameters = configuration.getParameters();
+					StringBuilder tempt = new StringBuilder();
+					for (int j = 0; j < parameters.size(); j++) {
+						ModuleConfigurationParameters paramter = parameters.get(j);
+						tempt.append(OtherUtil.getValue(paramter.getParameterName()) + "::\t"
+								+ OtherUtil.getValue(paramter.getParameterValue()) + "\n");
+					}
 
-				StringBuilder tempt = new StringBuilder();
-				for (int j = 0; j < parameters.size(); j++) {
-					ModuleConfigurationParameters paramter = parameters.get(j);
-					tempt.append(OtherUtil.getValue(paramter.getParameterName()) + "::\t"
-							+ OtherUtil.getValue(paramter.getParameterValue()) + "\n");
+					String parametersValue = "N/A";
+					if (tempt != null && tempt.length() > 0) {
+						parametersValue = OtherUtil.getValue(tempt.toString());
+					}
+
+					List<Item> items = new ArrayList<>();
+					items.add(new Item("$Main_Name", "MODULECONFIGURATIONPARTSAP"));
+					items.add(new Item("$Key_Value", key));
+					items.add(new Item("$ParametersValue_Value", parametersValue));
+
+					docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_MODULECONFIGURATION, items, key);
+
 				}
+				// generate domGroup and write back as module type
+				List<Item> moduleConfigItems = new ArrayList<>();
+				moduleConfigItems.add(new Item("$Main_Name", "MODULECONFIGURATIONPART"));
 
-				String parametersValue = "N/A";
-				if (tempt != null && tempt.length() > 0) {
-					parametersValue = OtherUtil.getValue(tempt.toString());
-				}
-
-				List<Item> items = new ArrayList<>();
-				items.add(new Item("$Main_Name", "MODULECONFIGURATIONPARTSAP"));
-				items.add(new Item("$Key_Value", key));
-				items.add(new Item("$ParametersValue_Value", parametersValue));
-
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_MODULECONFIGURATION, items, key);
-
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_MODULECONFIGURATION, moduleConfigItems,
+						"MODULE", true);
 			}
-			// generate domGroup and write back as module type
-			List<Item> moduleConfigItems = new ArrayList<>();
-			moduleConfigItems.add(new Item("$Main_Name", "MODULECONFIGURATIONPART"));
-
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_MODULECONFIGURATION, moduleConfigItems,
-					"MODULE", true);
 		}
 
 		// generate domGroup of Module
@@ -203,7 +213,7 @@ public class CommunicationChannelDocDomUtil {
 		ccItems.add(new Item("$PartyID_Value", partyID));
 		ccItems.add(new Item("$ComponentID_Value", componentID));
 
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONCHANNEL, moduleItems,
+		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONCHANNEL, ccItems,
 				type, move2dom);
 	}
 

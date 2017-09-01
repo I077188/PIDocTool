@@ -10,4 +10,12 @@ public class OtherUtil {
 		return "N/A";
 	}
 
+	public static String formatName(String inputString) {
+		String result = "";
+
+		result = inputString.replaceAll("[^a-zA-Z0-9.-]", "0");
+
+		return result;
+	}
+
 }
