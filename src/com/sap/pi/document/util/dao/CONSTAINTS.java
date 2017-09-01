@@ -100,7 +100,7 @@ public class CONSTAINTS {
 	public static File DOMGROUP_ERR_RULR_RECEIVER = new File(templateDomGroupPath + "ERRRULERECEIVER.docx");
 	public static File DOMGROUP_ERR_RULE_PARTSUNIT = new File(templateDomGroupPath + "ERRRULEUNIT.docx");
 	public static File DOMGROUP_ERR_RULEPARTS = new File(templateDomGroupPath + "ERRRULE.docx");
-	public static File DOMGROUP_ERR_RECEIVERRULE = new File(templateDomGroupPath + "ERRRECEIVERRULE.docx");
+	public static File DOMGROUP_ERR_RECEIVERRULE = new File(templateDomGroupPath + "ERRRULERECEIVERRULE.docx");
 	public static File DOMGROUP_ERR_RULEID = new File(templateDomGroupPath + "ERRRULEID.docx");
 	public static File DOMGROUP_ERR = new File(templateDomGroupPath + "ERR.docx");
 

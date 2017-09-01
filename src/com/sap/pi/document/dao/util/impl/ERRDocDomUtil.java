@@ -76,76 +76,98 @@ public class ERRDocDomUtil {
 						// conditionDomItems.add(new
 						// Item("$ExternalRuleId_Value",
 						// etReceiverRuleIds.get(j)));
+
 						conditionDomItems.add(new Item("$Condition_Value", condition));
+
+						CONSTAINTS.LOG.info("Generate external rule -- condition domGroup start");
 						domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_CONDITION, conditionDomItems,
 								"RULEPARTSUNIT", true);
+						CONSTAINTS.LOG.info("Generate external rule -- condition domGroup end");
 
 						// GENERATE RECEIVER related dom and domGroup file
 						List<CommunicationPartnerExtractor> extractors = externalReceiverRule.getReceiver();
+						CONSTAINTS.LOG.info("Generate external rule -- receiver dom start");
 						for (int k = 0; k < extractors.size(); k++) {
 							this.generateERRRULERECEIVERDomFile(extractors.get(k), String.valueOf(k));
 						}
+						CONSTAINTS.LOG.info("Generate external rule -- receiver dom end");
 
 						// write back to dom, type RULEPARTSUNIT
 						List<Item> receiverDomGroupItems = new ArrayList<>();
 						receiverDomGroupItems.add(new Item("$Main_Name", "ruleReceiver"));
+						CONSTAINTS.LOG.info("Generate external rule -- receiver domGroup start");
 						domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULR_RECEIVER, receiverDomGroupItems,
 								"RULEPARTSUNIT", true);
+						CONSTAINTS.LOG.info("Generate external rule -- receiver domGroup end");
 
 						// generate domGroup for rule part unit, write back type
 						// rule part
 						List<Item> errRuleUnitItems = new ArrayList<>();
 						receiverDomGroupItems.add(new Item("$Main_Name", "ruleUnit"));
+						CONSTAINTS.LOG.info("Generate external rulePartUnit domGroup start");
 						domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULE_PARTSUNIT, errRuleUnitItems,
 								"RULEPART", true);
+						CONSTAINTS.LOG.info("Generate external rulePartUnit domGroup end");
 
 					}
 					// generate rule domGROUP file with rule part, write back
 					// receiver rule
 					List<Item> ruleDomGroupItems = new ArrayList<>();
 					ruleDomGroupItems.add(new Item("$Main_Name", "rule"));
+					CONSTAINTS.LOG.info("Generate external rulePart domGroup start");
 					domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULEPARTS, ruleDomGroupItems,
 							"RECEIVERRULE", true);
+					CONSTAINTS.LOG.info("Generate external rulePart domGroup end");
 				}
 				// generate receiver rule domGROUP file with rule part, write
 				// back rule ID
 				List<Item> ruleDomGroupItems = new ArrayList<>();
 				ruleDomGroupItems.add(new Item("$Main_Name", "rule"));
+				CONSTAINTS.LOG.info("Generate external rule domGroup start");
 				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RECEIVERRULE, ruleDomGroupItems, "RULEID",
 						true);
+				CONSTAINTS.LOG.info("Generate external rule domGroup end");
 			}
 
 			// generate ruleID domGROUP file
 			List<Item> ruleIdDomGroupItems = new ArrayList<>();
 			ruleIdDomGroupItems.add(new Item("$Main_Name", "ruleId"));
+			CONSTAINTS.LOG.info("Generate external ruleID domGroup start");
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR_RULEID, ruleIdDomGroupItems, "ERR", true);
+			CONSTAINTS.LOG.info("Generate external ruleID domGroup end");
 		}
 
 		// generate ExternalRule domGROUP file
 		List<Item> ruleIdDomGroupItems = new ArrayList<>();
 		ruleIdDomGroupItems.add(new Item("$Main_Name", "externalRule"));
+		CONSTAINTS.LOG.info("Generate externalRule domGroup start");
 		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_ERR, ruleIdDomGroupItems, "RD", true);
+		CONSTAINTS.LOG.info("Generate externalRule domGroup end");
 	}
 
 	// generate receiver(external rule -->..--> rule-->receiver ) dom file
 	public void generateERRRULERECEIVERDomFile(CommunicationPartnerExtractor receiver, String num) {
 
-		String communicationPartyID = OtherUtil.getValue(receiver.getCommunicationParty().getValue());
-		String schemeID = OtherUtil.getValue(receiver.getCommunicationPartySchema().getValue());
-		String schemeAgencyID = OtherUtil.getValue(receiver.getCommunicationPartyAgency().getValue());
-		String name = OtherUtil.getValue(receiver.getCommunicationParty().getValue());
+		if (receiver != null) {
+			String communicationPartyID = OtherUtil.getValue(receiver.getCommunicationParty().getValue());
+			String schemeID = OtherUtil.getValue(receiver.getCommunicationPartySchema().getValue());
+			String schemeAgencyID = OtherUtil.getValue(receiver.getCommunicationPartyAgency().getValue());
+			String name = OtherUtil.getValue(receiver.getCommunicationParty().getValue());
 
-		String communicationComponentId = OtherUtil.getValue(receiver.getCommunicationComponent().getValue());
+			String communicationComponentId = OtherUtil.getValue(receiver.getCommunicationComponent().getValue());
 
-		List<Item> receiverDomItems = new ArrayList<>();
+			List<Item> receiverDomItems = new ArrayList<>();
 
-		receiverDomItems.add(new Item("$Receiver_Value", num));
-		receiverDomItems.add(new Item("$CommunicationPartyId_Value", communicationPartyID));
-		receiverDomItems.add(new Item("$SchemeId_Value", schemeID));
-		receiverDomItems.add(new Item("$SchemaAgencyId_Value", schemeAgencyID));
-		receiverDomItems.add(new Item("$Name_Value", name));
-		receiverDomItems.add(new Item("$CommunicationComponent_Value", communicationComponentId));
-		domUtil.generateDomFile(CONSTAINTS.DOM_ERR_RULR_RECEIVER, receiverDomItems, num);
+			receiverDomItems.add(new Item("$Main_Name", "rulrReceiver" + num));
+			receiverDomItems.add(new Item("$Receiver_Value", num));
+			receiverDomItems.add(new Item("$CommunicationPartyId_Value", communicationPartyID));
+			receiverDomItems.add(new Item("$SchemeId_Value", schemeID));
+			receiverDomItems.add(new Item("$SchemaAgencyId_Value", schemeAgencyID));
+			receiverDomItems.add(new Item("$Name_Value", name));
+			receiverDomItems.add(new Item("$CommunicationComponent_Value", communicationComponentId));
+			domUtil.generateDomFile(CONSTAINTS.DOM_ERR_RULR_RECEIVER, receiverDomItems, num);
+		}
+
 	}
 
 	public String getCondition(Condition condition) {
@@ -173,7 +195,7 @@ public class ERRDocDomUtil {
 				String rightExtrator = atomicCondition.getRightExtractor().getValue();
 				String oneCondition = leftExtrator + " " + operator + " " + rightExtrator;
 				conditionString.append(oneCondition);
-				if (j < (atomicConditionBlock.getAtomicCondition().size() - 2)) {
+				if (j < (atomicConditionBlock.getAtomicCondition().size() - 1)) {
 					conditionString.append(" AND ");
 				}
 

@@ -41,7 +41,9 @@ public class LOGDocDomUtil {
 			stagDomGroupItems.add(new Item("$IsGlobalSetting_Value", useGlobal));
 			stagDomGroupItems.add(new Item("$SpecificConfiguration_Value", specificConfig));
 
+			CONSTAINTS.LOG.info("Generate Logging domGroup start");
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_LOG, stagDomGroupItems, "ICO", false);
+			CONSTAINTS.LOG.info("Generate Logging domGroup end");
 
 		}
 		CONSTAINTS.LOG.info("LOGGING related tempt document had been created.");

@@ -41,7 +41,9 @@ public class STGDocDomUtil {
 			stagDomGroupItems.add(new Item("$IsGlobalSetting_Value", useGlobal));
 			stagDomGroupItems.add(new Item("$SpecificConfiguration_Value", specificConfig));
 
+			CONSTAINTS.LOG.info("Generate Stagging domGroup start");
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_STAG, stagDomGroupItems, "ICO", false);
+			CONSTAINTS.LOG.info("Generate Stagging domGroup start");
 
 		}
 		CONSTAINTS.LOG.info("STAGING related tempt document had been created.");
