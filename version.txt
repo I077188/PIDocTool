@@ -1,0 +1,12 @@
+*******************************************
+*										  *
+*		     PI Tool Version 1.0          *
+*										  *
+*******************************************
+
+support NW version: V7.3 and upper
+
+Latest update date: 2017/09/01
+Author: I077188/I321257
+
+GitHub repository: https://github.com/XiaoHuaZhao/PITool.git
