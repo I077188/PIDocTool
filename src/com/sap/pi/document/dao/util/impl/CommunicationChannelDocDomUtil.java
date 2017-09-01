@@ -70,8 +70,9 @@ public class CommunicationChannelDocDomUtil {
 			for (int i = 0; i < adapterSpecific.size(); i++) {
 				GenericProperty property = adapterSpecific.get(i);
 				content.append(
-						OtherUtil.getValue(property.getName()) + "::\t" + OtherUtil.getValue(property.getNamespace())
-								+ "::\t" + OtherUtil.getValue(property.getValue()) + "\n");
+						("<" + OtherUtil.getValue(property.getName())) + "::"
+								+ OtherUtil.getValue(property.getNamespace()) + "::"
+								+ OtherUtil.getValue(property.getValue()) + ">\n");
 			}
 
 			String adapterSpecificContent = "N/A";
@@ -80,7 +81,7 @@ public class CommunicationChannelDocDomUtil {
 			}
 
 			List<Item> items = new ArrayList<>();
-			items.add(new Item("$Main_Name", id + "PARAMETERSAP"));
+			items.add(new Item("$Main_Name", "PARAMETERSAP"));
 			items.add(new Item("$AdapterTypeName_Value", adapterType_NAME));
 			items.add(new Item("$AdapterTypeNameSpace_Value", adapterType_NAMESPACE));
 			items.add(new Item("$AdapterTypeSWC_Value", adapterType_SWC));

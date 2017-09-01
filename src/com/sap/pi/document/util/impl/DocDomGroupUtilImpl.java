@@ -95,11 +95,18 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 				for (XWPFTableRow row : table.getRows()) {
 					for (XWPFTableCell cell : row.getTableCells()) {
 						for (XWPFParagraph p : cell.getParagraphs()) {
+							StringBuilder sb = new StringBuilder();
+
 							for (XWPFRun run : p.getRuns()) {
 								String text = run.getText(0);
-								if (text != null && Pattern.matches(regularExpression, text)) {
-									text = parameters.get(text);
-									run.setText(text, 0);
+								sb.append(text);
+								run.setText("", 0);
+
+								if (Pattern.matches(regularExpression, sb.toString())) {
+									System.out.println("test" + sb.toString());
+									run.setText(OtherUtil.getValue(parameters.get(text)));
+								} else {
+									continue;
 								}
 							}
 						}
