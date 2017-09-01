@@ -14,6 +14,8 @@ import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
 
+import com.sap.pi.document.util.dao.CONSTAINTS;
+
 /**
  * Only support text/ table
  *
@@ -142,11 +144,21 @@ public class ContentMerge {
 
 	public static void close() {
 		try {
-			src1Document.close();
-			src2Document.close();
-			fops.close();
-			fips.close();
+
+			if (src1Document != null) {
+				src1Document.close();
+			}
+			if (src2Document != null) {
+				src2Document.close();
+			}
+			if (fops != null) {
+				fops.close();
+			}
+			if (fips != null) {
+				fips.close();
+			}
 		} catch (IOException e) {
+			CONSTAINTS.LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}

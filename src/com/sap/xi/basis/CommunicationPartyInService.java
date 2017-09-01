@@ -31,7 +31,9 @@ public class CommunicationPartyInService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/DEV/PI/PIDocTool/repo/PIDocTool/src/CommunicationPartyInImplBean.wsdl");
+			java.net.URL tmpUrl = IntegratedConfigurationInService.class.getClassLoader()
+					.getResource("CommunicationPartyInImplBean.wsdl");
+			url = new java.net.URL(tmpUrl.getProtocol(), tmpUrl.getHost(), tmpUrl.getPort(), tmpUrl.getFile());
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

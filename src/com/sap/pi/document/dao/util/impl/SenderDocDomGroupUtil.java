@@ -24,23 +24,28 @@ public class SenderDocDomGroupUtil {
 		WebServiceOperationImpl webServiceOperationImpl = new WebServiceOperationImpl();
 		Sender sender = webServiceOperationImpl.getSenderInformation(intID);
 
-		CommunicationPartyDao partyDao = sender.getSenderCommunicationParty();
-		CommunicationPartyDocDomUtil communicationPartyDocDomUtil = new CommunicationPartyDocDomUtil();
-		communicationPartyDocDomUtil.generateCommunicationPartyDomFile(partyDao, "SENDER", true);
+		if (sender != null) {
 
-		String componentID = OtherUtil.getValue(sender.getSenderCommunicationComponent());
-		String senderInterface = OtherUtil.getValue(sender.getSenderInterface());
-		String senderNamespace = OtherUtil.getValue(sender.getSenderNamespace());
-		String senderSWC = OtherUtil.getValue(sender.getSenderInterfaceSWC());
+			CommunicationPartyDao partyDao = sender.getSenderCommunicationParty();
+			CommunicationPartyDocDomUtil communicationPartyDocDomUtil = new CommunicationPartyDocDomUtil();
+			communicationPartyDocDomUtil.generateCommunicationPartyDomFile(partyDao, "SENDER", true);
 
-		List<Item> items = new ArrayList<>();
-		items.add(new Item("$Main_Name", "SENDERSAP"));
-		items.add(new Item("$ComponentID_Value", componentID));
-		items.add(new Item("$SenderInterface_Value", senderInterface));
-		items.add(new Item("$SenderNamespace_Value", senderNamespace));
-		items.add(new Item("$SenderSWC_Value", senderSWC));
+			String componentID = OtherUtil.getValue(sender.getSenderCommunicationComponent());
+			String senderInterface = OtherUtil.getValue(sender.getSenderInterface());
+			String senderNamespace = OtherUtil.getValue(sender.getSenderNamespace());
+			String senderSWC = OtherUtil.getValue(sender.getSenderInterfaceSWC());
 
-		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_SENDER, items, "ICO", false);
+			List<Item> items = new ArrayList<>();
+			items.add(new Item("$Main_Name", "SENDERSAP"));
+			items.add(new Item("$ComponentID_Value", componentID));
+			items.add(new Item("$SenderInterface_Value", senderInterface));
+			items.add(new Item("$SenderNamespace_Value", senderNamespace));
+			items.add(new Item("$SenderSWC_Value", senderSWC));
+
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_SENDER, items, "ICO", false);
+
+		}
+
 
 	}
 

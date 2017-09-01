@@ -1,3 +1,13 @@
 Manifest-Version: 1.0
-Class-Path: 
-
+Main-Class: com.sap.pi.document.entry.Entry
+Class-Path: lib/log4j-core-2.8.2.jar lib/log4j-api-2.8.2.jar lib/httpclient-4.5.3.jar lib/*.jar lib/httpcore-4.4.6.jar 
+ lib/jaxb-impl.jar lib/jaxrpc-api.jar lib/mail.jar lib/sap.com~tc~bl~base~webservices_lib~impl.jar 
+ lib/sap.com~tc~bl~jkernel_boot~api.jar lib/sap.com~tc~exception~impl.jar lib/sap.com~tc~je~webservices_api~impl.jar 
+ lib/sap.com~tc~je~webservices_lib~impl.jar lib/sap.com~tc~logging~java~impl.jar 
+ lib/sap.com~tc~sapxmltoolkit~sapxmltoolkit.jar lib/tc~je~sca~spi.jar lib/axis.jar lib/saaj.jar 
+ lib/javax.wsdl_1.6.2.v201012040545.jar lib/poi-3.16/poi-3.16.jar lib/poi-3.16/poi-excelant-3.16.jar 
+ lib/poi-3.16/poi-ooxml-3.16.jar lib/poi-3.16/poi-ooxml-schemas-3.16.jar lib/poi-3.16/poi-scratchpad-3.16.jar 
+ lib/poi-3.16/lib/commons-codec-1.10.jar lib/poi-3.16/lib/commons-collections4-4.1.jar 
+ lib/poi-3.16/lib/commons-logging-1.2.jar lib/poi-3.16/lib/junit-4.12.jar lib/poi-3.16/lib/log4j-1.2.17.jar 
+ lib/poi-3.16/ooxml-lib/curvesapi-1.04.jar lib/poi-3.16/ooxml-lib/xmlbeans-2.6.0.jar lib/commons-discovery-0.2.jar 
+ lib/commons-logging-1.2.jar lib/org.apache.commons.logging_1.1.1.v201101211721.jar lib/commons-lang3-3.1.jar 
