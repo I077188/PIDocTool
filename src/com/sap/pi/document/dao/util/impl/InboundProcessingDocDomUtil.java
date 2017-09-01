@@ -20,6 +20,7 @@ public class InboundProcessingDocDomUtil {
 	DocDomUtilImpl docDomUtilImpl = new DocDomUtilImpl();
 
 	public void generateInboundProcessingDomGroupFile(IntegratedConfiguration integratedConfiguration) {
+		CONSTAINTS.LOG.info("Start to create Inbound Processing related tempt document...");
 
 		WebServiceOperationImpl webService = new WebServiceOperationImpl();
 
@@ -75,7 +76,7 @@ public class InboundProcessingDocDomUtil {
 
 			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_INBOUNDPROCESSING, items, "ICO", false);
 		}
-
+		CONSTAINTS.LOG.info("Inbound Processing related tempt document had been created.");
 	}
 
 }

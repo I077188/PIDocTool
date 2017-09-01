@@ -28,6 +28,7 @@ import com.sap.pi.document.dao.Sender;
 import com.sap.pi.document.dao.Staging;
 import com.sap.pi.document.dao.VirtualReceiver;
 import com.sap.pi.document.util.WebServiceOperation;
+import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.dao.IntegrationPort;
 import com.sap.pi.document.util.dao.SetSecurity;
 import com.sap.xi.basis.ChannelProperty;
@@ -215,35 +216,32 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 			CommunicationPartyDao communicationParty = null;
 
-			String communicationPartyID = mHeaderID.getSenderPartyID();
-			communicationPartyID = (communicationPartyID == null || communicationPartyID.equals("")) ? "N/A"
-					: communicationPartyID;
+			String communicationPartyID = OtherUtil.getValue(mHeaderID.getSenderPartyID());
 
+			// get communicationParty
 			if (!communicationPartyID.equals("N/A")) {
-				// get communicationParty
 				try {
 					communicationParty = getCommunicationParty(communicationPartyID);
 				} catch (MalformedURLException e) {
+					CONSTAINTS.LOG.error(e.getMessage());
 					e.printStackTrace();
 				}
-
-				String communicationComponent = mHeaderID.getSenderComponentID();
-				communicationComponent = (communicationComponent == null || communicationComponent.equals("")) ? "N/A"
-						: communicationComponent;
-
-				String namespace = mHeaderID.getInterfaceNamespace();
-				namespace = (namespace == null || namespace.equals("")) ? "N/A" : namespace;
-
-				String senderInterface = mHeaderID.getInterfaceName();
-				senderInterface = (senderInterface == null || senderInterface.equals("")) ? "N/A" : senderInterface;
-
-				String senderInterfaceSWC = iConfig.getInboundProcessing().getSenderInterfaceSoftwareComponentVersion();
-				senderInterfaceSWC = (senderInterfaceSWC == null || senderInterfaceSWC.equals("")) ? "N/A"
-						: senderInterfaceSWC;
-
-				return new Sender(communicationParty, communicationComponent, senderInterface, namespace,
-						senderInterfaceSWC);
 			}
+
+			String communicationComponent = OtherUtil.getValue(mHeaderID.getSenderComponentID());
+
+			String namespace = OtherUtil.getValue(mHeaderID.getInterfaceNamespace());
+
+			String senderInterface = OtherUtil.getValue(mHeaderID.getInterfaceName());
+
+			com.sap.xi.basis.InboundProcessing inboundProcessing = iConfig.getInboundProcessing();
+			String senderInterfaceSWC = "N/A";
+			if (inboundProcessing != null) {
+				senderInterfaceSWC = OtherUtil.getValue(inboundProcessing.getSenderInterfaceSoftwareComponentVersion());
+			}
+
+			return new Sender(communicationParty, communicationComponent, senderInterface, namespace,
+					senderInterfaceSWC);
 		}
 		return null;
 

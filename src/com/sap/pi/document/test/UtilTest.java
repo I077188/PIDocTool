@@ -1,7 +1,6 @@
 package com.sap.pi.document.test;
 
-import java.util.List;
-
+import com.sap.pi.document.dao.util.impl.InboundProcessingDocDomUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -20,29 +19,36 @@ public class UtilTest {
 
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
-		List<MessageHeaderID> messageHeaderIDs = webServiceOperation.getIntegratedConfigurationID();
+		// List<MessageHeaderID> messageHeaderIDs =
+		// webServiceOperation.getIntegratedConfigurationID();
 
-		// MessageHeaderID messageHeaderID = new MessageHeaderID();
-		// messageHeaderID.setSenderComponentID("BC_BIT400_RFCLookupSender");
-		// messageHeaderID.setInterfaceName("SI_RFCLookup_Sender");
-		// messageHeaderID.setInterfaceNamespace("http://robert_forTest.com");
-		// List<OperationMapping> operationMappings =
-		// webServiceOperation.getOperationMappings(integratedConfiguration);
-		//
+		MessageHeaderID messageHeaderID = new MessageHeaderID();
+		messageHeaderID.setSenderComponentID("OPICHEM_VAL");
+		messageHeaderID.setInterfaceName("postInvoice_IN");
+		messageHeaderID.setInterfaceNamespace("http://opint.demo.sap.com/ip");
 
-		System.out.println("Started.." + messageHeaderIDs.size());
-		for (int i = 0; i < messageHeaderIDs.size(); i++) {
-			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderIDs.get(i));
+		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 
+		// generate domGroup file of Inbound Processing
+		InboundProcessingDocDomUtil inboundProcessingDocDomUtil = new InboundProcessingDocDomUtil();
+		inboundProcessingDocDomUtil.generateInboundProcessingDomGroupFile(integratedConfiguration);
 
-			if (integratedConfiguration != null) {
-				System.out
-						.println(messageHeaderIDs.get(i).getInterfaceName() + "\t:test");
-			}
+		/*
+		 * List<OperationMapping> operationMappings =
+		 * webServiceOperation.getOperationMappings(integratedConfiguration);
+		 *
+		 * System.out.println("Started.." + messageHeaderIDs.size()); for (int i
+		 * = 0; i < messageHeaderIDs.size(); i++) { integratedConfiguration =
+		 * webServiceOperation.getIntegrationConfiguration(messageHeaderIDs.get(
+		 * i));
+		 *
+		 *
+		 * if (integratedConfiguration != null) { System.out
+		 * .println(messageHeaderIDs.get(i).getInterfaceName() + "\t:test"); }
+		 *
+		 * }
+		 */
 
-		}
-
-		System.out.println("End ...");
 		Long end = System.currentTimeMillis();
 		CONSTAINTS.LOG.info("Program ended!");
 		CONSTAINTS.LOG.info("Time wasted:\t" + (end - start) + " (ms)");

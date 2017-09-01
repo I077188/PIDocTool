@@ -175,7 +175,7 @@ public class CommunicationChannelDocDomUtil {
 				items.add(new Item("$Key_Value", key));
 				items.add(new Item("$ParametersValue_Value", parametersValue));
 
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_MODULECONFIG, items, key);
+				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_MODULECONFIGURATION, items, key);
 
 			}
 			// generate domGroup and write back as module type

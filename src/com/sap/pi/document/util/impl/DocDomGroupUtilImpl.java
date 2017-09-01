@@ -15,6 +15,9 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.xmlbeans.XmlException;
 
 import com.sap.pi.document.util.DocDomGroupUtil;
@@ -85,6 +88,25 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 					}
 				}
 			}
+
+			// - get tables
+			List<XWPFTable> tables = document.getTables();
+			for (XWPFTable table : tables) {
+				for (XWPFTableRow row : table.getRows()) {
+					for (XWPFTableCell cell : row.getTableCells()) {
+						for (XWPFParagraph p : cell.getParagraphs()) {
+							for (XWPFRun run : p.getRuns()) {
+								String text = run.getText(0);
+								if (text != null && Pattern.matches(regularExpression, text)) {
+									text = parameters.get(text);
+									run.setText(text, 0);
+								}
+							}
+						}
+					}
+				}
+			}
+
 			document.write(fops);
 			close();
 

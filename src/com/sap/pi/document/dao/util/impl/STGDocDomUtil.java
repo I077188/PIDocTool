@@ -20,6 +20,7 @@ public class STGDocDomUtil {
 	// generate Dom file
 	public void generateSTGDomGroupFile(IntegratedConfiguration integratedConfiguration) {
 
+		CONSTAINTS.LOG.info("Start to create STAGING related tempt document...");
 		// get informations from the integrated configuration
 		AdvancedSettings staging = integratedConfiguration.getStaging();
 
@@ -36,15 +37,13 @@ public class STGDocDomUtil {
 
 			// generate staging dom group, erite back to ICO
 			List<Item> stagDomGroupItems = new ArrayList<>();
-			stagDomGroupItems.add(new Item("$Main_Name", "staging"));
+			stagDomGroupItems.add(new Item("$Main_Name", "STAGING"));
 			stagDomGroupItems.add(new Item("$IsGlobalSetting_Value", useGlobal));
 			stagDomGroupItems.add(new Item("$SpecificConfiguration_Value", specificConfig));
 
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_STAG, stagDomGroupItems, "ICO", false);
 
 		}
+		CONSTAINTS.LOG.info("STAGING related tempt document had been created.");
 	}
-
-
-
 }

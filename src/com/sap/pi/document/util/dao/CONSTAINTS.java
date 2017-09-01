@@ -86,7 +86,7 @@ public class CONSTAINTS {
 
 	// communication channel
 	public static File DOMGROUP_LONGDESCRIPTION = new File(templateDomGroupPath + "LONGDESCRIPTION.docx");
-	public static File DOMGROUP_PARAMTER = new File(templateDomGroupPath + "LONGDESCRIPTION.docx");
+	public static File DOMGROUP_PARAMTER = new File(templateDomGroupPath + "PARAMETER.docx");
 	public static File DOMGROUP_IDENTIFIER = new File(templateDomGroupPath + "IDENTIFIER.docx");
 
 	// External Receiver Rule - operation mapping parameter channel
@@ -104,9 +104,10 @@ public class CONSTAINTS {
 	public static File DOMGROUP_ERR_RULEID = new File(templateDomGroupPath + "ERRRULEID.docx");
 	public static File DOMGROUP_ERR = new File(templateDomGroupPath + "ERR.docx");
 
-	public static File DOM_MODULECONFIG = new File(templateDomPath + "MODULECONFIG.docx");
 	public static File DOM_MODULEPROCESSSEQUENCE = new File(templateDomPath + "MODULEPROCESSSEQUENCE.docx");
 	public static File DOMGROUP_MODULEPROCESSSEQUENCE = new File(templateDomGroupPath + "MODULEPROCESSSEQUENCE.docx");
+
+	public static File DOM_MODULECONFIGURATION = new File(templateDomPath + "MODULECONFIGURATION.docx");
 	public static File DOMGROUP_MODULECONFIGURATION = new File(templateDomGroupPath + "MODULECONFIGURATION.docx");
 
 	public static File DOMGROUP_MODULE = new File(templateDomGroupPath + "MODULE.docx");

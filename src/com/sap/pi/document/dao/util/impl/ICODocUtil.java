@@ -6,7 +6,9 @@ import java.util.List;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.dao.Item;
 import com.sap.pi.document.util.impl.DocUtilImp;
+import com.sap.pi.document.util.impl.OtherUtil;
 import com.sap.xi.basis.IntegratedConfiguration;
+import com.sap.xi.basis.global.LONGDescription;
 
 public class ICODocUtil {
 
@@ -39,8 +41,18 @@ public class ICODocUtil {
 		OutboundProcessingDocDomUtil outboundProcessingDocDomUtil = new OutboundProcessingDocDomUtil();
 		outboundProcessingDocDomUtil.generateOutboundProcessingDomGroupFile(integratedConfiguration);
 
+		List<LONGDescription> icoDescriptions = integratedConfiguration.getDescription();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < icoDescriptions.size(); i++) {
+			LONGDescription description = icoDescriptions.get(i);
+			String descriptionValue = OtherUtil.getValue(description.getValue());
+			String descriptionLanguage = OtherUtil.getValue(description.getLanguageCode());
+			sb.append(descriptionLanguage + "::" + descriptionValue);
+		}
+
 		List<Item> items = new ArrayList<>();
 		items.add(new Item("$ICO_Value", ICOName));
+		items.add(new Item("$DESCRIPTION_Value", ICOName));
 		docUtilImp.generateDocFile(CONSTAINTS.DOCUMENT, items);
 
 	}

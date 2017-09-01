@@ -18,6 +18,7 @@ public class SenderDocDomGroupUtil {
 	DocDomGroupUtilImpl domGroupUtil = new DocDomGroupUtilImpl();
 
 	public void generateSenderDomGroupFile(IntegratedConfiguration integratedConfiguration) {
+		CONSTAINTS.LOG.info("Start to create sender related tempt document...");
 
 		MessageHeaderID intID = integratedConfiguration.getIntegratedConfigurationID();
 
@@ -27,8 +28,11 @@ public class SenderDocDomGroupUtil {
 		if (sender != null) {
 
 			CommunicationPartyDao partyDao = sender.getSenderCommunicationParty();
-			CommunicationPartyDocDomUtil communicationPartyDocDomUtil = new CommunicationPartyDocDomUtil();
-			communicationPartyDocDomUtil.generateCommunicationPartyDomFile(partyDao, "SENDER", true);
+			if (partyDao != null) {
+
+				CommunicationPartyDocDomUtil communicationPartyDocDomUtil = new CommunicationPartyDocDomUtil();
+				communicationPartyDocDomUtil.generateCommunicationPartyDomFile(partyDao, "SENDER", true);
+			}
 
 			String componentID = OtherUtil.getValue(sender.getSenderCommunicationComponent());
 			String senderInterface = OtherUtil.getValue(sender.getSenderInterface());
@@ -39,14 +43,14 @@ public class SenderDocDomGroupUtil {
 			items.add(new Item("$Main_Name", "SENDERSAP"));
 			items.add(new Item("$ComponentID_Value", componentID));
 			items.add(new Item("$SenderInterface_Value", senderInterface));
-			items.add(new Item("$SenderNamespace_Value", senderNamespace));
+			items.add(new Item("$SenderNameSpace_Value", senderNamespace));
 			items.add(new Item("$SenderSWC_Value", senderSWC));
 
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_SENDER, items, "ICO", false);
 
 		}
 
-
+		CONSTAINTS.LOG.info("Sender related tempt documents had been created.");
 	}
 
 }

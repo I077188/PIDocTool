@@ -19,6 +19,7 @@ public class LOGDocDomUtil {
 
 	// generate Dom file
 	public void generateLOGDomGroupFile(IntegratedConfiguration integratedConfiguration) {
+		CONSTAINTS.LOG.info("Start to create LOGGING related tempt document...");
 
 		// get informations from the integrated configuration
 		AdvancedSettings logging = integratedConfiguration.getLogging();
@@ -36,15 +37,13 @@ public class LOGDocDomUtil {
 
 			// generate staging dom group, erite back to ICO
 			List<Item> stagDomGroupItems = new ArrayList<>();
-			stagDomGroupItems.add(new Item("$Main_Name", "logging"));
+			stagDomGroupItems.add(new Item("$Main_Name", "LOGGING"));
 			stagDomGroupItems.add(new Item("$IsGlobalSetting_Value", useGlobal));
 			stagDomGroupItems.add(new Item("$SpecificConfiguration_Value", specificConfig));
 
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_LOG, stagDomGroupItems, "ICO", false);
 
 		}
+		CONSTAINTS.LOG.info("LOGGING related tempt document had been created.");
 	}
-
-
-
 }

@@ -43,6 +43,8 @@ public class CommunicationPartyDocDomUtil {
 		// write back type is communication party
 		List<Item> items = new ArrayList<>();
 		items.add(new Item("$Main_Name", "ADDITIONALIDENTIFIERSSAP"));
+		items.add(new Item("$CPID_Value", partyID));
+
 		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADDITIONALIDENTIFIER, items, "COMMUNICATIONPARTY",
 				true);
 
