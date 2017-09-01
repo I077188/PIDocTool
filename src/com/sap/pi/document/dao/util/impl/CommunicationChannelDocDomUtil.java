@@ -42,11 +42,12 @@ public class CommunicationChannelDocDomUtil {
 		// write back to communication channel
 		if (descriptions.size() > 0) {
 			LONGDescription description = descriptions.get(0);
-			String descriptionContent = description.getValue();
+			String descriptionContent = OtherUtil.getValue(description.getValue());
+			String language = OtherUtil.getValue(description.getLanguageCode());
 
 			List<Item> items = new ArrayList<>();
-			items.add(new Item("$Main_Name", id + "LONGDESCRIPTIONSAP"));
-			items.add(new Item("$LONGDESCRIPTION_Value", descriptionContent));
+			items.add(new Item("$Main_Name", "LONGDESCRIPTIONSAP"));
+			items.add(new Item("$LONGDESCRIPTION_Value", language + "::" + descriptionContent));
 			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_LONGDESCRIPTION, items, "COMMUNICATIONCHANNEL",
 					true);
 		}

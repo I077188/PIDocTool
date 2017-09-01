@@ -51,11 +51,19 @@ public class DocDomUtilImpl implements DocDomUtil {
 
 			// create tempt file for document dom, named like
 			// docDom_<type>_<domName>.docx
+			String mainName = OtherUtil.getValue(parameters.get("$Main_Name"));
+
 			String domFilePath = "";
 			if (fileNameTag == "") {
-				domFilePath = CONSTAINTS.temptDomPath + "docDom_" + type + "_" + parameters.get("$Main_Name") + ".docx";
+				if (mainName.equals("N/A")) {
+					domFilePath = CONSTAINTS.temptDomPath + "docDom_" + type + ".docx";
+				}
+				domFilePath = CONSTAINTS.temptDomPath + "docDom_" + type + "_" + mainName + ".docx";
 			} else {
-				domFilePath = CONSTAINTS.temptDomPath + "docDom_" + type + "_" + parameters.get("$Main_Name") + "_"
+				if (mainName.equals("N/A")) {
+					domFilePath = CONSTAINTS.temptDomPath + "docDom_" + type + "_" + fileNameTag + ".docx";
+				}
+				domFilePath = CONSTAINTS.temptDomPath + "docDom_" + type + "_" + mainName + "_"
 						+ fileNameTag + ".docx";
 			}
 
@@ -118,9 +126,15 @@ public class DocDomUtilImpl implements DocDomUtil {
 
 	private void close() {
 		try {
-			fips.close();
-			fops.close();
-			document.close();
+			if (fips != null) {
+				fips.close();
+			}
+			if (fops != null) {
+				fops.close();
+			}
+			if (document != null) {
+				document.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

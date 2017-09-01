@@ -1,2 +1,5 @@
 *.class
+/resources/temptFiles/domGroup/*.docx
+/*.class
 /log/*.log
+/resources/temptFiles/dom/*.docx

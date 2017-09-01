@@ -51,11 +51,11 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			// docDomGroup_<type>_<domGroupName>_tempt.docx
 			// docDomGroup_<type>_tempt.docx
 			String domGroupTemptFilePath = "";
+			String mainName = OtherUtil.getValue(parameters.get("$Main_Name"));
 
-			if (parameters.get("$Main_Name") != null && parameters.get("$Main_Name") != ""
-					&& parameters.get("$Main_Name").toLowerCase() != "null") {
-				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_"
-						+ parameters.get("$Main_Name") + "_tempt.docx";
+			if (mainName != null && mainName != "" && mainName.toLowerCase() != "null" && !mainName.equals("N/A")) {
+				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_" + mainName
+						+ "_tempt.docx";
 			} else {
 				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_tempt.docx";
 			}
@@ -112,10 +112,8 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 
 			// copy all the information from dom and domgroup tempt files
 			String domGroupFilePath = "";
-			if (parameters.get("$Main_Name") != null && parameters.get("$Main_Name") != ""
-					&& parameters.get("$Main_Name") != "null") {
-				domGroupFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_"
-						+ parameters.get("$Main_Name") + ".docx";
+			if (mainName != null && mainName != "" && mainName != "null") {
+				domGroupFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_" + mainName + ".docx";
 			} else {
 				domGroupFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + ".docx";
 			}
@@ -182,11 +180,10 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 		// target file type
 		// name like dom_<target type>_$Main_Name_<tags>.docx
 
-		fileName = fileName.replaceAll(fileName.substring(0, fileName.indexOf("_")), "dom");
+		String tempt = fileName.substring(fileName.indexOf("_") + 1);
+		String tempt2 = tempt.substring(tempt.indexOf("_"));
 
-		System.out.println(fileName);
-		fileName = fileName.replaceAll(fileName.substring(fileName.indexOf("_") + 1).substring(0,
-				fileName.substring(fileName.indexOf("_") + 1).indexOf("_")), type);
+		fileName = "dom_" + type + tempt2;
 
 		System.out.println("after:\t" + fileName);
 
