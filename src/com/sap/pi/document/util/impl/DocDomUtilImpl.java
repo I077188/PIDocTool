@@ -96,19 +96,55 @@ public class DocDomUtilImpl implements DocDomUtil {
 			}
 
 			// - get tables
+			/*
+			 * List<XWPFTable> tables = document.getTables(); for (XWPFTable
+			 * table : tables) { for (XWPFTableRow row : table.getRows()) { for
+			 * (XWPFTableCell cell : row.getTableCells()) { for (XWPFParagraph p
+			 * : cell.getParagraphs()) { for (XWPFRun run : p.getRuns()) {
+			 * String text = run.getText(0); if (text != null &&
+			 * Pattern.matches(regularExpression, text)) { text =
+			 * parameters.get(text); run.setText(text, 0); } } } } } }
+			 */
 			List<XWPFTable> tables = document.getTables();
 			for (XWPFTable table : tables) {
 				for (XWPFTableRow row : table.getRows()) {
-					for (XWPFTableCell cell : row.getTableCells()) {
-						for (XWPFParagraph p : cell.getParagraphs()) {
-							for (XWPFRun run : p.getRuns()) {
-								String text = run.getText(0);
-								if (text != null && Pattern.matches(regularExpression, text)) {
-									text = parameters.get(text);
-									run.setText(text, 0);
+					TT: for (XWPFTableCell cell : row.getTableCells()) {
+						// for each cell judge whether it is a parameter cell or
+						// a value cell
+						// if the first run of first paragraph not include "$",
+						// it parameter cell
+						List<XWPFParagraph> xwpfParagraphs = cell.getParagraphs();
+
+						if (xwpfParagraphs.size() > 0) {
+							XWPFParagraph xwpfParagraph = xwpfParagraphs.get(0);
+							List<XWPFRun> xwpfRuns = xwpfParagraph.getRuns();
+							if (xwpfRuns.size() > 0) {
+								XWPFRun run0 = xwpfRuns.get(0);
+								if (run0.getText(0).indexOf("$") < 0) {
+									continue TT;
+								} else {
+									// execute value replace
+									for (XWPFParagraph p : xwpfParagraphs) {
+
+										StringBuilder sb = new StringBuilder();
+
+										for (XWPFRun run : p.getRuns()) {
+											String text = run.getText(0);
+											sb.append(text);
+											run.setText("", 0);
+
+											if (Pattern.matches(regularExpression, sb.toString())) {
+												run.setText(OtherUtil.getValue(parameters.get(sb.toString())));
+											} else {
+												continue;
+											}
+										}
+									}
+
 								}
 							}
 						}
+
 					}
 				}
 			}
