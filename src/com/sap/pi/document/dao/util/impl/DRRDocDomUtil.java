@@ -156,7 +156,7 @@ public class DRRDocDomUtil {
 			drrIMPItems.add(new Item("$Operation_Name", operation));
 			drrIMPItems.add(new Item("$Main_Name", "omParameterSAP"));
 			// write back to receiver determination
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomGroupItems, "RD", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomGroupItems, "RECEIVERDESTINATION", true);
 		}
 	}
 

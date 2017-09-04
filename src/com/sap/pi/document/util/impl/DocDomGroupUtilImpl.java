@@ -44,6 +44,7 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 		String type = templateFileName.substring(0, templateFileName.indexOf("."));
 
 		try {
+
 			fips = new FileInputStream(templateFile);
 			document = new XWPFDocument(fips);
 
@@ -75,16 +76,31 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			String regularExpression = "\\$(.*)_Value";
 
 			List<XWPFParagraph> paragraphs = document.getParagraphs();
-			for (XWPFParagraph paragraph : paragraphs) {
-				List<XWPFRun> runs = paragraph.getRuns();
 
-				if (runs != null) {
-					for (XWPFRun run : runs) {
-						String text = run.getText(0);
-						if (text != null && Pattern.matches(regularExpression, text)) {
-							text = parameters.get(text);
-							run.setText(text, 0);
-						}
+			for (XWPFParagraph paragraph : paragraphs) {
+				StringBuilder sb = new StringBuilder();
+				List<XWPFRun> xwpfRuns = paragraph.getRuns();
+
+				boolean replace = false;
+				for (XWPFRun run : xwpfRuns) {
+					String text = run.getText(0);
+					if (text.indexOf("$") >= 0) {
+						replace = true;
+					}
+
+					sb.append(text);
+					if (replace) {
+						run.setText("", 0);
+					}
+					// replace parameter had been replaced
+					if ((text.lastIndexOf(" ") == (text.length() - 1)) || text.substring(0, 1).equals(" ")) {
+						replace = false;
+					}
+
+					if (Pattern.matches(regularExpression, sb.toString())) {
+						run.setText(OtherUtil.getValue(parameters.get(sb.toString())));
+					} else {
+						continue;
 					}
 				}
 			}
@@ -155,8 +171,8 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 
 			// generate File list of input <domXX.docx and
 			// domgroup_XXX_tempt.docx>
+			// loop source file for domGroup generation
 			List<File> sourceFiles = new ArrayList<>();
-			sourceFiles.add(domGroupTemptFile);
 
 			File dir = new File(CONSTAINTS.temptDomPath);
 			for (File file : dir.listFiles()) {
@@ -164,12 +180,13 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 					String fileName = file.getName();
 
 					if (fileName.indexOf("_" + type + "_") >= 0) {
-
 						sourceFiles.add(file);
 					}
 
 				}
 			}
+
+			sourceFiles.add(domGroupTemptFile);
 
 			// merge content to the domGroup file
 			try {
@@ -180,6 +197,7 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 				}
 
 			} catch (InvalidFormatException | XmlException e) {
+				CONSTAINTS.LOG.error(e.getMessage());
 				e.printStackTrace();
 			}
 
@@ -248,12 +266,19 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 
 	private void close() {
 		try {
-			fips.close();
-			fops.flush();
-			fops.close();
-			document.close();
+			if (fips != null) {
+				fips.close();
+			}
+			if (fops != null) {
+				fops.flush();
+				fops.close();
+			}
+			if (document != null) {
+				document.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 	}
 

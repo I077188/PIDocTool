@@ -65,8 +65,6 @@ public class CONSTAINTS {
 
 	public static File DOMGROUP_COMMUNICATIONPARTY = new File(templateDomGroupPath + "COMMUNICATIONPARTY.docx");
 
-	public static File DOMGROUP_RR = new File(templateDomGroupPath + "RR.docx");
-
 	public static File DOM_ATO_CONDITION = new File(templateDomPath + "ATOCONDITION.docx");
 	public static File DOMGROUP_ATO_CONDITION_BLOCK = new File(templateDomGroupPath + "ATOCONDITIONBLOCK.docx");
 
@@ -91,17 +89,15 @@ public class CONSTAINTS {
 
 	// External Receiver Rule - operation mapping parameter channel
 	public static File DOM_ERR = new File(templateDomPath + "ERR.docx");
-	public static File DOMGROUP__ERR = new File(templateDomPath + "ERR.docx");
-	public static File DOM_ERR_RULR = new File(templateDomPath + "ERRRULE.docx");
-	public static File DOMGROUP__ERR_RULE = new File(templateDomPath + "ERRRULE.docx");
+	public static File DOM_ERRRULR = new File(templateDomPath + "ERRRULE.docx");
 	// External Receiver Rule
-	public static File DOMGROUP_ERR_CONDITION = new File(templateDomGroupPath + "ERRRULECONDITION.docx");
-	public static File DOM_ERR_RULR_RECEIVER = new File(templateDomPath + "ERRRULERECEIVER.docx");
-	public static File DOMGROUP_ERR_RULR_RECEIVER = new File(templateDomGroupPath + "ERRRULERECEIVER.docx");
-	public static File DOMGROUP_ERR_RULE_PARTSUNIT = new File(templateDomGroupPath + "ERRRULEUNIT.docx");
-	public static File DOMGROUP_ERR_RULEPARTS = new File(templateDomGroupPath + "ERRRULE.docx");
-	public static File DOMGROUP_ERR_RECEIVERRULE = new File(templateDomGroupPath + "ERRRULERECEIVERRULE.docx");
-	public static File DOMGROUP_ERR_RULEID = new File(templateDomGroupPath + "ERRRULEID.docx");
+	public static File DOMGROUP_ERRRULECONDITION = new File(templateDomGroupPath + "ERRRULECONDITION.docx");
+	public static File DOM_ERRRULERECEIVER = new File(templateDomPath + "ERRRULERECEIVER.docx");
+	public static File DOMGROUP_ERRRULERECEIVER = new File(templateDomGroupPath + "ERRRULERECEIVER.docx");
+	public static File DOMGROUP_ERRRULEUNIT = new File(templateDomGroupPath + "ERRRULEUNIT.docx");
+	public static File DOMGROUP_ERRRULE = new File(templateDomGroupPath + "ERRRULE.docx");
+	public static File DOMGROUP_ERRRULERECEIVERRULE = new File(templateDomGroupPath + "ERRRULERECEIVERRULE.docx");
+	public static File DOMGROUP_ERRRULEID = new File(templateDomGroupPath + "ERRRULEID.docx");
 	public static File DOMGROUP_ERR = new File(templateDomGroupPath + "ERR.docx");
 
 	public static File DOM_MODULEPROCESSSEQUENCE = new File(templateDomPath + "MODULEPROCESSSEQUENCE.docx");
@@ -118,7 +114,7 @@ public class CONSTAINTS {
 	public static File DOM_ADAPTERSPECIFICATTRIBUTE = new File(templateDomPath + "ADAPTERSPECIFICATTRIBUTE.docx");
 
 	// Receiver Destination
-	public static File DOMGROUP_RD = new File(templateDomGroupPath + "RD.docx");
+	public static File DOMGROUP_RECEIVERDESTINATION = new File(templateDomGroupPath + "RECEIVERDESTINATION.docx");
 
 	// Staging Destination
 	public static File DOMGROUP_STAG = new File(templateDomGroupPath + "STAGING.docx");

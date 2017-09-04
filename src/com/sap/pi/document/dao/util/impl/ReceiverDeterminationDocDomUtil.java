@@ -7,7 +7,9 @@ import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.dao.Item;
 import com.sap.pi.document.util.impl.DocDomGroupUtilImpl;
 import com.sap.pi.document.util.impl.OtherUtil;
+import com.sap.xi.basis.CommunicationComponentID;
 import com.sap.xi.basis.IntegratedConfiguration;
+import com.sap.xi.basis.NoReceiverBehaviour;
 import com.sap.xi.basis.Receivers;
 
 public class ReceiverDeterminationDocDomUtil {
@@ -24,19 +26,27 @@ public class ReceiverDeterminationDocDomUtil {
 		ERRDocDomUtil errDocDomUtil = new ERRDocDomUtil();
 		errDocDomUtil.generateERRDomFile(integratedConfiguration);
 
-
 		// generate dynamic Receiver Rule Part
 		DRRDocDomUtil drrDocDomUtil = new DRRDocDomUtil();
 		drrDocDomUtil.generateDRRDomFile(integratedConfiguration);
 
 		// dom group Receiver Destination, write back to type ICO
-
 		Receivers receiver = integratedConfiguration.getReceivers();
 		if (receiver != null) {
-			String noReceiverBehavior = OtherUtil
-					.getValue(receiver.getNoReceiverBehaviour().toString());
-			String partyID = OtherUtil.getValue(receiver.getNoReceiverReceiver().getPartyID());
-			String componentID = OtherUtil.getValue(receiver.getNoReceiverReceiver().getComponentID());
+			NoReceiverBehaviour noReceiverBehaviour = receiver.getNoReceiverBehaviour();
+			String noReceiverBehavior = "N/A";
+			String partyID = "N/A";
+			String componentID = "N/A";
+
+			if (noReceiverBehaviour != null) {
+				noReceiverBehavior = OtherUtil.getValue(noReceiverBehavior.toString());
+			}
+
+			CommunicationComponentID ccID = receiver.getNoReceiverReceiver();
+			if (ccID != null) {
+				partyID = OtherUtil.getValue(ccID.getPartyID());
+				componentID = OtherUtil.getValue(ccID.getComponentID());
+			}
 			String noReceiverReceiver = "N/A";
 
 			if (partyID != "N/A") {
@@ -50,11 +60,14 @@ public class ReceiverDeterminationDocDomUtil {
 				}
 			}
 
-			List<Item> rDestinationDomGroupItems = new ArrayList<>();
-			rDestinationDomGroupItems.add(new Item("$Main_Name", "receiverDestination"));
-			rDestinationDomGroupItems.add(new Item("$NoReceiverBehavior_Value", noReceiverBehavior));
-			rDestinationDomGroupItems.add(new Item("$NoReceiverReceiver_Value", noReceiverReceiver));
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RD, rDestinationDomGroupItems, "ICO", false);
+			if (!(noReceiverBehavior.equals("N/A") && noReceiverReceiver.equals("N/A"))) {
+				List<Item> rDestinationDomGroupItems = new ArrayList<>();
+				rDestinationDomGroupItems.add(new Item("$Main_Name", "receiverDestination"));
+				rDestinationDomGroupItems.add(new Item("$NoReceiverBehavior_Value", noReceiverBehavior));
+				rDestinationDomGroupItems.add(new Item("$NoReceiverReceiver_Value", noReceiverReceiver));
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERDESTINATION, rDestinationDomGroupItems,
+						"ICO", false);
+			}
 		}
 
 	}

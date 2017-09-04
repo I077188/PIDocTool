@@ -1,9 +1,6 @@
 package com.sap.pi.document.test;
 
-import com.sap.pi.document.dao.util.impl.InboundProcessingDocDomUtil;
-import com.sap.pi.document.dao.util.impl.LOGDocDomUtil;
-import com.sap.pi.document.dao.util.impl.STGDocDomUtil;
-import com.sap.pi.document.dao.util.impl.SenderDocDomGroupUtil;
+import com.sap.pi.document.dao.util.impl.ReceiverDeterminationDocDomUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -22,9 +19,6 @@ public class UtilTest {
 
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
-		// List<MessageHeaderID> messageHeaderIDs =
-		// webServiceOperation.getIntegratedConfigurationID();
-
 		MessageHeaderID messageHeaderID = new MessageHeaderID();
 		messageHeaderID.setSenderComponentID("OPICHEM_VAL");
 		messageHeaderID.setInterfaceName("postInvoice_IN");
@@ -32,36 +26,44 @@ public class UtilTest {
 
 		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 
-		// generate domGroup file of sender
-		SenderDocDomGroupUtil senderDocDomGroupUtil = new SenderDocDomGroupUtil();
-		senderDocDomGroupUtil.generateSenderDomGroupFile(integratedConfiguration);
-
-		// generate domGroup file of virtual receiver
-
-		// generate domGroup file of logging
-		LOGDocDomUtil logDocDomUtil = new LOGDocDomUtil();
-		logDocDomUtil.generateLOGDomGroupFile(integratedConfiguration);
-
-		// generate domGroup file of staging
-		STGDocDomUtil stgDocDomUtil = new STGDocDomUtil();
-		stgDocDomUtil.generateSTGDomGroupFile(integratedConfiguration);
-
-		// generate domGroup file of Inbound Processing
-		InboundProcessingDocDomUtil inboundProcessingDocDomUtil = new InboundProcessingDocDomUtil();
-		inboundProcessingDocDomUtil.generateInboundProcessingDomGroupFile(integratedConfiguration);
+		// generate domGroup file of Receiver Determination
+		ReceiverDeterminationDocDomUtil receiverDeterminationDocDomUtil = new ReceiverDeterminationDocDomUtil();
+		receiverDeterminationDocDomUtil.generateRDDomGroupFile(integratedConfiguration);
 
 		/*
-		 * List<OperationMapping> operationMappings =
-		 * webServiceOperation.getOperationMappings(integratedConfiguration);
+		 * List<MessageHeaderID> messageHeaderIDs =
+		 * webServiceOperation.getIntegratedConfigurationID();
 		 *
-		 * System.out.println("Started.." + messageHeaderIDs.size()); for (int i
-		 * = 0; i < messageHeaderIDs.size(); i++) { integratedConfiguration =
+		 * for (int i = 0; i < 15; i++) { integratedConfiguration =
 		 * webServiceOperation.getIntegrationConfiguration(messageHeaderIDs.get(
 		 * i));
 		 *
+		 * // generate domGroup file of sender SenderDocDomGroupUtil
+		 * senderDocDomGroupUtil = new SenderDocDomGroupUtil();
+		 * senderDocDomGroupUtil.generateSenderDomGroupFile(
+		 * integratedConfiguration);
 		 *
-		 * if (integratedConfiguration != null) { System.out
-		 * .println(messageHeaderIDs.get(i).getInterfaceName() + "\t:test"); }
+		 * // generate domGroup file of virtual receiver
+		 *
+		 * // generate domGroup file of logging LOGDocDomUtil logDocDomUtil =
+		 * new LOGDocDomUtil();
+		 * logDocDomUtil.generateLOGDomGroupFile(integratedConfiguration);
+		 *
+		 * // generate domGroup file of staging STGDocDomUtil stgDocDomUtil =
+		 * new STGDocDomUtil();
+		 * stgDocDomUtil.generateSTGDomGroupFile(integratedConfiguration);
+		 *
+		 * // generate domGroup file of Inbound Processing
+		 * InboundProcessingDocDomUtil inboundProcessingDocDomUtil = new
+		 * InboundProcessingDocDomUtil();
+		 * inboundProcessingDocDomUtil.generateInboundProcessingDomGroupFile(
+		 * integratedConfiguration);
+		 *
+		 * // generate domGroup file of Outbound Processing
+		 * OutboundProcessingDocDomUtil outboundProcessingDocDomUtil = new
+		 * OutboundProcessingDocDomUtil();
+		 * outboundProcessingDocDomUtil.generateOutboundProcessingDomGroupFile(
+		 * integratedConfiguration);
 		 *
 		 * }
 		 */

@@ -34,11 +34,11 @@ public class ReceiverRuleDocDomUtil {
 			// for each receiverRuleDao require to generate dom file
 			// for condition
 			ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
-			conditionDocDomUtil.generateConditionDomFile(receiverRuleDao.getCondtionDao(), "RR", true);
+			conditionDocDomUtil.generateConditionDomFile(receiverRuleDao.getCondtionDao(), "RECEIVERRULE", true);
 
 			// for receiverDao
 			ReceiverDaoDocDomUtil receiverDaoDocDomUtil = new ReceiverDaoDocDomUtil();
-			receiverDaoDocDomUtil.generateReceiverDomFile(receiverRuleDao.getReceiverDao(), "RR", true);
+			receiverDaoDocDomUtil.generateReceiverDomFile(receiverRuleDao.getReceiverDao(), "RECEIVERRULE", true);
 
 		}
 
@@ -46,7 +46,7 @@ public class ReceiverRuleDocDomUtil {
 		// target type is RD (Receiver Determination)
 		List<Item> items = new ArrayList<>();
 		items.add(new Item("$Main_Name", "RECEIVERRULE"));
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR, items, "RD", true);
+		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULE, items, "RECEIVERDESTINATION", true);
 
 	}
 

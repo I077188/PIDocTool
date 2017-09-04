@@ -84,7 +84,7 @@ public class OutboundProcessingDocDomUtil {
 					List<Item> items = new ArrayList<>();
 					items.add(new Item("$Main_Name", "HEADERMAPPINGSAP"));
 					items.add(new Item("$SenderParty_Value", senderParty));
-					items.add(new Item("$senderComponent_Value", senderComponent));
+					items.add(new Item("$SenderComponent_Value", senderComponent));
 					items.add(new Item("$ReceiverParty_Value", receiverParty));
 					items.add(new Item("$ReceiverComponent_Value", receiverComponent));
 
@@ -101,26 +101,30 @@ public class OutboundProcessingDocDomUtil {
 
 			// generate dom and domGroup file of adapterSepcAttr
 			// target type is OUTBOUNDPROCESSING
-			for (int j = 0; j < adapterSpecAttr.size(); j++) {
-				GenericProperty gProperty = adapterSpecAttr.get(j);
-				String name = OtherUtil.getValue(gProperty.getName());
-				String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
-				String value = OtherUtil.getValue(gProperty.getValue());
+			if (adapterSpecAttr != null && adapterSpecAttr.size() > 0) {
+				for (int j = 0; j < adapterSpecAttr.size(); j++) {
+					GenericProperty gProperty = adapterSpecAttr.get(j);
+					String name = OtherUtil.getValue(gProperty.getName());
+					String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
+					String value = OtherUtil.getValue(gProperty.getValue());
 
-				// generate dom file of adapter sepecific Attribute
-				List<Item> items = new ArrayList<>();
-				items.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
-				items.add(new Item("$Name_Value", name));
-				items.add(new Item("$NameSpace_Value", nameSpace));
-				items.add(new Item("$Value_Value", value));
+					// generate dom file of adapter sepecific Attribute
+					List<Item> items = new ArrayList<>();
+					items.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
+					items.add(new Item("$Name_Value", name));
+					items.add(new Item("$NameSpace_Value", nameSpace));
+					items.add(new Item("$Value_Value", value));
 
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items, name + nameSpace);
+					docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items,
+							OtherUtil.formatName(name + nameSpace));
+				}
+
+				List<Item> adapterSpecAttrItems = new ArrayList<>();
+				adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE,
+						adapterSpecAttrItems, "OUTBOUNDPROCESSING", true);
 			}
 
-			List<Item> adapterSpecAttrItems = new ArrayList<>();
-			adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE, adapterSpecAttrItems,
-					"OUTBOUNDPROCESSING", true);
 
 			// generate dom and domGroup file of adapterSepcAttrTable
 
@@ -137,6 +141,7 @@ public class OutboundProcessingDocDomUtil {
 
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "OUTBOUNDPROCESSINGSAP" + i));
+			items.add(new Item("$Title_Value", "OUTBOUNDPROCESSINGSAP" + i));
 			items.add(new Item("$VirsScan_Value", virsScan));
 			items.add(new Item("$SchemaValidation_Value", schemaValidation));
 

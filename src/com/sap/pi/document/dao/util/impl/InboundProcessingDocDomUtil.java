@@ -43,32 +43,33 @@ public class InboundProcessingDocDomUtil {
 			CommunicationChannelDocDomUtil ccIDocUtil = new CommunicationChannelDocDomUtil();
 			ccIDocUtil.generateCommunicationChannelDomFile(communicationChannel, "INBOUNDPROCESSING", true);
 
-			// generate dom and domGroup file of adapterSepcAttr
-			for (int i = 0; i < adapterSpecAttr.size(); i++) {
-				GenericProperty gProperty = adapterSpecAttr.get(i);
-				String name = OtherUtil.getValue(gProperty.getName());
-				String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
-				String value = OtherUtil.getValue(gProperty.getValue());
-
-				// generate dom file of adapter sepecific Attribute
-				List<Item> items = new ArrayList<>();
-				items.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
-				items.add(new Item("$Name_Value", name));
-				items.add(new Item("$NameSpace_Value", nameSpace));
-				items.add(new Item("$Value_Value", value));
-				if (!(name.equals("N/A") && nameSpace.equals("N/A") && value.equals("N/A"))) {
-					docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items,
-							OtherUtil.formatName(name + nameSpace));
-				}
-			}
-
-			List<Item> adapterSpecAttrItems = new ArrayList<>();
-			adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE, adapterSpecAttrItems,
-					"INBOUNDPROCESSING", true);
-
 			// generate dom and domGroup file of adapterSepcAttrTable
+			if (adapterSpecAttr != null && adapterSpecAttr.size() > 0) {
 
+				// generate dom and domGroup file of adapterSepcAttr
+				for (int i = 0; i < adapterSpecAttr.size(); i++) {
+					GenericProperty gProperty = adapterSpecAttr.get(i);
+					String name = OtherUtil.getValue(gProperty.getName());
+					String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
+					String value = OtherUtil.getValue(gProperty.getValue());
+
+					// generate dom file of adapter sepecific Attribute
+					List<Item> items = new ArrayList<>();
+					items.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
+					items.add(new Item("$Name_Value", name));
+					items.add(new Item("$NameSpace_Value", nameSpace));
+					items.add(new Item("$Value_Value", value));
+					if (!(name.equals("N/A") && nameSpace.equals("N/A") && value.equals("N/A"))) {
+						docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items,
+								OtherUtil.formatName(name + nameSpace));
+					}
+				}
+
+				List<Item> adapterSpecAttrItems = new ArrayList<>();
+				adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE,
+						adapterSpecAttrItems, "INBOUNDPROCESSING", true);
+			}
 			// generate domGroup file of inboundProcessing file, needn't write
 			// back
 			List<Item> items = new ArrayList<>();
