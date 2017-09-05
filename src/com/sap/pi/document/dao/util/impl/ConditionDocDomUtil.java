@@ -27,6 +27,10 @@ public class ConditionDocDomUtil {
 
 			List<AtomicCondition> atomicConditions = atomicConditionBlock.getAtomicCondition();
 
+			if (atomicConditions == null) {
+				return;
+			}
+
 			for (int k = 0; k < atomicConditions.size(); k++) {
 
 				AtomicCondition atomicCondition = atomicConditions.get(k);
@@ -53,6 +57,7 @@ public class ConditionDocDomUtil {
 					leftContextObjectName = OtherUtil.getValue(left.getContextObjectName());
 					leftContextObjectNamespace = OtherUtil.getValue(left.getContextObjectNamespace());
 				}
+
 
 				items.add(new Item("$LeftExtractorTypeID_Value", leftTypeID));
 				items.add(new Item("$LeftExtractorValue_Value", leftValue));
@@ -81,7 +86,7 @@ public class ConditionDocDomUtil {
 				items.add(new Item("$RightExtractorContextObjectNamespace_Value", rightContextObjectNamespace));
 
 				// generate dom files of AtomicCondition
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ATO_CONDITION, items, operationName);
+				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ATOCONDITION, items, operationName);
 
 			}
 
@@ -90,7 +95,7 @@ public class ConditionDocDomUtil {
 
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "ATOCONDITIONBLOCK"));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ATO_CONDITION_BLOCK, items, type, move2dom);
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ATOCONDITIONBLOCK, items, type, move2dom);
 		}
 	}
 

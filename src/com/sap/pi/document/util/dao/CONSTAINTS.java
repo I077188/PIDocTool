@@ -66,8 +66,8 @@ public class CONSTAINTS {
 
 	public static File DOMGROUP_COMMUNICATIONPARTY = new File(templateDomGroupPath + "COMMUNICATIONPARTY.docx");
 
-	public static File DOM_ATO_CONDITION = new File(templateDomPath + "ATOCONDITION.docx");
-	public static File DOMGROUP_ATO_CONDITION_BLOCK = new File(templateDomGroupPath + "ATOCONDITIONBLOCK.docx");
+	public static File DOM_ATOCONDITION = new File(templateDomPath + "ATOCONDITION.docx");
+	public static File DOMGROUP_ATOCONDITION = new File(templateDomGroupPath + "ATOCONDITION.docx");
 
 	public static File DOM_RECEIVER = new File(templateDomPath + "RECEIVER.docx");
 	public static File DOMGROUP_RECEIVER = new File(templateDomGroupPath + "RECEIVER.docx");
