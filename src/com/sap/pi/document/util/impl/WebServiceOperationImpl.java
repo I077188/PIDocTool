@@ -259,7 +259,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 	}
 
-	private CommunicationPartyDao getCommunicationParty(String communicationPartyID) throws MalformedURLException {
+	public CommunicationPartyDao getCommunicationParty(String communicationPartyID) throws MalformedURLException {
 
 		CommunicationPartyInService cPartyInService = new CommunicationPartyInService();
 		CommunicationPartyIn cPartyIn = cPartyInService.getCommunicationPartyInPort();
@@ -287,19 +287,16 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 			for (int i = 0; i < cpAdditionalIdentifiers.size(); i++) {
 				CommunicationPartyAdditionalIdentifier cpAdditionalIdentifier = cpAdditionalIdentifiers.get(i);
 
-				String schemeID = cpAdditionalIdentifier.getSchemeID();
-				schemeID = (schemeID.equals("") || schemeID == null) ? "N/A" : schemeID;
+				String schemeID = OtherUtil.getValue(cpAdditionalIdentifier.getSchemeID());
 
-				String schemeAgencyID = cpAdditionalIdentifier.getSchemeAgencyID();
-				schemeAgencyID = (schemeAgencyID.equals("") || schemeAgencyID == null) ? "N/A" : schemeAgencyID;
+				String schemeAgencyID = OtherUtil.getValue(cpAdditionalIdentifier.getSchemeAgencyID());
 
-				String Name = cpAdditionalIdentifier.getValue();
-				Name = (Name.equals("") || Name == null) ? "N/A" : Name;
+				String Name = OtherUtil.getValue(cpAdditionalIdentifier.getValue());
 
-				additionalIdentfiers.add(new AdditionalIdentfier(schemeID, schemeAgencyID, Name));
+				if (!(schemeID.equals("N/A") && schemeAgencyID.equals("N/A") && Name.equals("N/A"))) {
+					additionalIdentfiers.add(new AdditionalIdentfier(schemeID, schemeAgencyID, Name));
+				}
 			}
-		} else {
-			additionalIdentfiers.add(new AdditionalIdentfier("N/A", "N/A", "N/A"));
 		}
 
 		return new CommunicationPartyDao(communicationPartyID, additionalIdentfiers);
@@ -568,6 +565,5 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		 */
 		return null;
 	}
-
 
 }

@@ -31,7 +31,7 @@ public class SenderDocDomGroupUtil {
 			if (partyDao != null) {
 
 				CommunicationPartyDocDomUtil communicationPartyDocDomUtil = new CommunicationPartyDocDomUtil();
-				communicationPartyDocDomUtil.generateCommunicationPartyDomFile(partyDao, "SENDER", true);
+				communicationPartyDocDomUtil.generateCommunicationPartyDomFile(partyDao, "SENDER", true, 1);
 			}
 
 			String componentID = OtherUtil.getValue(sender.getSenderCommunicationComponent());

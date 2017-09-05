@@ -23,8 +23,8 @@ public class ReceiverDeterminationDocDomUtil {
 		rrDocDomUtil.generateRRDomFile(integratedConfiguration);
 
 		// generate external Receiver Rule Part
-		ERRDocDomUtil errDocDomUtil = new ERRDocDomUtil();
-		errDocDomUtil.generateERRDomFile(integratedConfiguration);
+		EXTReceiverRuleDocDomUtil errDocDomUtil = new EXTReceiverRuleDocDomUtil();
+		errDocDomUtil.generateEXTReceiverDomFile(integratedConfiguration);
 
 		// generate dynamic Receiver Rule Part
 		DRRDocDomUtil drrDocDomUtil = new DRRDocDomUtil();

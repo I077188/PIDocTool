@@ -94,4 +94,39 @@ public class ConditionDocDomUtil {
 		}
 	}
 
+	public String getCondition(Condition condition) {
+		// TODO Auto-generated method stub
+		StringBuilder conditionString = new StringBuilder();
+		for (int i = 0; i < condition.getAtomicConditionBlock().size(); i++) {
+			AtomicConditionBlock atomicConditionBlock = condition.getAtomicConditionBlock().get(i);
+			if (i > 0) {
+				conditionString.append("OR(");
+			} else {
+				conditionString.append("(");
+			}
+
+			for (int j = 0; j < atomicConditionBlock.getAtomicCondition().size(); j++) {
+				AtomicCondition atomicCondition = atomicConditionBlock.getAtomicCondition().get(j);
+				String operator = atomicCondition.getOperator();
+				if (operator.equals("EQ")) {
+					operator = "=";
+				} else if (operator.equals("NE")) {
+					operator = "!=";
+				} else if (operator.equals("CP")) {
+					operator = "~";
+				}
+				String leftExtrator = atomicCondition.getLeftExtractor().getContextObjectName();
+				String rightExtrator = atomicCondition.getRightExtractor().getValue();
+				String oneCondition = leftExtrator + " " + operator + " " + rightExtrator;
+				conditionString.append(oneCondition);
+				if (j < (atomicConditionBlock.getAtomicCondition().size() - 1)) {
+					conditionString.append(" AND ");
+				}
+
+			}
+			conditionString.append(")");
+		}
+		return conditionString.toString();
+	}
+
 }

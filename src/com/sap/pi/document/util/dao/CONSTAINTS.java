@@ -13,6 +13,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 public class CONSTAINTS {
 
+
 	public static Logger LOG = LogManager.getLogger("CONSTAINTS.class");
 	public static String logFolderPath = System.getProperty("user.dir") + File.separator + "log" + File.separator;
 	public static String logFilePath = logFolderPath + "Execution.log";
@@ -87,19 +88,25 @@ public class CONSTAINTS {
 	public static File DOMGROUP_PARAMTER = new File(templateDomGroupPath + "PARAMETER.docx");
 	public static File DOMGROUP_IDENTIFIER = new File(templateDomGroupPath + "IDENTIFIER.docx");
 
-	// External Receiver Rule - operation mapping parameter channel
-	public static File DOM_ERR = new File(templateDomPath + "ERR.docx");
-	public static File DOM_ERRRULR = new File(templateDomPath + "ERRRULE.docx");
-	// External Receiver Rule
-	public static File DOMGROUP_ERRRULECONDITION = new File(templateDomGroupPath + "ERRRULECONDITION.docx");
-	public static File DOM_ERRRULERECEIVER = new File(templateDomPath + "ERRRULERECEIVER.docx");
-	public static File DOMGROUP_ERRRULERECEIVER = new File(templateDomGroupPath + "ERRRULERECEIVER.docx");
-	public static File DOMGROUP_ERRRULEUNIT = new File(templateDomGroupPath + "ERRRULEUNIT.docx");
-	public static File DOMGROUP_ERRRULE = new File(templateDomGroupPath + "ERRRULE.docx");
-	public static File DOMGROUP_ERRRULERECEIVERRULE = new File(templateDomGroupPath + "ERRRULERECEIVERRULE.docx");
-	public static File DOMGROUP_ERRRULEID = new File(templateDomGroupPath + "ERRRULEID.docx");
-	public static File DOMGROUP_ERR = new File(templateDomGroupPath + "ERR.docx");
+	// EXTReceiverRule
+	public static File DOM_EXTEXTRACTOR = new File(templateDomPath + "EXTEXTRACTOR.docx");
+	public static File DOMGROUP_EXTEXTRACTOR = new File(templateDomGroupPath + "EXTEXTRACTOR.docx");
+	public static File DOMGROUP_EXTEXTRACTORS = new File(templateDomGroupPath + "EXTEXTRACTORS.docx");
+	public static File DOMGROUP_EXTCOMMUNICATIONPARTY = new File(templateDomGroupPath + "EXTCOMMUNICATIONPARTY.docx");
+	public static File DOMGROUP_EXTCOMMUNICATIONPARTYS = new File(templateDomGroupPath + "EXTCOMMUNICATIONPARTYS.docx");
 
+	public static File DOMGROUP_EXTRECEIVERRULEUNIT = new File(templateDomGroupPath + "EXTRECEIVERRULEUNIT.docx");
+	public static File DOMGROUP_EXTRECEIVERRULEUNITS = new File(templateDomGroupPath + "EXTRECEIVERRULEUNITS.docx");
+
+	public static File DOM_EXTRECEIVERINTERFACERULE = new File(templateDomPath + "EXTRECEIVERINTERFACERULE.docx");
+	public static File DOMGROUP_EXTRECEIVERINTERFACERULE = new File(templateDomGroupPath + "EXTRECEIVERINTERFACERULE.docx");
+	public static File DOMGROUP_EXTRECEIVERINTERFACE = new File(templateDomGroupPath + "EXTRECEIVERINTERFACE.docx");
+
+	public static File DOMGROUP_EXTRECEIVERRULE = new File(templateDomGroupPath + "EXTRECEIVERRULE.docx");
+	public static File DOMGROUP_EXTRECEIVER = new File(templateDomGroupPath + "EXTRECEIVER.docx");
+	public static File DOMGROUP_EXTRECEIVERRULEPARTY = new File(templateDomGroupPath + "EXTRECEIVERRULEPARTY.docx");
+
+	// Module
 	public static File DOM_MODULEPROCESSSEQUENCE = new File(templateDomPath + "MODULEPROCESSSEQUENCE.docx");
 	public static File DOMGROUP_MODULEPROCESSSEQUENCE = new File(templateDomGroupPath + "MODULEPROCESSSEQUENCE.docx");
 

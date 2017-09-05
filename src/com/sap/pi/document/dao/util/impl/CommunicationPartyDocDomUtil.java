@@ -17,7 +17,8 @@ public class CommunicationPartyDocDomUtil {
 	DocDomUtilImpl docDomUtilImpl = new DocDomUtilImpl();
 
 
-	public void generateCommunicationPartyDomFile(CommunicationPartyDao partyDao, String type, boolean move2dom) {
+	public void generateCommunicationPartyDomFile(CommunicationPartyDao partyDao, String type, boolean move2dom,
+			int tag) {
 
 		List<AdditionalIdentfier> additionalIdentfiers = partyDao.getAdditionalIdentfier();
 		String partyID = OtherUtil.getValue(partyDao.getCommunicationPartyID());
@@ -51,10 +52,23 @@ public class CommunicationPartyDocDomUtil {
 		// generate domGroup file of additional identifier
 		// write back type is communication party
 		List<Item> communicationPartyItems = new ArrayList<>();
-		communicationPartyItems.add(new Item("$Main_Name", "COMMUNICATIONPARTYSAP"));
-		communicationPartyItems.add(new Item("$PartyID_Value", partyID));
 
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONPARTY, items, type, move2dom);
+		// traditiaonl communication party
+		if (tag == 1) {
+			communicationPartyItems.add(new Item("$Main_Name", "COMMUNICATIONPARTYSAP"));
+			communicationPartyItems.add(new Item("$PartyID_Value", partyID));
+
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONPARTY, items, type, move2dom);
+		}
+
+		// external receiver rule communication party
+		if (tag == 2) {
+			communicationPartyItems.add(new Item("$Main_Name", "EXTCOMMUNICATIONPARTYSAP"));
+			communicationPartyItems.add(new Item("$PartyID_Value", partyID));
+
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTCOMMUNICATIONPARTY, items, type, move2dom);
+
+		}
 	}
 
 }

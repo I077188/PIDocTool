@@ -1,6 +1,6 @@
 package com.sap.pi.document.test;
 
-import com.sap.pi.document.dao.util.impl.ReceiverDeterminationDocDomUtil;
+import com.sap.pi.document.dao.util.impl.EXTReceiverRuleDocDomUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -20,15 +20,23 @@ public class UtilTest {
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
 		MessageHeaderID messageHeaderID = new MessageHeaderID();
-		messageHeaderID.setSenderComponentID("OPICHEM_VAL");
-		messageHeaderID.setInterfaceName("postInvoice_IN");
-		messageHeaderID.setInterfaceNamespace("http://opint.demo.sap.com/ip");
+		messageHeaderID.setSenderComponentID("CC_KELLY_SOAP_SENDER");
+		messageHeaderID.setInterfaceName("SI_Srudent_OUT");
+		messageHeaderID.setInterfaceNamespace("http://kelly.fistModel");
 
 		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 
-		// generate domGroup file of Receiver Determination
-		ReceiverDeterminationDocDomUtil receiverDeterminationDocDomUtil = new ReceiverDeterminationDocDomUtil();
-		receiverDeterminationDocDomUtil.generateRDDomGroupFile(integratedConfiguration);
+		/*
+		 * // generate domGroup file of Receiver Determination
+		 * ReceiverDeterminationDocDomUtil receiverDeterminationDocDomUtil = new
+		 * ReceiverDeterminationDocDomUtil();
+		 * receiverDeterminationDocDomUtil.generateRDDomGroupFile(
+		 * integratedConfiguration);
+		 */
+
+		// generate external Receiver Rule Part
+		EXTReceiverRuleDocDomUtil errDocDomUtil = new EXTReceiverRuleDocDomUtil();
+		errDocDomUtil.generateEXTReceiverDomFile(integratedConfiguration);
 
 		/*
 		 * List<MessageHeaderID> messageHeaderIDs =
