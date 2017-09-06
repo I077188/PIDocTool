@@ -22,6 +22,10 @@ public class ConditionDocDomUtil {
 		// AtomicConditionBlock
 		List<AtomicConditionBlock> atomicConditionBlocks = condition.getAtomicConditionBlock();
 
+		if (atomicConditionBlocks == null) {
+			return;
+		}
+
 		for (int j = 0; j < atomicConditionBlocks.size(); j++) {
 			AtomicConditionBlock atomicConditionBlock = atomicConditionBlocks.get(j);
 
@@ -86,7 +90,8 @@ public class ConditionDocDomUtil {
 				items.add(new Item("$RightExtractorContextObjectNamespace_Value", rightContextObjectNamespace));
 
 				// generate dom files of AtomicCondition
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ATOCONDITION, items, operationName);
+				System.out.println(OtherUtil.formatName(operationName));
+				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ATOCONDITION, items, OtherUtil.formatName(operationName) + k);
 
 			}
 
@@ -99,7 +104,21 @@ public class ConditionDocDomUtil {
 		}
 	}
 
-	public String getCondition(Condition condition) {
+	public void generateConditionStringDomFile(Condition condition, String type, boolean move2dom) {
+		if (condition != null) {
+			String conditionValue = getCondition(condition);
+
+			// generate domGroup file of AtomicConditionBlock write back
+			// required target type RR (receiver rule)
+			List<Item> items = new ArrayList<>();
+			items.add(new Item("$Main_Name", "ATOCONDITIONSRINGBLOCK"));
+			items.add(new Item("$Condition_Value", conditionValue));
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ATOCONDITIONSTRING, items, type, move2dom);
+		}
+
+	}
+
+	private String getCondition(Condition condition) {
 		// TODO Auto-generated method stub
 		StringBuilder conditionString = new StringBuilder();
 		for (int i = 0; i < condition.getAtomicConditionBlock().size(); i++) {

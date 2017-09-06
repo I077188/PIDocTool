@@ -20,11 +20,15 @@ public class UtilTest {
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
 		MessageHeaderID messageHeaderID = new MessageHeaderID();
-		messageHeaderID.setSenderComponentID("CC_KELLY_SOAP_SENDER");
-		messageHeaderID.setInterfaceName("SI_Srudent_OUT");
-		messageHeaderID.setInterfaceNamespace("http://kelly.fistModel");
+		messageHeaderID.setSenderComponentID("BS_SOAPUI_Anna");
+		messageHeaderID.setInterfaceName("SI_Student_Out_Async");
+		messageHeaderID.setInterfaceNamespace("http://firstdemo");
 
 		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
+
+		if (integratedConfiguration == null) {
+			System.out.println("null");
+		}
 
 		/*
 		 * // generate domGroup file of Receiver Determination

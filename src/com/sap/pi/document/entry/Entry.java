@@ -35,7 +35,9 @@ public class Entry {
 
 			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 			// generated document
-			icoDoc.generateICODoc(integratedConfiguration, name);
+			if (integratedConfiguration != null) {
+				icoDoc.generateICODoc(integratedConfiguration, name);
+			}
 		}
 
 		Long end = System.currentTimeMillis();

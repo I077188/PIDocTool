@@ -11,6 +11,7 @@ import com.sap.pi.document.util.dao.Item;
 import com.sap.pi.document.util.impl.DocDomGroupUtilImpl;
 import com.sap.pi.document.util.impl.DocDomUtilImpl;
 import com.sap.pi.document.util.impl.EasyQueryOperationImpl;
+import com.sap.pi.document.util.impl.OtherUtil;
 
 public class SWCDocDomUtil {
 
@@ -27,14 +28,14 @@ public class SWCDocDomUtil {
 
 			List<Item> items = new ArrayList<>();
 
-			items.add(new Item("$Main_Name", swc.getName()));
+			items.add(new Item("$Main_Name", OtherUtil.formatName(swc.getName())));
 			items.add(new Item("$DomName_Value", swc.getName()));
 			items.add(new Item("$Name_Value", swc.getName()));
 			items.add(new Item("$Version_Value", swc.getVersion()));
 			items.add(new Item("$NameSpace_Value", swc.getNameSpace()));
 
 			// generate dom related files
-			domUtil.generateDomFile(templateFile, items, swc.getVersion(), swc.getNameSpace());
+			domUtil.generateDomFile(templateFile, items, swc.getVersion(), OtherUtil.formatName(swc.getNameSpace()));
 
 		}
 		System.out.println("Finished!");

@@ -98,8 +98,7 @@ public class ReceiverInterfaceDocDomUtil {
 				errItems.add(new Item("$OperationMapping_Value", opMapping));
 				errItems.add(new Item("$ReceiverInterface_Value", interfacesValue));
 
-				domUtil.generateDomFile(CONSTAINTS.DOM_EXTRECEIVERINTERFACERULE, errItems,
-						OtherUtil.formatName(operation) + j);
+				domUtil.generateDomFile(CONSTAINTS.DOM_EXTRECEIVERINTERFACERULE, errItems, OtherUtil.formatName(operation) + j);
 			}
 
 			// generate internal party of receiver rule interface with number

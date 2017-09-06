@@ -37,7 +37,7 @@ public class CommunicationPartyDocDomUtil {
 			items.add(new Item("$SchemeAgencyID_Value", schemeAgencyID));
 
 			docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADDITIONALIDENTIFIER, items,
-					name + schemeID + schemeAgencyID);
+					OtherUtil.formatName(name + schemeID + schemeAgencyID));
 		}
 
 		// generate domGroup file of additional identifier

@@ -67,11 +67,11 @@ public class DRRDocDomUtil {
 					valueString = value.toString();
 				}
 
-				integerDomItems.add(new Item("$Main_Name", name));
+				integerDomItems.add(new Item("$Main_Name", OtherUtil.formatName(name)));
 				integerDomItems.add(new Item("$Name_Value", name));
 				integerDomItems.add(new Item("$Value_Value", valueString));
 
-				domUtil.generateDomFile(CONSTAINTS.DOM_OMP_INTEGER, integerDomItems, name);
+				domUtil.generateDomFile(CONSTAINTS.DOM_OMP_INTEGER, integerDomItems, OtherUtil.formatName(name));
 			}
 
 			List<Item> integerDomGroupItems = new ArrayList<>();
@@ -90,11 +90,11 @@ public class DRRDocDomUtil {
 				String value = stringProperty.getValue();
 				value = (value == null | value.equals("")) ? "N/A" : value;
 
-				stringDomItems.add(new Item("$Main_Name", name));
+				stringDomItems.add(new Item("$Main_Name", OtherUtil.formatName(name)));
 				stringDomItems.add(new Item("$Name_Value", name));
 				stringDomItems.add(new Item("$Value_Value", value));
 
-				domUtil.generateDomFile(CONSTAINTS.DOM_OMP_STRING, stringDomItems, name);
+				domUtil.generateDomFile(CONSTAINTS.DOM_OMP_STRING, stringDomItems, OtherUtil.formatName(name));
 			}
 			List<Item> stringDomGroupItems = new ArrayList<>();
 			stringDomGroupItems.add(new Item("$Operation_Name", operation));
@@ -125,13 +125,13 @@ public class DRRDocDomUtil {
 					valueChannelID = (valuePartyID == null || valuePartyID.equals("N/A")) ? "N/A" : valueChannelID;
 				}
 
-				channelDomItems.add(new Item("$Main_Name", channelName));
+				channelDomItems.add(new Item("$Main_Name", OtherUtil.formatName(channelName)));
 				channelDomItems.add(new Item("$Name_Value", channelName));
 				channelDomItems.add(new Item("$PartyID_Value", valuePartyID));
 				channelDomItems.add(new Item("$ComponentID_Value", valueComponentID));
 				channelDomItems.add(new Item("$ChannelID_Value", valueChannelID));
 
-				domUtil.generateDomFile(CONSTAINTS.DOM_OMP_CHANEL, channelDomItems, channelName);
+				domUtil.generateDomFile(CONSTAINTS.DOM_OMP_CHANEL, channelDomItems, OtherUtil.formatName(channelName));
 			}
 			List<Item> channelDomGroupItems = new ArrayList<>();
 			channelDomGroupItems.add(new Item("$Operation_Name", operation));
@@ -150,7 +150,7 @@ public class DRRDocDomUtil {
 			omDomItems.add(new Item("$NameSpace_Value", mappingNameSpace));
 			omDomItems.add(new Item("$ComponentID_Value", mappingSWCV));
 
-			domUtil.generateDomFile(CONSTAINTS.DOM_OM, omDomItems, mappingName);
+			domUtil.generateDomFile(CONSTAINTS.DOM_OM, omDomItems, OtherUtil.formatName(mappingName));
 
 			List<Item> omDomGroupItems = new ArrayList<>();
 			drrIMPItems.add(new Item("$Operation_Name", operation));

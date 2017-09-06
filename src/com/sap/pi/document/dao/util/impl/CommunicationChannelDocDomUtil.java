@@ -103,7 +103,7 @@ public class CommunicationChannelDocDomUtil {
 			String receiverSchema = OtherUtil.getValue(identifier.getReceiverSchema());
 
 			List<Item> identifierItems = new ArrayList<>();
-			identifierItems.add(new Item("$Main_Name", id.replaceAll("_", "") + "IDENTIFIERSAP"));
+			identifierItems.add(new Item("$Main_Name", OtherUtil.formatName(id.replaceAll("_", "") + "IDENTIFIERSAP")));
 			identifierItems.add(new Item("$SenderAgency_Value", senderAgency));
 			identifierItems.add(new Item("$SenderSchema_Value", senderSchema));
 			identifierItems.add(new Item("$ReceiverAgency_Value", receiverAgency));

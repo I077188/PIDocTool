@@ -42,7 +42,7 @@ public class ReceiverDaoDocDomUtil {
 					// interface rule
 					IntegratedConfigurationReceiverInterfaceRule receiverInterfaceRule = receiverInterfaceRules.get(k);
 
-					String operation = receiverInterfaceRule.getOperation();
+					String operation = OtherUtil.getValue(receiverInterfaceRule.getOperation());
 
 					DesignObjectID mapping = receiverInterfaceRule.getMapping();
 					MappingParameters mappingParameter = receiverInterfaceRule.getMappingParameters();
@@ -57,8 +57,10 @@ public class ReceiverDaoDocDomUtil {
 					opMappingDocDomUtil.generateMappingDomFile(operation, mapping, mappingParameter, "RIR", true);
 
 					// generate condition part for receiver interface rule
-					ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
-					conditionDocDomUtil.generateConditionDomFile(condition, "RIR", true);
+					if (condition != null) {
+						ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
+						conditionDocDomUtil.generateConditionDomFile(condition, "RIR", true);
+					}
 
 					// generate interfaces related domGroup file and write back
 					// to dom file of receiver interface
@@ -68,7 +70,7 @@ public class ReceiverDaoDocDomUtil {
 					// generate receiver Interface rule domGroup file and write
 					// back to communct
 					List<Item> items = new ArrayList<>();
-					items.add(new Item("$Main_Name", operation));
+					items.add(new Item("$Main_Name", OtherUtil.formatName(operation)));
 					items.add(new Item("$Operation_Name", operation));
 
 					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIR, items, "ID", true);
@@ -79,7 +81,7 @@ public class ReceiverDaoDocDomUtil {
 				String quality = OtherUtil.getValue(receiverInterface.getQualityOfService().value());
 
 				List<Item> items = new ArrayList<>();
-				items.add(new Item("$Main_Name", quality));
+				items.add(new Item("$Main_Name", OtherUtil.formatName(quality)));
 				items.add(new Item("$QoS_Value", quality));
 				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_INTERFACEDETERMINATION, items, "RECEIVER",
 						true);
@@ -88,7 +90,7 @@ public class ReceiverDaoDocDomUtil {
 			// generate receiver domGroup file and write back to the dom, target
 			// type is the RR - receiver rule
 			List<Item> items = new ArrayList<>();
-			items.add(new Item("$Main_Name", partID + "-" + componentID));
+			items.add(new Item("$Main_Name", OtherUtil.formatName(partID + "-" + componentID)));
 			items.add(new Item("$PartyID_Value", partID));
 			items.add(new Item("$ComponentID_Value", componentID));
 
