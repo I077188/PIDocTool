@@ -24,6 +24,12 @@ public class UtilTest {
 		messageHeaderID.setInterfaceName("SI_Student_Out_Async");
 		messageHeaderID.setInterfaceNamespace("http://firstdemo");
 
+		/*
+		 * <SenderComponentID>CC_KELLY_SOAP_SENDER</SenderComponentID>
+		 * <InterfaceName>SI_Srudent_OUT</InterfaceName>
+		 * <InterfaceNamespace>http://kelly.fistModel</InterfaceNamespace>
+		 */
+
 		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 
 		if (integratedConfiguration == null) {

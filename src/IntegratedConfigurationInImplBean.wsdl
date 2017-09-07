@@ -808,7 +808,7 @@
 	</wsdl:binding>
 	<wsdl:service name="IntegratedConfigurationInService">
 		<wsdl:port xmlns:bprf="http://sap.com/xi/BASIS" binding="bprf:IntegratedConfigurationInBinding" name="IntegratedConfigurationInPort">
-			<soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://CNDT5008PO73.pvgl.sap.corp:50000/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"/>
+			<soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://10.131.117.136:50000/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
