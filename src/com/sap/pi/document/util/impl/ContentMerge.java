@@ -158,8 +158,8 @@ public class ContentMerge {
 				fips.close();
 			}
 		} catch (IOException e) {
-			CONSTAINTS.LOG.error(e.getMessage());
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 	}
 

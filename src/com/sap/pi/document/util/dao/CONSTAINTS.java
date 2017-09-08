@@ -163,6 +163,7 @@ public class CONSTAINTS {
 			password = prop.getProperty("password");
 		} catch (IOException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 	}
 }

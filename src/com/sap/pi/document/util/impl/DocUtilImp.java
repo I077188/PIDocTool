@@ -106,6 +106,7 @@ public class DocUtilImp implements DocUtil {
 				ContentMerge.mergeContent(sourceFiles, icoDoc, false);
 			} catch (InvalidFormatException | XmlException e) {
 				e.printStackTrace();
+				CONSTAINTS.LOG.error(e.getMessage());
 			}
 
 			// clean up tempt dom folder removeAllDomFile();
@@ -117,8 +118,10 @@ public class DocUtilImp implements DocUtil {
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		} finally {
 			close();
 		}
@@ -147,8 +150,8 @@ public class DocUtilImp implements DocUtil {
 				document.close();
 			}
 		} catch (IOException e) {
-			CONSTAINTS.LOG.error(e.getMessage());
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 	}
 

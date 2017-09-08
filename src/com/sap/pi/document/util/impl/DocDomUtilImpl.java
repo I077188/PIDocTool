@@ -153,8 +153,10 @@ public class DocDomUtilImpl implements DocDomUtil {
 			document.write(fops);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		} finally {
 			close();
 		}
@@ -173,6 +175,7 @@ public class DocDomUtilImpl implements DocDomUtil {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 	}
 }

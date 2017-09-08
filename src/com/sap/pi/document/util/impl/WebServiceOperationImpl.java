@@ -226,8 +226,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 				try {
 					communicationParty = getCommunicationParty(communicationPartyID);
 				} catch (MalformedURLException e) {
-					CONSTAINTS.LOG.error(e.getMessage());
 					e.printStackTrace();
+					CONSTAINTS.LOG.error(e.getMessage());
 				}
 			}
 
@@ -273,6 +273,7 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 					"/CommunicationPartyInService/CommunicationPartyInImplBean");
 		} catch (IOException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 
 		CommunicationPartyReadIn in = new CommunicationPartyReadIn();

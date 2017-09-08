@@ -90,7 +90,7 @@ public class ConditionDocDomUtil {
 				items.add(new Item("$RightExtractorContextObjectNamespace_Value", rightContextObjectNamespace));
 
 				// generate dom files of AtomicCondition
-				System.out.println(OtherUtil.formatName(operationName));
+				// System.out.println(OtherUtil.formatName(operationName));
 				items.add(new Item("$Main_Name", OtherUtil.formatName(operationName) + k));
 				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ATOCONDITION, items);
 

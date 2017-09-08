@@ -84,7 +84,7 @@ public class HttpOperation {
 
 				for (int i = 0; i < length; i++) {
 					headerItem[i] = headerAttribute.item(i).getTextContent();
-					System.out.println(headerItem[i]);
+					// System.out.println(headerItem[i]);
 				}
 				results.add(headerItem);
 
@@ -109,6 +109,7 @@ public class HttpOperation {
 
 		} catch (IOException | UnsupportedOperationException | SAXException | ParserConfigurationException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		} finally {
 		}
 		return results;

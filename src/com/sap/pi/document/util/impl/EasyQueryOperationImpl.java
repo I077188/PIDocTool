@@ -69,7 +69,8 @@ public class EasyQueryOperationImpl implements EasyQueryOperation {
 					result.get(i)[indexNameSpace]);
 			swcList.add(swc);
 		}
-		System.out.println("Software component number is:\t" + swcList.size());
+		// System.out.println("Software component number is:\t" +
+		// swcList.size());
 
 		return swcList;
 	}

@@ -28,8 +28,8 @@ public class IntegrationPort {
 					"/IntegratedConfigurationInService/IntegratedConfigurationInImplBean");
 			return port;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 
 		return null;
@@ -47,8 +47,8 @@ public class IntegrationPort {
 					"/CommunicationChannelInService/CommunicationChannelInImplBean");
 			return port;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 
 		return null;
@@ -66,8 +66,8 @@ public class IntegrationPort {
 					"/CommunicationPartyInService/CommunicationPartyInImplBean");
 			return port;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 
 		return null;
@@ -84,8 +84,8 @@ public class IntegrationPort {
 			setSecurity.set_security((BindingProvider) port, "/ReceiverRuleInService/ReceiverRuleInImplBean");
 			return port;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		}
 
 		return null;

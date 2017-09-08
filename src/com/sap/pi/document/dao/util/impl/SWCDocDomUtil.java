@@ -23,7 +23,7 @@ public class SWCDocDomUtil {
 
 		List<SoftwareComponent> swcs = getInfo.getSCWInfo();
 
-		System.out.println("Start generate dom file...");
+		// System.out.println("Start generate dom file...");
 		for (SoftwareComponent swc : swcs) {
 
 			List<Item> items = new ArrayList<>();
@@ -38,14 +38,14 @@ public class SWCDocDomUtil {
 			domUtil.generateDomFile(templateFile, items, swc.getVersion(), OtherUtil.formatName(swc.getNameSpace()));
 
 		}
-		System.out.println("Finished!");
+		// System.out.println("Finished!");
 	}
 
 	public void generateSWCDomGroupFile(File templateFile) {
-		System.out.println("Start generate dom group file...");
+		// System.out.println("Start generate dom group file...");
 		List<Item> items = new ArrayList<>();
 		domGroupUtil.generateDomGroupFile(templateFile, items, "", false);
-		System.out.println("Finished!");
+		// System.out.println("Finished!");
 	}
 
 }

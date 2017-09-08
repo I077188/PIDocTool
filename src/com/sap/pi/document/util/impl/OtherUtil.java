@@ -13,7 +13,7 @@ public class OtherUtil {
 	public static String formatName(String inputString) {
 		String result = "";
 
-		result = inputString.replaceAll("[^a-zA-Z0-9.]", "0");
+		result = inputString.replaceAll("[^a-zA-Z0-9_.$]", "0");
 
 		return result;
 	}

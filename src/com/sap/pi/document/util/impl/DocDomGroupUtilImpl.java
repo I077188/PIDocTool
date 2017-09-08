@@ -197,8 +197,8 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 				}
 
 			} catch (InvalidFormatException | XmlException e) {
-				CONSTAINTS.LOG.error(e.getMessage());
 				e.printStackTrace();
+				CONSTAINTS.LOG.error(e.getMessage());
 			}
 
 			// clean up tempt dom folder removeAllDomFile();
@@ -210,8 +210,10 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
+			CONSTAINTS.LOG.error(e.getMessage());
 		} finally {
 			close();
 		}
@@ -219,7 +221,7 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 
 	private void move2Dom(String type, File file) {
 		String fileName = file.getName();
-		System.out.println("before:\t" + fileName);
+		// System.out.println("before:\t" + fileName);
 
 		// original file type
 		// name like domGroup_<original type>_$Main_Name_<tags>.docx
@@ -231,7 +233,7 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 
 		fileName = "dom_" + type + tempt2;
 
-		System.out.println("after:\t" + fileName);
+		// System.out.println("after:\t" + fileName);
 
 		File targeFile = new File(CONSTAINTS.temptDomPath + fileName);
 
@@ -246,7 +248,7 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 	 * remove all the generated tempt dom files
 	 */
 	private void removeAllDomFile(String type) {
-		int i = 0;
+		// int i = 0;
 		// loop directory and delete tempt file
 		File dir = new File(CONSTAINTS.temptDomPath);
 		for (File file : dir.listFiles()) {
@@ -256,12 +258,12 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 				fileName = fileName.substring(fileName.indexOf("_") + 1);
 
 				if (type.equalsIgnoreCase(fileName.substring(0, fileName.indexOf("_")))) {
-					i++;
+					// i++;
 					file.delete();
 				}
 			}
 		}
-		System.out.println("delete files number is:\t" + i);
+		// System.out.println("delete files number is:\t" + i);
 	}
 
 	private void close() {
