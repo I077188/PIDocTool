@@ -40,8 +40,10 @@ public class InboundProcessingDocDomUtil {
 			// inboundProcessing.getAdapterSpecificTableAttribute();
 
 			// generate dom and domGroup file of communication channel
-			CommunicationChannelDocDomUtil ccIDocUtil = new CommunicationChannelDocDomUtil();
-			ccIDocUtil.generateCommunicationChannelDomFile(communicationChannel, "INBOUNDPROCESSING", true);
+			if (communicationChannel != null) {
+				CommunicationChannelDocDomUtil ccIDocUtil = new CommunicationChannelDocDomUtil();
+				ccIDocUtil.generateCommunicationChannelDomFile(communicationChannel, "INBOUNDPROCESSING", true);
+			}
 
 			// generate dom and domGroup file of adapterSepcAttrTable
 			if (adapterSpecAttr != null && adapterSpecAttr.size() > 0) {

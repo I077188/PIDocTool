@@ -142,21 +142,18 @@ public class DRRDocDomUtil {
 			List<Item> drrIMPItems = new ArrayList<>();
 			drrIMPItems.add(new Item("$Operation_Name", operation));
 			drrIMPItems.add(new Item("$Main_Name", "ompParameterSAP"));
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OMP, drrIMPItems, "DRR", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OMP, drrIMPItems, "OM", true);
 
 			// generate domGroup and dom file of operation mapping
 			List<Item> omDomItems = new ArrayList<>();
+			omDomItems.add(new Item("$Main_Name", "OMSAP"));
+			omDomItems.add(new Item("$Operation_Name", operation));
 			omDomItems.add(new Item("$Name_Value", mappingName));
 			omDomItems.add(new Item("$NameSpace_Value", mappingNameSpace));
 			omDomItems.add(new Item("$ComponentID_Value", mappingSWCV));
-
-			domUtil.generateDomFile(CONSTAINTS.DOM_OM, omDomItems, OtherUtil.formatName(mappingName));
-
-			List<Item> omDomGroupItems = new ArrayList<>();
-			drrIMPItems.add(new Item("$Operation_Name", operation));
-			drrIMPItems.add(new Item("$Main_Name", "omParameterSAP"));
 			// write back to receiver determination
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomGroupItems, "RECEIVERDESTINATION", true);
+
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomItems, "RECEIVERDESTINATION", true);
 		}
 	}
 

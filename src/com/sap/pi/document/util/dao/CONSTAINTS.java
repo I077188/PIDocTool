@@ -73,7 +73,9 @@ public class CONSTAINTS {
 
 	public static File DOM_RECEIVER = new File(templateDomPath + "RECEIVER.docx");
 	public static File DOMGROUP_RECEIVER = new File(templateDomGroupPath + "RECEIVER.docx");
+	public static File DOMGROUP_RECEIVERS = new File(templateDomGroupPath + "RECEIVERS.docx");
 	public static File DOMGROUP_RECEIVERRULE = new File(templateDomGroupPath + "RECEIVERRULE.docx");
+	public static File DOMGROUP_RECEIVERRULES = new File(templateDomGroupPath + "RECEIVERRULES.docx");
 	public static File DOMGROUP_RECEIVERINTERFACE = new File(templateDomGroupPath + "RECEIVERINTERFACE.docx");
 	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
 	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");

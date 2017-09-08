@@ -91,7 +91,8 @@ public class ConditionDocDomUtil {
 
 				// generate dom files of AtomicCondition
 				System.out.println(OtherUtil.formatName(operationName));
-				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ATOCONDITION, items, OtherUtil.formatName(operationName) + k);
+				items.add(new Item("$Main_Name", OtherUtil.formatName(operationName) + k));
+				docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ATOCONDITION, items);
 
 			}
 

@@ -20,9 +20,17 @@ public class UtilTest {
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
 		MessageHeaderID messageHeaderID = new MessageHeaderID();
-		messageHeaderID.setSenderComponentID("BS_SOAPUI_Anna");
-		messageHeaderID.setInterfaceName("SI_Student_Out_Async");
-		messageHeaderID.setInterfaceNamespace("http://firstdemo");
+		messageHeaderID.setSenderComponentID("BC_KELLY_RestSender");
+		messageHeaderID.setInterfaceName("SI_Rest_Sender");
+		messageHeaderID.setInterfaceNamespace("http://kelly.fourth.rest2restModel");
+		messageHeaderID.setReceiverPartyID("CIDX_Buyer_Party");
+		messageHeaderID.setReceiverComponentID("BC_ANGELA_JDBC_Receiver");
+		// messageHeaderID.setSenderComponentID("CC_KELLY_SOAP_SENDER");
+		// messageHeaderID.setInterfaceName("SI_Srudent_OUT");
+		// messageHeaderID.setInterfaceNamespace("http://kelly.fistModel");
+		// messageHeaderID.setSenderComponentID("BS_SOAPUI_Anna");
+		// messageHeaderID.setInterfaceName("SI_Student_Out_Async");
+		// messageHeaderID.setInterfaceNamespace("http://firstdemo");
 
 		/*
 		 * <SenderComponentID>CC_KELLY_SOAP_SENDER</SenderComponentID>
@@ -32,17 +40,22 @@ public class UtilTest {
 
 		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 
-		if (integratedConfiguration == null) {
-			System.out.println("null");
-		}
 
-		/*
-		 * // generate domGroup file of Receiver Determination
-		 * ReceiverDeterminationDocDomUtil receiverDeterminationDocDomUtil = new
-		 * ReceiverDeterminationDocDomUtil();
-		 * receiverDeterminationDocDomUtil.generateRDDomGroupFile(
-		 * integratedConfiguration);
-		 */
+		// if (integratedConfiguration == null) {
+		// System.out.println("null");
+		// } else {
+		// ICODocUtil icoDoc = new ICODocUtil();
+		// icoDoc.generateICODoc(integratedConfiguration, "test");
+		// }
+
+		// generate domGroup file of Receiver Determination
+		// ReceiverDeterminationDocDomUtil receiverDeterminationDocDomUtil = new
+		// ReceiverDeterminationDocDomUtil();
+		// receiverDeterminationDocDomUtil.generateRDDomGroupFile(integratedConfiguration);
+
+		// generate Receiver Rule Part
+		// ReceiverRuleDocDomUtil rrDocDomUtil = new ReceiverRuleDocDomUtil();
+		// rrDocDomUtil.generateRRDomFile(integratedConfiguration);
 
 		// generate external Receiver Rule Part
 		EXTReceiverRuleDocDomUtil errDocDomUtil = new EXTReceiverRuleDocDomUtil();

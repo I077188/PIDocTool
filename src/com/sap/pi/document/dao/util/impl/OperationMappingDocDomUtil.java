@@ -120,24 +120,17 @@ public class OperationMappingDocDomUtil {
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OMP, drrIMPItems, "OM", true);
 		}
 
-		if (mapping != null) {
+		if (!(mapping == null && mappingParameter == null)) {
 			String mappingName = OtherUtil.getValue(mapping.getName());
 			String mappingNameSpace = OtherUtil.getValue(mapping.getNamespace());
 			String mappingSWCV = OtherUtil.getValue(mapping.getSoftwareComponentVersionID());
 
-			// generate domGroup and dom file of operation mapping
-			List<Item> omDomItems = new ArrayList<>();
-			omDomItems.add(new Item("$Name_Value", mappingName));
-			omDomItems.add(new Item("$NameSpace_Value", mappingNameSpace));
-			omDomItems.add(new Item("$ComponentID_Value", mappingSWCV));
-
-			domUtil.generateDomFile(CONSTAINTS.DOM_OM, omDomItems, OtherUtil.formatName(mappingName + "change"));
-		}
-
-		if (!(mapping == null && mappingParameter == null)) {
 			List<Item> omDomGroupItems = new ArrayList<>();
 			omDomGroupItems.add(new Item("$Operation_Name", operation));
 			omDomGroupItems.add(new Item("$Main_Name", "omParameterSAP"));
+			omDomGroupItems.add(new Item("$Name_Value", mappingName));
+			omDomGroupItems.add(new Item("$NameSpace_Value", mappingNameSpace));
+			omDomGroupItems.add(new Item("$ComponentID_Value", mappingSWCV));
 			// write back to receiver determination
 			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomGroupItems, type, move2dom);
 		}

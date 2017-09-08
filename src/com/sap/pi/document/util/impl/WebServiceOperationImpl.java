@@ -61,6 +61,7 @@ import com.sap.xi.basis.ModuleProcess;
 import com.sap.xi.basis.ModuleTypeCode;
 import com.sap.xi.basis.ParameterGroup;
 import com.sap.xi.basis.ProcessStep;
+import com.sap.xi.basis.ReadContextCode;
 import com.sap.xi.basis.ReceiverDeterminationMapping;
 import com.sap.xi.basis.ReceiverInterfaces;
 import com.sap.xi.basis.Receivers;
@@ -94,10 +95,12 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 
 		IntegratedConfigurationReadIn readIn = new IntegratedConfigurationReadIn();
 		readIn.getIntegratedConfigurationID().add(messageHeaderID);
+		readIn.setReadContext(ReadContextCode.fromValue("Active"));
 
 		IntegratedConfigurationReadOut readOut = port.read(readIn);
 
 		List<IntegratedConfiguration> integratedConfigurations = readOut.getIntegratedConfiguration();
+		readIn.getIntegratedConfigurationID().clear();
 
 		if (integratedConfigurations.size() > 0) {
 			return integratedConfigurations.get(0);

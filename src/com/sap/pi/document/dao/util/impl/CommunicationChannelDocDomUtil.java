@@ -69,10 +69,9 @@ public class CommunicationChannelDocDomUtil {
 			StringBuilder content = new StringBuilder();
 			for (int i = 0; i < adapterSpecific.size(); i++) {
 				GenericProperty property = adapterSpecific.get(i);
-				content.append(
-						("<" + OtherUtil.getValue(property.getName())) + "::"
-								+ OtherUtil.getValue(property.getNamespace()) + "::"
-								+ OtherUtil.getValue(property.getValue()) + ">\n");
+				content.append(("<" + OtherUtil.getValue(property.getName())) + "::"
+						+ OtherUtil.getValue(property.getNamespace()) + "::" + OtherUtil.getValue(property.getValue())
+						+ ">\n");
 			}
 
 			String adapterSpecificContent = "N/A";
@@ -161,7 +160,6 @@ public class CommunicationChannelDocDomUtil {
 						"MODULE", true);
 			}
 
-
 			if (moduleConfigurations != null) {
 				for (int i = 0; i < moduleConfigurations.size(); i++) {
 					// generate dom
@@ -213,8 +211,7 @@ public class CommunicationChannelDocDomUtil {
 		ccItems.add(new Item("$PartyID_Value", partyID));
 		ccItems.add(new Item("$ComponentID_Value", componentID));
 
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONCHANNEL, ccItems,
-				type, move2dom);
+		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONCHANNEL, ccItems, type, move2dom);
 	}
 
 }

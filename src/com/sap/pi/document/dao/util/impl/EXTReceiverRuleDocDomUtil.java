@@ -137,7 +137,9 @@ public class EXTReceiverRuleDocDomUtil {
 				List<CommunicationPartnerExtractor> extractors = receiverRulePart.getReceiver();
 
 				ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
-				conditionDocDomUtil.generateConditionDomFile(condition, "EXTRECEIVERRULEPARTUNIT", true);
+				// conditionDocDomUtil.generateConditionDomFile(condition,
+				// "EXTRECEIVERRULEPARTUNIT", true);
+				conditionDocDomUtil.generateConditionStringDomFile(condition, "EXTRECEIVERRULEPARTUNIT", true);
 
 				// generate domGroup for the extractor
 				// target type is EXTRECEIVERRULEPARTYUNIT

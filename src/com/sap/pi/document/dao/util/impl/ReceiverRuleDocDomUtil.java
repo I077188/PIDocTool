@@ -38,24 +38,33 @@ public class ReceiverRuleDocDomUtil {
 				Condition condition = receiverRuleDao.getCondtionDao();
 				if (condition != null) {
 					ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
-					conditionDocDomUtil.generateConditionDomFile(condition, "RECEIVERRULE", true);
+					// conditionDocDomUtil.generateConditionDomFile(condition,
+					// "RECEIVERRULE", true);
+					conditionDocDomUtil.generateConditionStringDomFile(condition, "RECEIVERRULE_" + i, true);
 				}
 
 				// for receiverDao
 				List<ReceiverDao> receiverDao = receiverRuleDao.getReceiverDao();
 				if (receiverDao != null && receiverDao.size() > 0) {
 					ReceiverDaoDocDomUtil receiverDaoDocDomUtil = new ReceiverDaoDocDomUtil();
-					receiverDaoDocDomUtil.generateReceiverDomFile(receiverRuleDao.getReceiverDao(), "RECEIVERRULE",
+					receiverDaoDocDomUtil.generateReceiverDomFile(receiverRuleDao.getReceiverDao(), "RECEIVERRULE_" + i,
 							true);
 				}
 
+				// generate receiverrules domGroup file and write back type
+				// receiverrules
+				List<Item> items = new ArrayList<>();
+				items.add(new Item("$Main_Name", "RECEIVERRULESAP"));
+
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULE, items, "RECEIVERRULES_" + i,
+						true);
 			}
 
 			// generated domGroup file of Receiver Rule, write back required,
 			// target type is RD (Receiver Determination)
 			List<Item> items = new ArrayList<>();
-			items.add(new Item("$Main_Name", "RECEIVERRULE"));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULE, items, "RECEIVERDESTINATION",
+			items.add(new Item("$Main_Name", "RECEIVERRULESSAP"));
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULES, items, "RECEIVERDESTINATION",
 					true);
 		}
 
