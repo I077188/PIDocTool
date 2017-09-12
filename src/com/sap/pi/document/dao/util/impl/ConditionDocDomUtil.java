@@ -122,35 +122,48 @@ public class ConditionDocDomUtil {
 	private String getCondition(Condition condition) {
 		// TODO Auto-generated method stub
 		StringBuilder conditionString = new StringBuilder();
-		for (int i = 0; i < condition.getAtomicConditionBlock().size(); i++) {
-			AtomicConditionBlock atomicConditionBlock = condition.getAtomicConditionBlock().get(i);
-			if (i > 0) {
-				conditionString.append("OR(");
-			} else {
-				conditionString.append("(");
-			}
 
-			for (int j = 0; j < atomicConditionBlock.getAtomicCondition().size(); j++) {
-				AtomicCondition atomicCondition = atomicConditionBlock.getAtomicCondition().get(j);
-				String operator = atomicCondition.getOperator();
-				if (operator.equals("EQ")) {
-					operator = "=";
-				} else if (operator.equals("NE")) {
-					operator = "!=";
-				} else if (operator.equals("CP")) {
-					operator = "~";
-				}
-				String leftExtrator = atomicCondition.getLeftExtractor().getContextObjectName();
-				String rightExtrator = atomicCondition.getRightExtractor().getValue();
-				String oneCondition = leftExtrator + " " + operator + " " + rightExtrator;
-				conditionString.append(oneCondition);
-				if (j < (atomicConditionBlock.getAtomicCondition().size() - 1)) {
-					conditionString.append(" AND ");
+		List<AtomicConditionBlock> conditionBlocks = condition.getAtomicConditionBlock();
+
+		if (conditionBlocks != null) {
+			for (int i = 0; i < conditionBlocks.size(); i++) {
+				AtomicConditionBlock atomicConditionBlock = conditionBlocks.get(i);
+				if (i > 0) {
+					conditionString.append("OR(");
+				} else {
+					conditionString.append("(");
 				}
 
+				List<AtomicCondition> atoConditions = atomicConditionBlock.getAtomicCondition();
+
+				if (atoConditions != null) {
+					for (int j = 0; j < atoConditions.size(); j++) {
+						AtomicCondition atomicCondition = atoConditions.get(j);
+						String operator = atomicCondition.getOperator();
+						if (operator.equals("EQ")) {
+							operator = "=";
+						} else if (operator.equals("NE")) {
+							operator = "!=";
+						} else if (operator.equals("CP")) {
+							operator = "~";
+						}
+						String leftExtratorName = atomicCondition.getLeftExtractor().getValue();
+						String leftExtratorValue = atomicCondition.getLeftExtractor().getContextObjectName();
+
+						String leftExtractor = OtherUtil.getValue(leftExtratorName + leftExtratorValue);
+
+						String rightExtrator = atomicCondition.getRightExtractor().getValue();
+						String oneCondition = "(" + leftExtractor + " " + operator + " " + rightExtrator + ")";
+						conditionString.append(oneCondition);
+						if (j < (atoConditions.size() - 1)) {
+							conditionString.append(" AND ");
+						}
+					}
+					conditionString.append(")");
+				}
 			}
-			conditionString.append(")");
 		}
+
 		return conditionString.toString();
 	}
 

@@ -15,6 +15,9 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.xmlbeans.XmlException;
 
 import com.sap.pi.document.util.DocUtil;
@@ -43,7 +46,8 @@ public class DocUtilImp implements DocUtil {
 
 			// create tempt file for document domGroup, named like
 			// docDomGroup_<type>_<domName>_tempt.docx
-			String icoTemptDocPath = CONSTAINTS.resultPath + "ICO_" + OtherUtil.formatName(parameters.get("$ICO_Value"))
+			String icoTemptDocPath = CONSTAINTS.resultPath + "ICO_"
+					+ OtherUtil.formatName(parameters.get("$Main_Value"))
 					+ "_tempt.docx";
 
 			File icoTemptDoc = new File(icoTemptDocPath);
@@ -58,27 +62,102 @@ public class DocUtilImp implements DocUtil {
 
 			// modified the groupName
 			// replace content
-			String regularExpression = "\\$(.*)_VALUE";
+			String regularExpression = "\\$(.*)_Value";
 
+			// modified the groupName
+			// replace content
 			List<XWPFParagraph> paragraphs = document.getParagraphs();
-			for (XWPFParagraph paragraph : paragraphs) {
-				List<XWPFRun> runs = paragraph.getRuns();
 
-				if (runs != null) {
-					for (XWPFRun run : runs) {
-						String text = run.getText(0);
-						if (text != null && Pattern.matches(regularExpression, text)) {
-							text = parameters.get(text);
-							run.setText(text, 0);
-						}
+			for (XWPFParagraph paragraph : paragraphs) {
+				StringBuilder sb = new StringBuilder();
+				List<XWPFRun> xwpfRuns = paragraph.getRuns();
+
+				boolean replace = false;
+				for (XWPFRun run : xwpfRuns) {
+					String text = run.getText(0);
+					if (text.indexOf("$") >= 0) {
+						replace = true;
+					}
+
+					sb.append(text);
+					if (replace) {
+						run.setText("", 0);
+					}
+					// replace parameter had been replaced
+					if ((text.lastIndexOf(" ") == (text.length() - 1)) || text.substring(0, 1).equals(" ")) {
+						replace = false;
+					}
+
+					if (Pattern.matches(regularExpression, sb.toString())) {
+						run.setText(OtherUtil.getValue(parameters.get(sb.toString())));
+					} else {
+						continue;
 					}
 				}
 			}
+
+			// - get tables
+			List<XWPFTable> tables = document.getTables();
+			for (XWPFTable table : tables) {
+				for (XWPFTableRow row : table.getRows()) {
+					TT: for (XWPFTableCell cell : row.getTableCells()) {
+						// for each cell judge whether it is a parameter cell or
+						// a value cell
+						// if the first run of first paragraph not include "$",
+						// it parameter cell
+						List<XWPFParagraph> xwpfParagraphs = cell.getParagraphs();
+
+						if (xwpfParagraphs.size() > 0) {
+							XWPFParagraph xwpfParagraph = xwpfParagraphs.get(0);
+							List<XWPFRun> xwpfRuns = xwpfParagraph.getRuns();
+							if (xwpfRuns.size() > 0) {
+								XWPFRun run0 = xwpfRuns.get(0);
+								if (run0.getText(0).indexOf("$") < 0) {
+									continue TT;
+								} else {
+									// execute value replace
+									for (XWPFParagraph p : xwpfParagraphs) {
+
+										StringBuilder sb = new StringBuilder();
+
+										for (XWPFRun run : p.getRuns()) {
+											String text = run.getText(0);
+											sb.append(text);
+											run.setText("", 0);
+
+											if (Pattern.matches(regularExpression, sb.toString())) {
+
+												run.setText(OtherUtil.getValue(parameters.get(sb.toString())));
+											} else {
+												continue;
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+
 			document.write(fops);
 			close();
 
+			/*
+			 * List<XWPFParagraph> paragraphs = document.getParagraphs(); for
+			 * (XWPFParagraph paragraph : paragraphs) { List<XWPFRun> runs =
+			 * paragraph.getRuns();
+			 *
+			 * if (runs != null) { for (XWPFRun run : runs) { String text =
+			 * run.getText(0); if (text != null &&
+			 * Pattern.matches(regularExpression, text)) { text =
+			 * parameters.get(text); run.setText(text, 0); } } } }
+			 * document.write(fops); close();
+			 */
+
 			// copy all the information from dom and domgroup tempt files
-			String icoDocPath = CONSTAINTS.resultPath + "ICO_" + OtherUtil.formatName(parameters.get("$ICO_Value"))
+			String icoDocPath = CONSTAINTS.resultPath + "ICO_" + OtherUtil.formatName(parameters.get("$Main_Value"))
 					+ ".docx";
 
 			File icoDoc = new File(icoDocPath);

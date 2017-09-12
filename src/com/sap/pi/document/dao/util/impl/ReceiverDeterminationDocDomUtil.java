@@ -65,7 +65,8 @@ public class ReceiverDeterminationDocDomUtil {
 		rDestinationDomGroupItems.add(new Item("$NoReceiverBehavior_Value", noReceiverBehavior));
 		rDestinationDomGroupItems.add(new Item("$NoReceiverReceiver_Value", noReceiverReceiver));
 		rDestinationDomGroupItems.add(new Item("$Main_Name", "receiverDestination"));
-		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERDESTINATION, rDestinationDomGroupItems, "ICO", false);
+		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERDETERMINATION, rDestinationDomGroupItems, "ICO",
+				false);
 
 	}
 

@@ -1,6 +1,6 @@
 package com.sap.pi.document.test;
 
-import com.sap.pi.document.dao.util.impl.ReceiverRuleDocDomUtil;
+import com.sap.pi.document.dao.util.impl.ICODocUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -41,12 +41,12 @@ public class UtilTest {
 		integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 
 
-		// if (integratedConfiguration == null) {
-		// System.out.println("null");
-		// } else {
-		// ICODocUtil icoDoc = new ICODocUtil();
-		// icoDoc.generateICODoc(integratedConfiguration, "test");
-		// }
+		if (integratedConfiguration == null) {
+			System.out.println("null");
+		} else {
+			ICODocUtil icoDoc = new ICODocUtil();
+			icoDoc.generateICODoc(integratedConfiguration, "test", "test");
+		}
 
 		// generate domGroup file of Receiver Determination
 		// ReceiverDeterminationDocDomUtil receiverDeterminationDocDomUtil = new
@@ -54,11 +54,11 @@ public class UtilTest {
 		// receiverDeterminationDocDomUtil.generateRDDomGroupFile(integratedConfiguration);
 
 		// generate Receiver Rule Part
-		ReceiverRuleDocDomUtil rrDocDomUtil = new ReceiverRuleDocDomUtil();
-		rrDocDomUtil.generateRRDomFile(integratedConfiguration);
+		// ReceiverRuleDocDomUtil rrDocDomUtil = new ReceiverRuleDocDomUtil();
+		// rrDocDomUtil.generateRRDomFile(integratedConfiguration);
 
 		// generate external Receiver Rule Part
-		// EXTReceiverRuleDoc DomUtil errDocDomUtil = new
+		// EXTReceiverRuleDocDomUtil errDocDomUtil = new
 		// EXTReceiverRuleDocDomUtil();
 		// errDocDomUtil.generateEXTReceiverDomFile(integratedConfiguration);
 

@@ -69,9 +69,12 @@ public class CommunicationChannelDocDomUtil {
 			StringBuilder content = new StringBuilder();
 			for (int i = 0; i < adapterSpecific.size(); i++) {
 				GenericProperty property = adapterSpecific.get(i);
-				content.append(("<" + OtherUtil.getValue(property.getName())) + "::"
-						+ OtherUtil.getValue(property.getNamespace()) + "::" + OtherUtil.getValue(property.getValue())
-						+ ">\n");
+
+				if (!OtherUtil.getValue(property.getValue()).equals("N/A")) {
+					content.append(("<" + OtherUtil.getValue(property.getName())) + "::"
+							+ OtherUtil.getValue(property.getNamespace()) + "::"
+							+ OtherUtil.getValue(property.getValue()) + ">\n");
+				}
 			}
 
 			String adapterSpecificContent = "N/A";

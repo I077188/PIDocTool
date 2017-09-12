@@ -12,7 +12,7 @@ import com.sap.xi.basis.global.LONGDescription;
 
 public class ICODocUtil {
 
-	public void generateICODoc(IntegratedConfiguration integratedConfiguration, String ICOName) {
+	public void generateICODoc(IntegratedConfiguration integratedConfiguration, String ICODocName, String ICOName) {
 
 		if (integratedConfiguration != null) {
 
@@ -55,6 +55,7 @@ public class ICODocUtil {
 
 			// generate ICO file
 			List<Item> items = new ArrayList<>();
+			items.add(new Item("$Main_Value", ICODocName));
 			items.add(new Item("$ICO_Value", ICOName));
 			items.add(new Item("$DESCRIPTION_Value", OtherUtil.getValue(sb.toString())));
 			docUtilImp.generateDocFile(CONSTAINTS.DOCUMENT, items);

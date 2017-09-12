@@ -37,15 +37,17 @@ public class Entry {
 
 		int count = 0;
 		int count1 = 0;
-		for (int i = 0; i < number; i++) {
+		for (int i = 0; i < 1; i++) {
 			MessageHeaderID messageHeaderID = messageHeaderIDs.get(i);
 
 			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
 			// generated document
+			String nameDoc = generateICODocName(messageHeaderID);
+
 			String name = generateICOName(messageHeaderID);
 
 			if (integratedConfiguration != null) {
-				icoDoc.generateICODoc(integratedConfiguration, OtherUtil.formatName(name));
+				icoDoc.generateICODoc(integratedConfiguration, OtherUtil.formatName(nameDoc), name);
 				count++;
 				CONSTAINTS.LOG.info("------------------------------FINISHED!------------------------------");
 			} else {
@@ -63,6 +65,19 @@ public class Entry {
 	}
 
 	private static String generateICOName(MessageHeaderID messageHeaderID) {
+
+		String senderPartyID = OtherUtil.getValue(messageHeaderID.getSenderPartyID());
+		String senderComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());
+		String interfaceName = OtherUtil.getValue(messageHeaderID.getInterfaceName());
+		String receiverPartyID = OtherUtil.getValue(messageHeaderID.getReceiverPartyID());
+		String receiverComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());
+
+		return senderPartyID + "|" + senderComponentID + "|" + interfaceName + "|" + receiverPartyID + "|"
+				+ receiverComponentID;
+
+	}
+
+	private static String generateICODocName(MessageHeaderID messageHeaderID) {
 
 		String senderPartyID = OtherUtil.getValue(messageHeaderID.getSenderPartyID());
 		String senderComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());

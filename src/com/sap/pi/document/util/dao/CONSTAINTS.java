@@ -125,7 +125,7 @@ public class CONSTAINTS {
 	public static File DOM_ADAPTERSPECIFICATTRIBUTE = new File(templateDomPath + "ADAPTERSPECIFICATTRIBUTE.docx");
 
 	// Receiver Destination
-	public static File DOMGROUP_RECEIVERDESTINATION = new File(templateDomGroupPath + "RECEIVERDESTINATION.docx");
+	public static File DOMGROUP_RECEIVERDETERMINATION = new File(templateDomGroupPath + "RECEIVERDETERMINATION.docx");
 
 	// Staging Destination
 	public static File DOMGROUP_STAG = new File(templateDomGroupPath + "STAGING.docx");

@@ -102,25 +102,33 @@ public class OutboundProcessingDocDomUtil {
 			// generate dom and domGroup file of adapterSepcAttr
 			// target type is OUTBOUNDPROCESSING
 			if (adapterSpecAttr != null && adapterSpecAttr.size() > 0) {
+				StringBuilder sBuilder = new StringBuilder();
+
 				for (int j = 0; j < adapterSpecAttr.size(); j++) {
 					GenericProperty gProperty = adapterSpecAttr.get(j);
 					String name = OtherUtil.getValue(gProperty.getName());
 					String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
 					String value = OtherUtil.getValue(gProperty.getValue());
 
-					// generate dom file of adapter sepecific Attribute
-					List<Item> items = new ArrayList<>();
-					items.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
-					items.add(new Item("$Name_Value", name));
-					items.add(new Item("$NameSpace_Value", nameSpace));
-					items.add(new Item("$Value_Value", value));
-
-					docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE, items,
-							OtherUtil.formatName(name + nameSpace));
+					if (!(name.equals("N/A") && nameSpace.equals("N/A") && value.equals("N/A"))) {
+						sBuilder.append("<" + name + "|" + nameSpace + "|" + value + ">");
+					}
+					// // generate dom file of adapter sepecific Attribute
+					// List<Item> items = new ArrayList<>();
+					// items.add(new Item("$Main_Name",
+					// "ADAPTERSPECIFICATTRIBUTESAP"));
+					// items.add(new Item("$Name_Value", name));
+					// items.add(new Item("$NameSpace_Value", nameSpace));
+					// items.add(new Item("$Value_Value", value));
+					//
+					// docDomUtilImpl.generateDomFile(CONSTAINTS.DOM_ADAPTERSPECIFICATTRIBUTE,
+					// items,
+					// OtherUtil.formatName(name + nameSpace));
 				}
 
 				List<Item> adapterSpecAttrItems = new ArrayList<>();
 				adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
+				adapterSpecAttrItems.add(new Item("$Value_Value", sBuilder.toString()));
 				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE,
 						adapterSpecAttrItems, "OUTBOUNDPROCESSING", true);
 			}
