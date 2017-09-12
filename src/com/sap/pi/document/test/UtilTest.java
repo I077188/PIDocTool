@@ -1,6 +1,6 @@
 package com.sap.pi.document.test;
 
-import com.sap.pi.document.dao.util.impl.EXTReceiverRuleDocDomUtil;
+import com.sap.pi.document.dao.util.impl.ReceiverRuleDocDomUtil;
 import com.sap.pi.document.util.dao.CONSTAINTS;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.IntegratedConfiguration;
@@ -54,12 +54,13 @@ public class UtilTest {
 		// receiverDeterminationDocDomUtil.generateRDDomGroupFile(integratedConfiguration);
 
 		// generate Receiver Rule Part
-		// ReceiverRuleDocDomUtil rrDocDomUtil = new ReceiverRuleDocDomUtil();
-		// rrDocDomUtil.generateRRDomFile(integratedConfiguration);
+		ReceiverRuleDocDomUtil rrDocDomUtil = new ReceiverRuleDocDomUtil();
+		rrDocDomUtil.generateRRDomFile(integratedConfiguration);
 
 		// generate external Receiver Rule Part
-		EXTReceiverRuleDocDomUtil errDocDomUtil = new EXTReceiverRuleDocDomUtil();
-		errDocDomUtil.generateEXTReceiverDomFile(integratedConfiguration);
+		// EXTReceiverRuleDoc DomUtil errDocDomUtil = new
+		// EXTReceiverRuleDocDomUtil();
+		// errDocDomUtil.generateEXTReceiverDomFile(integratedConfiguration);
 
 		/*
 		 * List<MessageHeaderID> messageHeaderIDs =

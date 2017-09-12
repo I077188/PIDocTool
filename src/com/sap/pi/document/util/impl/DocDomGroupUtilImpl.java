@@ -174,19 +174,20 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			// loop source file for domGroup generation
 			List<File> sourceFiles = new ArrayList<>();
 
+			sourceFiles.add(domGroupTemptFile);
+
 			File dir = new File(CONSTAINTS.temptDomPath);
+
+			// sorting file to confirm the adding sequence
 			for (File file : dir.listFiles()) {
 				if (!file.isDirectory()) {
 					String fileName = file.getName();
-
 					if (fileName.indexOf("_" + type + "_") >= 0) {
 						sourceFiles.add(file);
 					}
 
 				}
 			}
-
-			sourceFiles.add(domGroupTemptFile);
 
 			// merge content to the domGroup file
 			try {

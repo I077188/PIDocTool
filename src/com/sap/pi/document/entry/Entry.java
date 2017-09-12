@@ -85,8 +85,8 @@ public class Entry {
 		CONSTAINTS.LOG.info("Receiver ComponentID:\t" + receiverComponentID);
 		CONSTAINTS.LOG.info("");
 
-		return senderPartyID + "$" + senderComponentID + "$" + interfaceName + "$" + interfaceNameSpace + "$"
-				+ receiverPartyID + "$" + receiverComponentID + "$" + System.currentTimeMillis();
+		return senderPartyID + "_" + senderComponentID + "_" + interfaceName + "_" + receiverPartyID + "_"
+				+ receiverComponentID + "_" + System.currentTimeMillis();
 
 	}
 
