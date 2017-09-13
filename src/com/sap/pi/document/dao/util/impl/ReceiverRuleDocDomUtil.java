@@ -64,7 +64,7 @@ public class ReceiverRuleDocDomUtil {
 			// target type is RD (Receiver Determination)
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "RECEIVERRULESSAP"));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULES, items, "RECEIVERDESTINATION",
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULES, items, "RECEIVERDETERMINATION",
 					true);
 		}
 

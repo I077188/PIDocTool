@@ -36,7 +36,7 @@ public class EXTReceiverRuleDocDomUtil {
 	DocDomGroupUtilImpl docDomGroupUtilImpl = new DocDomGroupUtilImpl();
 	DocDomUtilImpl docDomUtilImpl = new DocDomUtilImpl();
 
-	// generate EXTRECEIVER domGroup file write back type RECEIVERDESTINATION
+	// generate EXTRECEIVER domGroup file write back type RECEIVERDETERMINATION
 	public void generateEXTReceiverDomFile(IntegratedConfiguration integratedConfiguration) {
 
 		// receiver interface
@@ -63,7 +63,7 @@ public class EXTReceiverRuleDocDomUtil {
 		// Generate external receiver file
 		List<Item> items = new ArrayList<>();
 		items.add(new Item("$Main_Name", "EXTRECEIVERSAP"));
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVER, items, "RECEIVERDESTINATION", true);
+		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVER, items, "RECEIVERDETERMINATION", true);
 	}
 
 	// get interface determination and write back to type EXTRECEIVER

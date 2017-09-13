@@ -173,7 +173,11 @@ public class DocUtilImp implements DocUtil {
 			sourceFiles.add(icoTemptDoc);
 
 			File dir = new File(CONSTAINTS.temptDomGroupPath);
-			for (File file : dir.listFiles()) {
+
+			File[] originalFiles = dir.listFiles();
+			File[] files = OtherUtil.sortByNumber(originalFiles);
+
+			for (File file : files) {
 				if (!file.isDirectory()) {
 					sourceFiles.add(file);
 				}

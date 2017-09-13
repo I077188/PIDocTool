@@ -153,7 +153,7 @@ public class DRRDocDomUtil {
 			omDomItems.add(new Item("$ComponentID_Value", mappingSWCV));
 			// write back to receiver determination
 
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomItems, "RECEIVERDESTINATION", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_OM, omDomItems, "RECEIVERDETERMINATION", true);
 		}
 	}
 

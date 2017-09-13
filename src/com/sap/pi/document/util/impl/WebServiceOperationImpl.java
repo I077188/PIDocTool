@@ -412,8 +412,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		Identifiers identifiers = this.getIdentifiersInformation(originalChannel);
 		Module module = this.getModuleInformation(originalChannel.getModuleProcess());
 
-		return new CommunicationChannel(communicationChannelID.getPartyID(), communicationChannelID.getChannelID(),
-				communicationChannelID.getComponentID(), description, parameters, identifiers, module);
+		return new CommunicationChannel(communicationChannelID.getPartyID(), communicationChannelID.getComponentID(),
+				communicationChannelID.getChannelID(), description, parameters, identifiers, module);
 	}
 
 	@Override

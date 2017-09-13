@@ -71,7 +71,7 @@ public class InboundProcessingDocDomUtil {
 			// generate domGroup file of inboundProcessing file, needn't write
 			// back
 			List<Item> items = new ArrayList<>();
-			items.add(new Item("$Main_Name", "InboundProcessingSAP"));
+			items.add(new Item("$Main_Name", "InboundProcessingSAP_3"));
 			items.add(new Item("$VirusScan_Value", virusScan));
 			items.add(new Item("$SchemaValidation_Value", schemaValidation));
 

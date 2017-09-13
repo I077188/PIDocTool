@@ -70,6 +70,7 @@ public class CommunicationChannelDocDomUtil {
 			for (int i = 0; i < adapterSpecific.size(); i++) {
 				GenericProperty property = adapterSpecific.get(i);
 
+				// filter by excluding attribute whose value is "N/A"
 				if (!OtherUtil.getValue(property.getValue()).equals("N/A")) {
 					content.append(("<" + OtherUtil.getValue(property.getName())) + "::"
 							+ OtherUtil.getValue(property.getNamespace()) + "::"
@@ -211,8 +212,8 @@ public class CommunicationChannelDocDomUtil {
 		List<Item> ccItems = new ArrayList<>();
 		ccItems.add(new Item("$Main_Name", "COMMUNICATIONCHANNELSAP"));
 		ccItems.add(new Item("$ID_Value", id));
-		ccItems.add(new Item("$PartyID_Value", partyID));
 		ccItems.add(new Item("$ComponentID_Value", componentID));
+		ccItems.add(new Item("$PartyID_Value", partyID));
 
 		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONCHANNEL, ccItems, type, move2dom);
 	}

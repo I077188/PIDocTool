@@ -110,7 +110,9 @@ public class OutboundProcessingDocDomUtil {
 					String nameSpace = OtherUtil.getValue(gProperty.getNamespace());
 					String value = OtherUtil.getValue(gProperty.getValue());
 
-					if (!(name.equals("N/A") && nameSpace.equals("N/A") && value.equals("N/A"))) {
+					// OutboundProcessing - Adapter specific attribute: merge in
+					// one table, exclude one that value = N/A
+					if (!(name.equals("N/A") && nameSpace.equals("N/A")) && !value.equals("N/A")) {
 						sBuilder.append("<" + name + "|" + nameSpace + "|" + value + ">");
 					}
 					// // generate dom file of adapter sepecific Attribute
@@ -161,7 +163,7 @@ public class OutboundProcessingDocDomUtil {
 		// generate domGroup file of outboundProcessings file, needn't write
 		// back
 		List<Item> items = new ArrayList<>();
-		items.add(new Item("$Main_Name", "OUTBOUNDPROCESSINGSSAP"));
+		items.add(new Item("$Main_Name", "OUTBOUNDPROCESSINGSSAP_5"));
 
 		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OUTBOUNDPROCESSINGS, items, "ICO", false);
 	}
