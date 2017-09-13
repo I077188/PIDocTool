@@ -66,7 +66,7 @@ public class ReceiverInterfaceDocDomUtil {
 					String swc = OtherUtil.getValue(mapping.getSoftwareComponentVersionID());
 
 					if (!(name.equals("N/A") && nameSpace.equals("N/A") && swc.equals("N/A"))) {
-						opMapping = "Name::" + name + "::" + nameSpace + "::" + swc;
+						opMapping = name + "|" + nameSpace + "|" + swc;
 					}
 				}
 
@@ -83,7 +83,7 @@ public class ReceiverInterfaceDocDomUtil {
 						String swc = OtherUtil.getValue(interfaceID.getSoftwareComponentVersionID());
 
 						if (!(name.equals("N/A") && nameSpace.equals("N/A") && swc.equals("N/A"))) {
-							sb.append(tip + "::Name::" + name + "::" + nameSpace + "::" + swc + "\n");
+							sb.append(tip + "|" + name + "|" + nameSpace + "|" + swc + "\n");
 							tip++;
 						}
 

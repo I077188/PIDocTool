@@ -40,7 +40,7 @@ public class SenderDocDomGroupUtil {
 			String senderSWC = OtherUtil.getValue(sender.getSenderInterfaceSWC());
 
 			List<Item> items = new ArrayList<>();
-			items.add(new Item("$Main_Name", "SENDERSAP_0"));
+			items.add(new Item("$Main_Name", "SENDERSAP"));
 			items.add(new Item("$ComponentID_Value", componentID));
 			items.add(new Item("$SenderInterface_Value", senderInterface));
 			items.add(new Item("$SenderNameSpace_Value", senderNamespace));

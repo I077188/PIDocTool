@@ -59,7 +59,8 @@ public class CONSTAINTS {
 	public static File DOMGROUP_DRR = new File(templateDomGroupPath + "DRR.docx");
 
 	// sender
-	public static File DOMGROUP_SENDER = new File(templateDomGroupPath + "SENDER.docx");
+	// public static File DOMGROUP_SENDER = new File(templateDomGroupPath + "SENDER.docx");
+	public static File DOMGROUP_SENDER = new File(templateDomGroupPath + "0_SENDER.docx");
 
 	public static File DOM_ADDITIONALIDENTIFIER = new File(templateDomPath + "ADDITIONALIDENTIFIER.docx");
 	public static File DOMGROUP_ADDITIONALIDENTIFIER = new File(templateDomGroupPath + "ADDITIONALIDENTIFIER.docx");
@@ -80,10 +81,12 @@ public class CONSTAINTS {
 	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
 	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
 
-	public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "INBOUNDPROCESSING.docx");
+	// public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "INBOUNDPROCESSING.docx");
+	public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "3_INBOUNDPROCESSING.docx");
 
 	public static File DOMGROUP_OUTBOUNDPROCESSING = new File(templateDomGroupPath + "OUTBOUNDPROCESSING.docx");
-	public static File DOMGROUP_OUTBOUNDPROCESSINGS = new File(templateDomGroupPath + "OUTBOUNDPROCESSINGS.docx");
+	public static File DOMGROUP_OUTBOUNDPROCESSINGS = new File(templateDomGroupPath + "5_OUTBOUNDPROCESSINGS.docx");
+	// public static File DOMGROUP_OUTBOUNDPROCESSINGS = new File(templateDomGroupPath + "OUTBOUNDPROCESSINGS.docx");
 
 	public static File DOMGROUP_HEADERMAPPING = new File(templateDomGroupPath + "HEADERMAPPING.docx");
 
@@ -125,13 +128,16 @@ public class CONSTAINTS {
 	public static File DOM_ADAPTERSPECIFICATTRIBUTE = new File(templateDomPath + "ADAPTERSPECIFICATTRIBUTE.docx");
 
 	// Receiver Destination
-	public static File DOMGROUP_RECEIVERDETERMINATION = new File(templateDomGroupPath + "RECEIVERDETERMINATION.docx");
+	public static File DOMGROUP_RECEIVERDETERMINATION = new File(templateDomGroupPath + "4_RECEIVERDETERMINATION.docx");
+	// public static File DOMGROUP_RECEIVERDETERMINATION = new File(templateDomGroupPath + "RECEIVERDETERMINATION.docx");
 
 	// Staging Destination
-	public static File DOMGROUP_STAG = new File(templateDomGroupPath + "STAGING.docx");
+	// public static File DOMGROUP_STAG = new File(templateDomGroupPath + "STAGING.docx");
+	public static File DOMGROUP_STAG = new File(templateDomGroupPath + "2_STAGING.docx");
 
 	// Loging Destination
-	public static File DOMGROUP_LOG = new File(templateDomGroupPath + "LOGGING.docx");
+	// public static File DOMGROUP_LOG = new File(templateDomGroupPath + "LOGGING.docx");
+	public static File DOMGROUP_LOG = new File(templateDomGroupPath + "1_LOGGING.docx");
 	// tempt part
 	public static String temptPath = resourcePath + "temptFiles" + File.separator;
 

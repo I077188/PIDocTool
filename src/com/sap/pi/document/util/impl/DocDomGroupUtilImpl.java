@@ -41,7 +41,14 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 
 		// get domGroup type
 		String templateFileName = templateFile.getName();
-		String type = templateFileName.substring(0, templateFileName.indexOf("."));
+
+		String typeTempt = templateFileName.substring(0, templateFileName.indexOf("."));
+		String type = "";
+		if (typeTempt.indexOf("_") > 0) {
+			type = typeTempt.substring(typeTempt.indexOf("_") + 1);
+		} else {
+			type = typeTempt;
+		}
 
 		try {
 
@@ -55,10 +62,10 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			String mainName = OtherUtil.getValue(parameters.get("$Main_Name"));
 
 			if (mainName != null && mainName != "" && mainName.toLowerCase() != "null" && !mainName.equals("N/A")) {
-				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_" + mainName
+				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + typeTempt + "_" + mainName
 						+ "_tempt.docx";
 			} else {
-				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_tempt.docx";
+				domGroupTemptFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + typeTempt + "_tempt.docx";
 			}
 
 			File domGroupTemptFile = new File(domGroupTemptFilePath);
@@ -157,9 +164,9 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			// copy all the information from dom and domgroup tempt files
 			String domGroupFilePath = "";
 			if (mainName != null && mainName != "" && mainName != "null") {
-				domGroupFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + "_" + mainName + ".docx";
+				domGroupFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + typeTempt + "_" + mainName + ".docx";
 			} else {
-				domGroupFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + type + ".docx";
+				domGroupFilePath = CONSTAINTS.temptDomGroupPath + "docDomGroup_" + typeTempt + ".docx";
 			}
 
 			File domGroupFile = new File(domGroupFilePath);
@@ -182,7 +189,8 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			for (File file : dir.listFiles()) {
 				if (!file.isDirectory()) {
 					String fileName = file.getName();
-					if (fileName.indexOf("_" + type + "_") >= 0) {
+					if (OtherUtil.isOfType(type, fileName)) {
+						// if (fileName.indexOf("_" + type + "_") >= 0) {
 						sourceFiles.add(file);
 					}
 
@@ -256,9 +264,7 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 			if (!file.isDirectory()) {
 				String fileName = file.getName();
 
-				fileName = fileName.substring(fileName.indexOf("_") + 1);
-
-				if (type.equalsIgnoreCase(fileName.substring(0, fileName.indexOf("_")))) {
+				if (OtherUtil.isOfType(type, fileName)) {
 					// i++;
 					file.delete();
 				}

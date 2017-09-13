@@ -47,7 +47,7 @@ public class CommunicationChannelDocDomUtil {
 
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "LONGDESCRIPTIONSAP"));
-			items.add(new Item("$LONGDESCRIPTION_Value", language + "::" + descriptionContent));
+			items.add(new Item("$LONGDESCRIPTION_Value", language + "|" + descriptionContent));
 			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_LONGDESCRIPTION, items, "COMMUNICATIONCHANNEL",
 					true);
 		}
@@ -72,8 +72,8 @@ public class CommunicationChannelDocDomUtil {
 
 				// filter by excluding attribute whose value is "N/A"
 				if (!OtherUtil.getValue(property.getValue()).equals("N/A")) {
-					content.append(("<" + OtherUtil.getValue(property.getName())) + "::"
-							+ OtherUtil.getValue(property.getNamespace()) + "::"
+					content.append(("<" + OtherUtil.getValue(property.getName())) + "|"
+							+ OtherUtil.getValue(property.getNamespace()) + "|"
 							+ OtherUtil.getValue(property.getValue()) + ">\n");
 				}
 			}
@@ -174,7 +174,7 @@ public class CommunicationChannelDocDomUtil {
 					StringBuilder tempt = new StringBuilder();
 					for (int j = 0; j < parameters.size(); j++) {
 						ModuleConfigurationParameters paramter = parameters.get(j);
-						tempt.append(OtherUtil.getValue(paramter.getParameterName()) + "::\t"
+						tempt.append(OtherUtil.getValue(paramter.getParameterName()) + "|\t"
 								+ OtherUtil.getValue(paramter.getParameterValue()) + "\n");
 					}
 

@@ -163,7 +163,7 @@ public class OutboundProcessingDocDomUtil {
 		// generate domGroup file of outboundProcessings file, needn't write
 		// back
 		List<Item> items = new ArrayList<>();
-		items.add(new Item("$Main_Name", "OUTBOUNDPROCESSINGSSAP_5"));
+		items.add(new Item("$Main_Name", "OUTBOUNDPROCESSINGSSAP"));
 
 		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OUTBOUNDPROCESSINGS, items, "ICO", false);
 	}

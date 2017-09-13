@@ -50,7 +50,7 @@ public class ICODocUtil {
 				LONGDescription description = icoDescriptions.get(i);
 				String descriptionValue = OtherUtil.getValue(description.getValue());
 				String descriptionLanguage = OtherUtil.getValue(description.getLanguageCode());
-				sb.append(descriptionLanguage + "::" + descriptionValue);
+				sb.append(descriptionLanguage + "|" + descriptionValue);
 			}
 
 			// generate ICO file

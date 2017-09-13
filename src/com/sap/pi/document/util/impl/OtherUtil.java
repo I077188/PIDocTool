@@ -1,6 +1,10 @@
 package com.sap.pi.document.util.impl;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 public class OtherUtil {
 
@@ -20,37 +24,61 @@ public class OtherUtil {
 		return result;
 	}
 
+	// file name: dom/domGroup_index_TYPENAME_TAG.docx
 	public static File[] sortByNumber(File[] files) {
 
-		int size = files.length;
-		if (size > 0) {
-			File[] result = new File[size];
-
+		HashMap<Integer, File> fileMap = new HashMap<Integer, File>();
+		if (files != null && files.length > 0) {
 			for (int i = 0; i < files.length; i++) {
 				File file = files[i];
 
 				String fileName = file.getName();
-				int index = extractNumber(fileName);
+				// get number
+				fileName = fileName.substring(fileName.indexOf("_") + 1);
 
-				result[index] = file;
+				// check whether the template has pre-number
+				String regularExpression = "[0-9]+";
+
+				String tag = fileName.substring(0, fileName.indexOf("_"));
+
+				Integer key = Integer.valueOf(tag);
+
+				if (Pattern.matches(regularExpression, tag)) {
+					fileMap.put(key, file);
+				}
+			}
+
+			File[] result = new File[files.length];
+			SortedSet<Integer> keys = new TreeSet<Integer>();
+			keys.addAll(fileMap.keySet());
+
+			int i = 0;
+			for (Integer key : keys) {
+				File file = fileMap.get(key);
+				result[i] = file;
+				i++;
 			}
 
 			return result;
 		}
+
+
 		return null;
 	}
 
-	private static int extractNumber(String name) {
-		int i = 0;
-		try {
-			int s = name.lastIndexOf('_') + 1;
-			int e = name.lastIndexOf('.');
-			String number = name.substring(s, e);
-			i = Integer.parseInt(number);
-		} catch (Exception e) {
-			i = 0; // if filename does not match the format
-			// then default to 0
+	public static boolean isOfType(String type, String fileName) {
+		fileName = fileName.substring(fileName.indexOf("_") + 1);
+
+		// check whether the template has pre-number
+		String regularExpression = "[0-9]+";
+
+		String tag = fileName.substring(0, fileName.indexOf("_"));
+
+		if (Pattern.matches(regularExpression, tag)) {
+			fileName = fileName.substring(fileName.indexOf("_") + 1);
 		}
-		return i;
+
+		return type.equalsIgnoreCase(fileName.substring(0, fileName.indexOf("_")));
 	}
+
 }

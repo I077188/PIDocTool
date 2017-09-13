@@ -37,7 +37,7 @@ public class STGDocDomUtil {
 
 			// generate staging dom group, erite back to ICO
 			List<Item> stagDomGroupItems = new ArrayList<>();
-			stagDomGroupItems.add(new Item("$Main_Name", "STAGING_2"));
+			stagDomGroupItems.add(new Item("$Main_Name", "STAGING"));
 			stagDomGroupItems.add(new Item("$IsGlobalSetting_Value", useGlobal));
 			stagDomGroupItems.add(new Item("$SpecificConfiguration_Value", specificConfig));
 
