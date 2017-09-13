@@ -33,6 +33,12 @@ public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 	@Override
 	public void generateDomGroupFile(File templateFile, List<Item> items, String targetType, boolean move2Dom) {
 
+		int tag = OtherUtil.getIndexOfFile(templateFile.getName());
+
+		if (move2Dom && tag >= 0) {
+			targetType = tag + "_" + targetType;
+		}
+
 		// initial parameters
 		Map<String, String> parameters = new HashMap<String, String>();
 		for (Item item : items) {

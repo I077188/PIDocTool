@@ -42,18 +42,18 @@ public class CONSTAINTS {
 
 	// Dynamic Receiver Rule - operation mapping parameter channel
 	public static File DOM_OMP_INTEGER = new File(templateDomPath + "OMPINTEGER.docx");
-	public static File DOMGROUP_OMP_INTEGER = new File(templateDomGroupPath + "OMPINTEGER.docx");
+	public static File DOMGROUP_OMP_INTEGER = new File(templateDomGroupPath + "0_OMPINTEGER.docx");
 
 	public static File DOM_OMP_STRING = new File(templateDomPath + "OMPSTRING.docx");
-	public static File DOMGROUP_OMP_STRING = new File(templateDomGroupPath + "OMPSTRING.docx");
+	public static File DOMGROUP_OMP_STRING = new File(templateDomGroupPath + "1_OMPSTRING.docx");
 
 	public static File DOM_OMP_CHANEL = new File(templateDomPath + "OMPCHANEL.docx");
-	public static File DOMGROUP_OMP_CHANEL = new File(templateDomGroupPath + "OMPCHANEL.docx");
+	public static File DOMGROUP_OMP_CHANEL = new File(templateDomGroupPath + "2_OMPCHANEL.docx");
 
-	public static File DOMGROUP_OMP = new File(templateDomGroupPath + "OMP.docx");
+	public static File DOMGROUP_OMP = new File(templateDomGroupPath + "2_OMP.docx");
 	public static File DOM_OMP = new File(templateDomPath + "OMP.docx");
 
-	public static File DOMGROUP_OM = new File(templateDomGroupPath + "OM.docx");
+	public static File DOMGROUP_OM = new File(templateDomGroupPath + "1_OM.docx");
 	public static File DOM_OM = new File(templateDomPath + "OM.docx");
 
 	public static File DOMGROUP_DRR = new File(templateDomGroupPath + "DRR.docx");
@@ -68,18 +68,19 @@ public class CONSTAINTS {
 	public static File DOMGROUP_COMMUNICATIONPARTY = new File(templateDomGroupPath + "COMMUNICATIONPARTY.docx");
 
 	public static File DOM_ATOCONDITION = new File(templateDomPath + "ATOCONDITION.docx");
-	public static File DOMGROUP_ATOCONDITION = new File(templateDomGroupPath + "ATOCONDITION.docx");
+	public static File DOMGROUP_ATOCONDITION = new File(templateDomGroupPath + "0_ATOCONDITION.docx");
 
 	public static File DOMGROUP_ATOCONDITIONSTRING = new File(templateDomGroupPath + "ATOCONDITIONSTRING.docx");
 
 	public static File DOM_RECEIVER = new File(templateDomPath + "RECEIVER.docx");
 	public static File DOMGROUP_RECEIVER = new File(templateDomGroupPath + "RECEIVER.docx");
-	public static File DOMGROUP_RECEIVERS = new File(templateDomGroupPath + "RECEIVERS.docx");
-	public static File DOMGROUP_RECEIVERRULE = new File(templateDomGroupPath + "RECEIVERRULE.docx");
+	public static File DOMGROUP_RECEIVERS = new File(templateDomGroupPath + "1_RECEIVERS.docx");
+	public static File DOMGROUP_RECEIVERRULE = new File(templateDomGroupPath + "0_RECEIVERRULE.docx");
 	public static File DOMGROUP_RECEIVERRULES = new File(templateDomGroupPath + "RECEIVERRULES.docx");
 	public static File DOMGROUP_RECEIVERINTERFACE = new File(templateDomGroupPath + "RECEIVERINTERFACE.docx");
 	public static File DOMGROUP_RIR = new File(templateDomGroupPath + "RIR.docx");
-	public static File DOMGROUP_INTERFACEDETERMINATION = new File(templateDomGroupPath + "INTERFACEDETERMINATION.docx");
+	public static File DOMGROUP_INTERFACEDETERMINATION = new File(
+			templateDomGroupPath + "2_INTERFACEDETERMINATION.docx");
 
 	// public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "INBOUNDPROCESSING.docx");
 	public static File DOMGROUP_INBOUNDPROCESSING = new File(templateDomGroupPath + "3_INBOUNDPROCESSING.docx");
@@ -88,12 +89,15 @@ public class CONSTAINTS {
 	public static File DOMGROUP_OUTBOUNDPROCESSINGS = new File(templateDomGroupPath + "5_OUTBOUNDPROCESSINGS.docx");
 	// public static File DOMGROUP_OUTBOUNDPROCESSINGS = new File(templateDomGroupPath + "OUTBOUNDPROCESSINGS.docx");
 
-	public static File DOMGROUP_HEADERMAPPING = new File(templateDomGroupPath + "HEADERMAPPING.docx");
+	public static File DOMGROUP_HEADERMAPPING = new File(templateDomGroupPath + "1_HEADERMAPPING.docx");
 
 	// communication channel
-	public static File DOMGROUP_LONGDESCRIPTION = new File(templateDomGroupPath + "LONGDESCRIPTION.docx");
-	public static File DOMGROUP_PARAMTER = new File(templateDomGroupPath + "PARAMETER.docx");
-	public static File DOMGROUP_IDENTIFIER = new File(templateDomGroupPath + "IDENTIFIER.docx");
+	// public static File DOMGROUP_LONGDESCRIPTION = new File(templateDomGroupPath + "LONGDESCRIPTION.docx");
+	public static File DOMGROUP_LONGDESCRIPTION = new File(templateDomGroupPath + "0_LONGDESCRIPTION.docx");
+	public static File DOMGROUP_PARAMTER = new File(templateDomGroupPath + "1_PARAMETER.docx");
+	// public static File DOMGROUP_PARAMTER = new File(templateDomGroupPath + "PARAMETER.docx");
+	public static File DOMGROUP_IDENTIFIER = new File(templateDomGroupPath + "2_IDENTIFIER.docx");
+	// public static File DOMGROUP_IDENTIFIER = new File(templateDomGroupPath + "IDENTIFIER.docx");
 
 	// EXTReceiverRule
 	public static File DOM_EXTEXTRACTOR = new File(templateDomPath + "EXTEXTRACTOR.docx");
@@ -115,13 +119,16 @@ public class CONSTAINTS {
 
 	// Module
 	public static File DOM_MODULEPROCESSSEQUENCE = new File(templateDomPath + "MODULEPROCESSSEQUENCE.docx");
-	public static File DOMGROUP_MODULEPROCESSSEQUENCE = new File(templateDomGroupPath + "MODULEPROCESSSEQUENCE.docx");
+	// public static File DOMGROUP_MODULEPROCESSSEQUENCE = new File(templateDomGroupPath + "MODULEPROCESSSEQUENCE.docx");
+	public static File DOMGROUP_MODULEPROCESSSEQUENCE = new File(templateDomGroupPath + "5_MODULEPROCESSSEQUENCE.docx");
 
 	public static File DOM_MODULECONFIGURATION = new File(templateDomPath + "MODULECONFIGURATION.docx");
-	public static File DOMGROUP_MODULECONFIGURATION = new File(templateDomGroupPath + "MODULECONFIGURATION.docx");
+	// public static File DOMGROUP_MODULECONFIGURATION = new File(templateDomGroupPath + "MODULECONFIGURATION.docx");
+	public static File DOMGROUP_MODULECONFIGURATION = new File(templateDomGroupPath + "4_MODULECONFIGURATION.docx");
 
-	public static File DOMGROUP_MODULE = new File(templateDomGroupPath + "MODULE.docx");
-	public static File DOMGROUP_COMMUNICATIONCHANNEL = new File(templateDomGroupPath + "COMMUNICATIONCHANNEL.docx");
+	// public static File DOMGROUP_MODULE = new File(templateDomGroupPath + "MODULE.docx");
+	public static File DOMGROUP_MODULE = new File(templateDomGroupPath + "3_MODULE.docx");
+	public static File DOMGROUP_COMMUNICATIONCHANNEL = new File(templateDomGroupPath + "0_COMMUNICATIONCHANNEL.docx");
 
 	public static File DOMGROUP_ADAPTERSPECIFICATTRIBUTE = new File(
 			templateDomGroupPath + "ADAPTERSPECIFICATTRIBUTE.docx");

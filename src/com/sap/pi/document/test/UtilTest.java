@@ -20,15 +20,18 @@ public class UtilTest {
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
 		MessageHeaderID messageHeaderID = new MessageHeaderID();
-		// messageHeaderID.setSenderComponentID("BC_KELLY_RestSender");
-		// messageHeaderID.setInterfaceName("SI_Rest_Sender");
-		// messageHeaderID.setInterfaceNamespace("http://kelly.fourth.rest2restModel");
-		// messageHeaderID.setReceiverPartyID("CIDX_Buyer_Party");
-		// messageHeaderID.setReceiverComponentID("BC_ANGELA_JDBC_Receiver");
+		messageHeaderID.setSenderComponentID("BC_KELLY_RestSender");
+		messageHeaderID.setInterfaceName("SI_Rest_Sender");
+		messageHeaderID.setInterfaceNamespace("http://kelly.fourth.rest2restModel");
+		messageHeaderID.setReceiverPartyID("CIDX_Buyer_Party");
+		messageHeaderID.setReceiverComponentID("BC_ANGELA_JDBC_Receiver");
 
+		/*
 		messageHeaderID.setSenderComponentID("CC_KELLY_SOAP_SENDER");
 		messageHeaderID.setInterfaceName("SI_Srudent_OUT");
 		messageHeaderID.setInterfaceNamespace("http://kelly.fistModel");
+		*/
+
 		// messageHeaderID.setSenderComponentID("BS_SOAPUI_Anna");
 		// messageHeaderID.setInterfaceName("SI_Student_Out_Async");
 		// messageHeaderID.setInterfaceNamespace("http://firstdemo");
@@ -46,7 +49,7 @@ public class UtilTest {
 			System.out.println("null");
 		} else {
 			ICODocUtil icoDoc = new ICODocUtil();
-			icoDoc.generateICODoc(integratedConfiguration, "test1", "test1");
+			icoDoc.generateICODoc(integratedConfiguration, "testAfter", "testAfter");
 		}
 
 		// generate domGroup file of Receiver Determination

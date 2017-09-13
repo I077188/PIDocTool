@@ -29,26 +29,21 @@ public class OtherUtil {
 
 		HashMap<Integer, File> fileMap = new HashMap<Integer, File>();
 		if (files != null && files.length > 0) {
+			File[] result = new File[files.length];
 			for (int i = 0; i < files.length; i++) {
 				File file = files[i];
 
 				String fileName = file.getName();
 				// get number
-				fileName = fileName.substring(fileName.indexOf("_") + 1);
-
-				// check whether the template has pre-number
-				String regularExpression = "[0-9]+";
-
-				String tag = fileName.substring(0, fileName.indexOf("_"));
-
-				Integer key = Integer.valueOf(tag);
-
-				if (Pattern.matches(regularExpression, tag)) {
+				Integer key = getIndexOfFile(fileName);
+				if (key >= 0) {
 					fileMap.put(key, file);
+				} else {
+					// once met a name without sequence number then return
+					result = files;
+					return result;
 				}
 			}
-
-			File[] result = new File[files.length];
 			SortedSet<Integer> keys = new TreeSet<Integer>();
 			keys.addAll(fileMap.keySet());
 
@@ -58,12 +53,38 @@ public class OtherUtil {
 				result[i] = file;
 				i++;
 			}
-
 			return result;
 		}
-
-
 		return null;
+	}
+
+	public static Integer getIndexOfFile(String fileName) {
+		Integer key = -1;
+
+		if (fileName.indexOf("_") >= 0) {
+			String regularExpression = "[0-9]+";
+
+			String tag = fileName.substring(0, fileName.indexOf("_"));
+			// number_NAME.docx
+			if (Pattern.matches(regularExpression, tag)) {
+				key = Integer.valueOf(tag);
+			} else {
+				// dom/domGroup_number_Name.docx
+				if (fileName.indexOf("_") >= 0) {
+					fileName = fileName.substring(fileName.indexOf("_") + 1);
+					// check whether the template has pre-number
+					if (fileName.indexOf("_") >= 0) {
+						tag = fileName.substring(0, fileName.indexOf("_"));
+
+						if (Pattern.matches(regularExpression, tag)) {
+							key = Integer.valueOf(tag);
+						}
+					}
+				}
+			}
+
+		}
+		return key;
 	}
 
 	public static boolean isOfType(String type, String fileName) {
@@ -80,5 +101,6 @@ public class OtherUtil {
 
 		return type.equalsIgnoreCase(fileName.substring(0, fileName.indexOf("_")));
 	}
+
 
 }
