@@ -127,6 +127,8 @@ public class ReceiverRuleDocDomUtil {
 					List<ReceiverInterfaces> reInterfacesInRI = new ArrayList<>();
 					for (int l = 0; l < receiverInterfaces.size(); l++) {
 						ReceiverInterfaces receiverInterface = receiverInterfaces.get(l);
+						// including receiver/ receiverInterfaceRule/ QoS
+
 						CommunicationComponentID receiverInRI = receiverInterface.getReceiver();
 
 						if (receiverInRI != null) {

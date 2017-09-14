@@ -50,6 +50,7 @@ public class CONSTAINTS {
 	public static File DOM_OMP_CHANEL = new File(templateDomPath + "OMPCHANEL.docx");
 	public static File DOMGROUP_OMP_CHANEL = new File(templateDomGroupPath + "2_OMPCHANEL.docx");
 
+
 	public static File DOMGROUP_OMP = new File(templateDomGroupPath + "2_OMP.docx");
 	public static File DOM_OMP = new File(templateDomPath + "OMP.docx");
 
@@ -137,6 +138,13 @@ public class CONSTAINTS {
 	// Receiver Destination
 	public static File DOMGROUP_RECEIVERDETERMINATION = new File(templateDomGroupPath + "4_RECEIVERDETERMINATION.docx");
 	// public static File DOMGROUP_RECEIVERDETERMINATION = new File(templateDomGroupPath + "RECEIVERDETERMINATION.docx");
+	public static File DOMGROUP_RIROM = new File(templateDomGroupPath + "0_RIROM.docx");
+	public static File DOMGROUP_RIROMP = new File(templateDomGroupPath + "1_RIROMP.docx");
+	// public static File DOM_RIROM = new File(templateDomPath + "RIROM.docx");
+
+	public static File DOMGROUP_RIROMP_INTEGER = new File(templateDomGroupPath + "0_RIROMPINTEGER.docx");
+	public static File DOMGROUP_RIROMP_STRING = new File(templateDomGroupPath + "1_RIROMPSTRING.docx");
+	public static File DOMGROUP_RIROMP_CHANEL = new File(templateDomGroupPath + "2_RIROMPCHANEL.docx");
 
 	// Staging Destination
 	// public static File DOMGROUP_STAG = new File(templateDomGroupPath + "STAGING.docx");

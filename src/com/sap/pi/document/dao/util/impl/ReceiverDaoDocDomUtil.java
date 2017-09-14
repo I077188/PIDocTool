@@ -58,7 +58,7 @@ public class ReceiverDaoDocDomUtil {
 
 							// generate operation Mapping related domGroup file
 							// and write back to dom file of Receiver Interface
-							OperationMappingDocDomUtil opMappingDocDomUtil = new OperationMappingDocDomUtil();
+							RIROperationMappingDocDomUtil opMappingDocDomUtil = new RIROperationMappingDocDomUtil();
 							opMappingDocDomUtil.generateMappingDomFile(operation, mapping, mappingParameter, "RIR_" + k,
 									true);
 

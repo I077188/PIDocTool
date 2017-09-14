@@ -109,18 +109,20 @@ public class EXTReceiverRuleDocDomUtil {
 
 	// get all ReceiverRule domGroup file and write back to type EXTRECEIVER
 	private void generateDomFileReceiverRule(List<ReceiverRule> receiverRules) {
-		for (int i = 0; i < receiverRules.size(); i++) {
-			ReceiverRule receiverRule = receiverRules.get(i);
-			if (receiverRule != null) {
-				generateDomFileReceiverRule(receiverRule, i);
+
+		if (receiverRules.size() > 0 && receiverRules != null) {
+			for (int i = 0; i < receiverRules.size(); i++) {
+				ReceiverRule receiverRule = receiverRules.get(i);
+				if (receiverRule != null) {
+					generateDomFileReceiverRule(receiverRule, i);
+				}
 			}
+			// generate domGroup file of EXTRECEIVERRULE
+			// write back to type: EXTRECEIVERRULE
+			List<Item> items = new ArrayList<>();
+			items.add(new Item("$Main_Name", "EXTRECEIVERRULESAP"));
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVERRULE, items, "EXTRECEIVER", true);
 		}
-		// generate domGroup file of EXTRECEIVERRULE
-		// write back to type: EXTRECEIVERRULE
-		List<Item> items = new ArrayList<>();
-		items.add(new Item("$Main_Name", "EXTRECEIVERRULESAP"));
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVERRULE, items, "EXTRECEIVER",
-				true);
 	}
 
 	// generate on receiver rule dom file receiver rule

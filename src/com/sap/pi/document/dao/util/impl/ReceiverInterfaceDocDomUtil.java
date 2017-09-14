@@ -39,80 +39,85 @@ public class ReceiverInterfaceDocDomUtil {
 
 	public void generateExtReceiverInterfaceDomFile(List<ReceiverInterfaces> interfaces, String type,
 			boolean move2dom) {
+		if (interfaces != null && interfaces.size() > 0) {
 
-		for (int i = 0; i < interfaces.size(); i++) {
-			List<Item> items = new ArrayList<>();
+			for (int i = 0; i < interfaces.size(); i++) {
+				List<Item> items = new ArrayList<>();
 
-			ReceiverInterfaces receiverInterfaces = interfaces.get(i);
+				ReceiverInterfaces receiverInterfaces = interfaces.get(i);
 
-			QualityOfService qos = receiverInterfaces.getQualityOfService();
-			if (qos != null) {
-				String qosValue = qos.value();
-				items.add(new Item("$Qos_Value", qosValue));
-			}
-
-			List<IntegratedConfigurationReceiverInterfaceRule> rirs = receiverInterfaces.getReceiverInterfaceRule();
-
-			for (int j = 0; j < rirs.size(); j++) {
-				IntegratedConfigurationReceiverInterfaceRule rir = rirs.get(j);
-
-				String operation = OtherUtil.getValue(rir.getOperation());
-				DesignObjectID mapping = rir.getMapping();
-
-				String opMapping = "N/A";
-				if (mapping != null) {
-					String name = OtherUtil.getValue(mapping.getName());
-					String nameSpace = OtherUtil.getValue(mapping.getNamespace());
-					String swc = OtherUtil.getValue(mapping.getSoftwareComponentVersionID());
-
-					if (!(name.equals("N/A") && nameSpace.equals("N/A") && swc.equals("N/A"))) {
-						opMapping = name + "|" + nameSpace + "|" + swc;
-					}
+				QualityOfService qos = receiverInterfaces.getQualityOfService();
+				if (qos != null) {
+					String qosValue = qos.value();
+					items.add(new Item("$Qos_Value", qosValue));
 				}
 
-				String interfacesValue = "N/A";
-				List<DesignObjectID> interfacesIDS = rir.getInterface();
-				if (interfacesIDS != null) {
-					StringBuilder sb = new StringBuilder();
-					int tip = 0;
-					for (int k = 0; k < interfacesIDS.size(); k++) {
-						DesignObjectID interfaceID = interfacesIDS.get(k);
+				List<IntegratedConfigurationReceiverInterfaceRule> rirs = receiverInterfaces.getReceiverInterfaceRule();
+				if (rirs != null && rirs.size() > 0) {
 
-						String name = OtherUtil.getValue(interfaceID.getName());
-						String nameSpace = OtherUtil.getValue(interfaceID.getNamespace());
-						String swc = OtherUtil.getValue(interfaceID.getSoftwareComponentVersionID());
+					for (int j = 0; j < rirs.size(); j++) {
+						IntegratedConfigurationReceiverInterfaceRule rir = rirs.get(j);
 
-						if (!(name.equals("N/A") && nameSpace.equals("N/A") && swc.equals("N/A"))) {
-							sb.append(tip + "|" + name + "|" + nameSpace + "|" + swc + "\n");
-							tip++;
+						String operation = OtherUtil.getValue(rir.getOperation());
+						DesignObjectID mapping = rir.getMapping();
+
+						String opMapping = "N/A";
+						if (mapping != null) {
+							String name = OtherUtil.getValue(mapping.getName());
+							String nameSpace = OtherUtil.getValue(mapping.getNamespace());
+							String swc = OtherUtil.getValue(mapping.getSoftwareComponentVersionID());
+
+							if (!(name.equals("N/A") && nameSpace.equals("N/A") && swc.equals("N/A"))) {
+								opMapping = name + "|" + nameSpace + "|" + swc;
+							}
 						}
 
+						String interfacesValue = "N/A";
+						List<DesignObjectID> interfacesIDS = rir.getInterface();
+						if (interfacesIDS != null) {
+							StringBuilder sb = new StringBuilder();
+							int tip = 0;
+							for (int k = 0; k < interfacesIDS.size(); k++) {
+								DesignObjectID interfaceID = interfacesIDS.get(k);
+
+								String name = OtherUtil.getValue(interfaceID.getName());
+								String nameSpace = OtherUtil.getValue(interfaceID.getNamespace());
+								String swc = OtherUtil.getValue(interfaceID.getSoftwareComponentVersionID());
+
+								if (!(name.equals("N/A") && nameSpace.equals("N/A") && swc.equals("N/A"))) {
+									sb.append(tip + "|" + name + "|" + nameSpace + "|" + swc + "\n");
+									tip++;
+								}
+
+							}
+							interfacesValue = OtherUtil.getValue(sb.toString());
+						}
+
+						// create dom file of interface determination
+						List<Item> errItems = new ArrayList<>();
+						errItems.add(new Item("$Main_Name", "ERRRECEIVERINTERFACERULEPARTSAP"));
+						errItems.add(new Item("$Operation_Value", operation));
+						errItems.add(new Item("$OperationMapping_Value", opMapping));
+						errItems.add(new Item("$ReceiverInterface_Value", interfacesValue));
+
+						domUtil.generateDomFile(CONSTAINTS.DOM_EXTRECEIVERINTERFACERULE, errItems,
+								OtherUtil.formatName(operation) + j);
 					}
-					interfacesValue = OtherUtil.getValue(sb.toString());
 				}
 
-				// create dom file of interface determination
-				List<Item> errItems = new ArrayList<>();
-				errItems.add(new Item("$Main_Name", "ERRRECEIVERINTERFACERULEPARTSAP"));
-				errItems.add(new Item("$Operation_Value", operation));
-				errItems.add(new Item("$OperationMapping_Value", opMapping));
-				errItems.add(new Item("$ReceiverInterface_Value", interfacesValue));
+				// generate internal party of receiver rule interface with
+				// number
+				items.add(new Item("$Main_Name", "EXTINTERFACERULEUNITSAP"));
 
-				domUtil.generateDomFile(CONSTAINTS.DOM_EXTRECEIVERINTERFACERULE, errItems, OtherUtil.formatName(operation) + j);
+				domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVERINTERFACERULE, items,
+						"EXTRECEIVERINTERFACE_" + i, true);
 			}
+			// generate interface determination
+			List<Item> items = new ArrayList<>();
+			items.add(new Item("$Main_Name", "EXTRECEIVERINTERFACESAP"));
 
-			// generate internal party of receiver rule interface with number
-			items.add(new Item("$Main_Name", "EXTINTERFACERULEUNITSAP"));
-
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVERINTERFACERULE, items,
-					"EXTRECEIVERINTERFACE_" + i, true);
-
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVERINTERFACE, items, type, move2dom);
 		}
-		// generate interface determination
-		List<Item> items = new ArrayList<>();
-		items.add(new Item("$Main_Name", "EXTRECEIVERINTERFACESAP"));
-
-		domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTRECEIVERINTERFACE, items, type, move2dom);
 	}
 
 }
