@@ -36,11 +36,16 @@ public class ReceiverRuleDocDomUtil {
 				// for condition
 
 				Condition condition = receiverRuleDao.getCondtionDao();
-				if (condition != null) {
+				/*if (condition != null) {
 					ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
 					// conditionDocDomUtil.generateConditionDomFile(condition,
 					// "RECEIVERRULE", true);
 					conditionDocDomUtil.generateConditionStringDomFile(condition, "RECEIVERRULE_" + i, true);
+				}*/
+
+				String conditionValue = "N/A";
+				if (condition != null) {
+					conditionValue = OtherUtil.getValue(OtherUtil.getCondition(condition));
 				}
 
 				// for receiverDao
@@ -55,6 +60,7 @@ public class ReceiverRuleDocDomUtil {
 				// receiverrules
 				List<Item> items = new ArrayList<>();
 				items.add(new Item("$Main_Name", "RECEIVERRULESAP"));
+				items.add(new Item("$Condition_Value", conditionValue));
 
 				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULE, items, "RECEIVERRULES_" + i,
 						true);

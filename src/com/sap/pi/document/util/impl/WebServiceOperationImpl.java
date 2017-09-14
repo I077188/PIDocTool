@@ -373,6 +373,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 				schemaValidation = "No Validation";
 			}
 
+			DesignObjectID receiverInterface = outboundProcessing.getReceiverInterface();
+
 			HeaderMapping headerMapping = outboundProcessing.getHeaderMapping();
 
 			List<GenericProperty> adapterSpecificAttribute;
@@ -386,7 +388,8 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 			CommunicationChannel communicationChannel = getCommunicationChannelInformation(communicationChannelID);
 
 			OutboundProcessing outboundProcessingDao = new OutboundProcessing(communicationChannel, virusScan,
-					schemaValidation, adapterSpecificAttribute, adapterSpecificTableAttribute, headerMapping);
+					schemaValidation, adapterSpecificAttribute, adapterSpecificTableAttribute, headerMapping,
+					receiverInterface);
 			outboundProcessingDaos.add(outboundProcessingDao);
 		}
 

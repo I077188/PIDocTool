@@ -2,6 +2,7 @@ package com.sap.pi.document.dao;
 
 import java.util.List;
 
+import com.sap.xi.basis.DesignObjectID;
 import com.sap.xi.basis.GenericProperty;
 import com.sap.xi.basis.GenericPropertyTable;
 import com.sap.xi.basis.HeaderMapping;
@@ -39,10 +40,17 @@ public class OutboundProcessing {
 	List<GenericProperty> adapterSpecificAttribute;
 	List<GenericPropertyTable> adapterSpecificTableAttribute;
 	HeaderMapping headerMapping;
+	DesignObjectID receiverInterface;
+
+
+	public DesignObjectID getReceiverInterface() {
+		return receiverInterface;
+	}
 
 	public OutboundProcessing(CommunicationChannel senderCommunicationChannel, VirusScanCode virusScan,
 			String schemaValidation, List<GenericProperty> adapterSpecificAttribute,
-			List<GenericPropertyTable> adapterSpecificTableAttribute, HeaderMapping headerMapping) {
+			List<GenericPropertyTable> adapterSpecificTableAttribute, HeaderMapping headerMapping,
+			DesignObjectID receiverInterface) {
 
 		this.receiverCommunicationChannel = senderCommunicationChannel;
 		this.virusScan = virusScan;
@@ -50,6 +58,7 @@ public class OutboundProcessing {
 		this.adapterSpecificAttribute = adapterSpecificAttribute;
 		this.adapterSpecificTableAttribute = adapterSpecificTableAttribute;
 		this.headerMapping = headerMapping;
+		this.receiverInterface = receiverInterface;
 	}
 
 }

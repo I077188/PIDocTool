@@ -63,12 +63,20 @@ public class ReceiverDaoDocDomUtil {
 									true);
 
 							// generate condition part for receiver interface rule
+							// if (condition != null) {
+							// ConditionDocDomUtil conditionDocDomUtil = new
+							// ConditionDocDomUtil();
+							// //
+							// conditionDocDomUtil.generateConditionDomFile(condition,
+							// // "RIR", true);
+							// conditionDocDomUtil.generateConditionStringDomFile(condition,
+							// "RIR_" + k, true);
+							// }
+							String conditionValue = "N/A";
 							if (condition != null) {
-								ConditionDocDomUtil conditionDocDomUtil = new ConditionDocDomUtil();
-								// conditionDocDomUtil.generateConditionDomFile(condition,
-								// "RIR", true);
-								conditionDocDomUtil.generateConditionStringDomFile(condition, "RIR_" + k, true);
+								conditionValue = OtherUtil.getValue(OtherUtil.getCondition(condition));
 							}
+
 
 							// generate interfaces related domGroup file and
 							// write back to dom file of receiver interface
@@ -80,6 +88,7 @@ public class ReceiverDaoDocDomUtil {
 							List<Item> items = new ArrayList<>();
 							items.add(new Item("$Main_Name", OtherUtil.formatName(operation)));
 							items.add(new Item("$Operation_Name", operation));
+							items.add(new Item("$Condition_Value", conditionValue));
 
 							docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIR, items,
 									"INTERFACEDETERMINATION_" + k, true);

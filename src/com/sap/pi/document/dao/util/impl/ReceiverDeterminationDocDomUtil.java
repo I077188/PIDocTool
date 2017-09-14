@@ -23,12 +23,13 @@ public class ReceiverDeterminationDocDomUtil {
 		rrDocDomUtil.generateRRDomFile(integratedConfiguration);
 
 		// generate external Receiver Rule Part
-		EXTReceiverRuleDocDomUtil errDocDomUtil = new EXTReceiverRuleDocDomUtil();
-		errDocDomUtil.generateEXTReceiverDomFile(integratedConfiguration);
+		// EXTReceiverRuleDocDomUtil errDocDomUtil = new
+		// EXTReceiverRuleDocDomUtil();
+		// errDocDomUtil.generateEXTReceiverDomFile(integratedConfiguration);
 
 		// generate dynamic Receiver Rule Part
-		DRRDocDomUtil drrDocDomUtil = new DRRDocDomUtil();
-		drrDocDomUtil.generateDRRDomFile(integratedConfiguration);
+		// DRRDocDomUtil drrDocDomUtil = new DRRDocDomUtil();
+		// drrDocDomUtil.generateDRRDomFile(integratedConfiguration);
 
 		// dom group Receiver Destination, write back to type ICO
 		Receivers receiver = integratedConfiguration.getReceivers();

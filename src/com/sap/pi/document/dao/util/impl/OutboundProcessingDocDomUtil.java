@@ -12,6 +12,7 @@ import com.sap.pi.document.util.impl.DocDomUtilImpl;
 import com.sap.pi.document.util.impl.OtherUtil;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
 import com.sap.xi.basis.CommunicationPartnerExtractor;
+import com.sap.xi.basis.DesignObjectID;
 import com.sap.xi.basis.Extractor;
 import com.sap.xi.basis.GenericProperty;
 import com.sap.xi.basis.HeaderMapping;
@@ -147,6 +148,17 @@ public class OutboundProcessingDocDomUtil {
 				virsScan = OtherUtil.getValue(virsScanCode.value());
 			}
 
+			String interfaceName = "N/A";
+			String interfaceNameSpace = "N/A";
+			String interfaceSWC = "N/A";
+
+			DesignObjectID receiverInterface = outboundProcessing.getReceiverInterface();
+			if (receiverInterface != null) {
+				interfaceName = OtherUtil.getValue(receiverInterface.getName());
+				interfaceNameSpace = OtherUtil.getValue(receiverInterface.getNamespace());
+				interfaceSWC = OtherUtil.getValue(receiverInterface.getSoftwareComponentVersionID());
+			}
+
 			String schemaValidation = OtherUtil.getValue(outboundProcessing.getSchemaValidation());
 
 			List<Item> items = new ArrayList<>();
@@ -154,6 +166,10 @@ public class OutboundProcessingDocDomUtil {
 			items.add(new Item("$Title_Value", "OUTBOUNDPROCESSINGSAP" + i));
 			items.add(new Item("$VirsScan_Value", virsScan));
 			items.add(new Item("$SchemaValidation_Value", schemaValidation));
+
+			items.add(new Item("$InterfaceName_Value", interfaceName));
+			items.add(new Item("$InterfaceNameSpace_Value", interfaceNameSpace));
+			items.add(new Item("$InterfaceNameSWC_Value", interfaceSWC));
 
 			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OUTBOUNDPROCESSING, items,
 					"OUTBOUNDPROCESSINGS", true);
