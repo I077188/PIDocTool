@@ -114,7 +114,7 @@ public class ConditionDocDomUtil {
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "ATOCONDITIONSRINGBLOCK"));
 			items.add(new Item("$Condition_Value", conditionValue));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ATOCONDITIONSTRING, items, type, move2dom);
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTATOCONDITIONSTRING, items, type, move2dom);
 		}
 
 	}

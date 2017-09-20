@@ -90,8 +90,7 @@ public class ReceiverDaoDocDomUtil {
 							items.add(new Item("$Operation_Name", operation));
 							items.add(new Item("$Condition_Value", conditionValue));
 
-							docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIR, items,
-									"INTERFACEDETERMINATION_" + k, true);
+							docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RIR, items, "INTERFACEDETERMINATION_" + k, true);
 						}
 					}
 
@@ -102,8 +101,7 @@ public class ReceiverDaoDocDomUtil {
 					List<Item> items = new ArrayList<>();
 					items.add(new Item("$Main_Name", OtherUtil.formatName(quality)));
 					items.add(new Item("$QoS_Value", quality));
-					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_INTERFACEDETERMINATION, items,
-							"RECEIVER_" + j, true);
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_INTERFACEDETERMINATION, items, "RECEIVER_" + j, true);
 				}
 			}
 
@@ -115,7 +113,7 @@ public class ReceiverDaoDocDomUtil {
 			items.add(new Item("$PartyID_Value", partID));
 			items.add(new Item("$ComponentID_Value", componentID));
 
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVER, items, "RECEIVERS_" + i, true);
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RECEIVER, items, "RECEIVERS_" + i, true);
 		}
 
 		// generate receiver rule domGroup file and write back to dom, targe
@@ -123,7 +121,7 @@ public class ReceiverDaoDocDomUtil {
 		List<Item> items = new ArrayList<>();
 		items.add(new Item("$Main_Name", "receiverRuleSAP"));
 
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERS, items, type, move2dom);
+		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RECEIVERS, items, type, move2dom);
 
 	}
 

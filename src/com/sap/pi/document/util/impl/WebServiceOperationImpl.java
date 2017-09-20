@@ -519,15 +519,24 @@ public class WebServiceOperationImpl implements WebServiceOperation {
 		}
 		String moduleKey = parameterGroup.getParameterGroupID();
 		List<ModuleConfigurationParameters> parameters = new ArrayList<>();
-		ModuleConfigurationParameters parameter = new ModuleConfigurationParameters(
-				parameterGroup.getParameter().get(0).getName(), parameterGroup.getParameter().get(0).getValue());
-		parameters.add(parameter);
 
-		for (int i = 1; i < parameterGroup.getParameter().size(); i++) {
-			parameter.setParameterName(parameterGroup.getParameter().get(i).getName());
-			parameter.setParameterValue(parameterGroup.getParameter().get(i).getValue());
-			parameters.add(parameter);
+		List<RestrictedGenericProperty> parameterProp = parameterGroup.getParameter();
+
+		if (parameterProp != null) {
+			int size = parameterProp.size();
+			for (int i = 0; i < size; i++) {
+				RestrictedGenericProperty property = parameterProp.get(i);
+
+				String name = OtherUtil.getValue(property.getName());
+				String value = OtherUtil.getValue(property.getValue());
+
+				if (!(name.equals("N/A") && value.equals("N/A"))) {
+					parameters.add(new ModuleConfigurationParameters(name, value));
+				}
+
+			}
 		}
+
 		return new ModuleConfiguration(moduleKey, parameters);
 	}
 

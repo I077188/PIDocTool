@@ -33,7 +33,7 @@ public class ReceiverInterfaceDocDomUtil {
 			items.add(new Item("$NameSpace_Value", interfaceNameSpace));
 			items.add(new Item("$ComponentID_Value", interfaceSWC));
 
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERINTERFACE, items, type, move2dom);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RECEIVERINTERFACE, items, type, move2dom);
 		}
 	}
 

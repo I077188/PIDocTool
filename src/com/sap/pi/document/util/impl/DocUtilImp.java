@@ -162,6 +162,7 @@ public class DocUtilImp implements DocUtil {
 
 			File icoDoc = new File(icoDocPath);
 			if (icoDoc.exists()) {
+				CONSTAINTS.LOG.warn("An old file with the same name exist:\t" + icoDocPath);
 				icoDoc.delete();
 			}
 

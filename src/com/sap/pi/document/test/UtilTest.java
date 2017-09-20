@@ -20,17 +20,27 @@ public class UtilTest {
 		IntegratedConfiguration integratedConfiguration = new IntegratedConfiguration();
 
 		MessageHeaderID messageHeaderID = new MessageHeaderID();
-		messageHeaderID.setSenderComponentID("BC_KELLY_RestSender");
+
+		/*messageHeaderID.setSenderComponentID("BC_KELLY_RestSender");
 		messageHeaderID.setInterfaceName("SI_Rest_Sender");
 		messageHeaderID.setInterfaceNamespace("http://kelly.fourth.rest2restModel");
 		messageHeaderID.setReceiverPartyID("CIDX_Buyer_Party");
-		messageHeaderID.setReceiverComponentID("BC_ANGELA_JDBC_Receiver");
+		messageHeaderID.setReceiverComponentID("BC_ANGELA_JDBC_Receiver");*/
 
-		/*
-		messageHeaderID.setSenderComponentID("CC_KELLY_SOAP_SENDER");
-		messageHeaderID.setInterfaceName("SI_Srudent_OUT");
-		messageHeaderID.setInterfaceNamespace("http://kelly.fistModel");
-		*/
+		// messageHeaderID.setSenderPartyID("BUSINESS_PARTNER_B");
+		// messageHeaderID.setSenderComponentID("CIDXE41_40_Buyer");
+		// messageHeaderID.setInterfaceName("OrderCreate");
+		// messageHeaderID.setInterfaceNamespace("http://sap.com/xi/CIDX/40");
+		// messageHeaderID.setReceiverPartyID("OWN_B2B_PARTNER");
+		// messageHeaderID.setReceiverComponentID("*");
+
+		// messageHeaderID.setSenderComponentID("CC_KELLY_SOAP_SENDER");
+		// messageHeaderID.setInterfaceName("SI_Srudent_OUT");
+		// messageHeaderID.setInterfaceNamespace("http://kelly.fistModel");
+
+		messageHeaderID.setSenderComponentID("QR0CLNT100");
+		messageHeaderID.setInterfaceName("SOA_PendingMemoRTN");
+		messageHeaderID.setInterfaceNamespace("http://nsl.com/CRM/PendingMemoRTN");
 
 		// messageHeaderID.setSenderComponentID("BS_SOAPUI_Anna");
 		// messageHeaderID.setInterfaceName("SI_Student_Out_Async");
@@ -49,7 +59,8 @@ public class UtilTest {
 			System.out.println("null");
 		} else {
 			ICODocUtil icoDoc = new ICODocUtil();
-			icoDoc.generateICODoc(integratedConfiguration, "testAfter", "testAfter");
+			icoDoc.generateICODoc(integratedConfiguration, "CC_KELLY_SOAP_SENDER", "CC_KELLY_SOAP_SENDER");
+//			icoDoc.generateICODoc(integratedConfiguration, "BC_KELLY_RestSender", "BC_KELLY_RestSender");
 		}
 
 		// generate domGroup file of Receiver Determination

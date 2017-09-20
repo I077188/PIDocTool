@@ -58,14 +58,14 @@ public class InboundProcessingDocDomUtil {
 
 					// generate dom file of adapter sepecific Attribute
 					if (!(name.equals("N/A") && nameSpace.equals("N/A")) && !value.equals("N/A")) {
-						sb.append("<" + name + "|" + nameSpace + "|" + value + ">\n");
+						sb.append("<" + name + ":" + value + ">\n");
 					}
 				}
 
 				List<Item> adapterSpecAttrItems = new ArrayList<>();
 				adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
 				adapterSpecAttrItems.add(new Item("$Value_Value", sb.toString()));
-				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE,
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBADAPTERSPECIFICATTRIBUTE,
 						adapterSpecAttrItems, "INBOUNDPROCESSING", true);
 			}
 			// generate domGroup file of inboundProcessing file, needn't write

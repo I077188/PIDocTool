@@ -89,12 +89,12 @@ public class OutboundProcessingDocDomUtil {
 					items.add(new Item("$ReceiverParty_Value", receiverParty));
 					items.add(new Item("$ReceiverComponent_Value", receiverComponent));
 
-					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_HEADERMAPPING, items,
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBHEADERMAPPING, items,
 							"OUTBOUNDPROCESSING", true);
 				}
 			}
 
-			// List<GenericPropertyTable> adapterSpecAttrTab =
+			// List<GenericPropertyTable> adapterSpecAttrTable
 			// outboundProcessing.getAdapterSpecificTableAttribute();
 
 			// get Adapter specific Attribute
@@ -114,7 +114,7 @@ public class OutboundProcessingDocDomUtil {
 					// OutboundProcessing - Adapter specific attribute: merge in
 					// one table, exclude one that value = N/A
 					if (!(name.equals("N/A") && nameSpace.equals("N/A")) && !value.equals("N/A")) {
-						sBuilder.append("<" + name + "|" + nameSpace + "|" + value + ">");
+						sBuilder.append("<" + name + ":" + value + ">");
 					}
 					// // generate dom file of adapter sepecific Attribute
 					// List<Item> items = new ArrayList<>();
@@ -132,12 +132,9 @@ public class OutboundProcessingDocDomUtil {
 				List<Item> adapterSpecAttrItems = new ArrayList<>();
 				adapterSpecAttrItems.add(new Item("$Main_Name", "ADAPTERSPECIFICATTRIBUTESAP"));
 				adapterSpecAttrItems.add(new Item("$Value_Value", sBuilder.toString()));
-				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADAPTERSPECIFICATTRIBUTE,
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBADAPTERSPECIFICATTRIBUTE,
 						adapterSpecAttrItems, "OUTBOUNDPROCESSING", true);
 			}
-
-
-			// generate dom and domGroup file of adapterSepcAttrTable
 
 			// generate outbound processing domGroup and write back
 			// target type is OUTBOUNDPROCESSINGS
@@ -163,7 +160,7 @@ public class OutboundProcessingDocDomUtil {
 
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "OUTBOUNDPROCESSINGSAP" + i));
-			items.add(new Item("$Title_Value", "OUTBOUNDPROCESSINGSAP" + i));
+			items.add(new Item("$OutboundProcessingTitle_Value", "OUTBOUNDPROCESSING  " + (i + 1)));
 			items.add(new Item("$VirsScan_Value", virsScan));
 			items.add(new Item("$SchemaValidation_Value", schemaValidation));
 

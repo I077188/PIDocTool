@@ -1,5 +1,6 @@
 package com.sap.pi.document.entry;
 
+import java.io.File;
 import java.util.List;
 
 import com.sap.pi.document.dao.util.impl.ICODocUtil;
@@ -16,8 +17,26 @@ public class Entry {
 		Long start = System.currentTimeMillis();
 		CONSTAINTS.LOG.info("Program started ... ");
 
+		CONSTAINTS.LOG.info("\t\tInitial steps started...");
 		CONSTAINTS.initial();
 		CONSTAINTS.LOG.info("\t\tInitial steps are finished.");
+
+		// clean document folder
+		CONSTAINTS.LOG.info("\t\tClean document folder action started...");
+		String resultFolderpath = CONSTAINTS.resultPath;
+		File resultFolder = new File(resultFolderpath);
+
+		int removeFiles = 0;
+		if (resultFolder.isDirectory()) {
+			File[] files = resultFolder.listFiles();
+
+			for (int i = 0; i < files.length; i++) {
+				files[i].delete();
+				removeFiles++;
+			}
+		}
+		CONSTAINTS.LOG.info("\t\tClean document folder action is finished.");
+		CONSTAINTS.LOG.info("\t\tDelete files' number:\t" + removeFiles);
 
 		WebServiceOperationImpl webServiceOperation = new WebServiceOperationImpl();
 		// get all the ICO ID
@@ -37,7 +56,7 @@ public class Entry {
 
 		int count = 0;
 		int count1 = 0;
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 10; i++) {
 			MessageHeaderID messageHeaderID = messageHeaderIDs.get(i);
 
 			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
@@ -66,14 +85,20 @@ public class Entry {
 
 	private static String generateICOName(MessageHeaderID messageHeaderID) {
 
-		String senderPartyID = OtherUtil.getValue(messageHeaderID.getSenderPartyID());
+		// String senderPartyID =
+		// OtherUtil.getValue(messageHeaderID.getSenderPartyID());
 		String senderComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());
 		String interfaceName = OtherUtil.getValue(messageHeaderID.getInterfaceName());
-		String receiverPartyID = OtherUtil.getValue(messageHeaderID.getReceiverPartyID());
-		String receiverComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());
+		String interfaceNameSpace = OtherUtil.getValue(messageHeaderID.getInterfaceNamespace());
+		// String receiverPartyID =
+		// OtherUtil.getValue(messageHeaderID.getReceiverPartyID());
+		// String receiverComponentID =
+		// OtherUtil.getValue(messageHeaderID.getReceiverComponentID());
 
-		return senderPartyID + "|" + senderComponentID + "|" + interfaceName + "|" + receiverPartyID + "|"
-				+ receiverComponentID;
+		return
+		// senderPartyID + "|" +
+		senderComponentID + "|" + interfaceName + "|" + interfaceNameSpace;
+		// + "|" + receiverPartyID + "|" + receiverComponentID;
 
 	}
 
@@ -84,11 +109,11 @@ public class Entry {
 		String interfaceName = OtherUtil.getValue(messageHeaderID.getInterfaceName());
 		String interfaceNameSpaceTT = OtherUtil.getValue(messageHeaderID.getInterfaceNamespace());
 		String receiverPartyID = OtherUtil.getValue(messageHeaderID.getReceiverPartyID());
-		String receiverComponentID = OtherUtil.getValue(messageHeaderID.getSenderComponentID());
+		String receiverComponentID = OtherUtil.getValue(messageHeaderID.getReceiverComponentID());
 
 		String interfaceNameSpace = "N/A";
 		if (!interfaceNameSpaceTT.equals("N/A")) {
-			interfaceNameSpace = interfaceName.replaceAll("http://", "");
+			interfaceNameSpace = OtherUtil.formatName(interfaceName);
 		}
 
 		CONSTAINTS.LOG.info("-------------------start generate ICO document-----------------------");
@@ -100,8 +125,12 @@ public class Entry {
 		CONSTAINTS.LOG.info("Receiver ComponentID:\t" + receiverComponentID);
 		CONSTAINTS.LOG.info("");
 
-		return senderPartyID + "_" + senderComponentID + "_" + interfaceName + "_" + receiverPartyID + "_"
-				+ receiverComponentID + "_" + System.currentTimeMillis();
+		return
+//				senderPartyID + "_" +
+		senderComponentID + "_" + interfaceName + "_" + interfaceNameSpaceTT;
+//		+ "_" + receiverPartyID + "_"
+//				+ receiverComponentID;
+		// + "_" + System.currentTimeMillis();
 
 	}
 

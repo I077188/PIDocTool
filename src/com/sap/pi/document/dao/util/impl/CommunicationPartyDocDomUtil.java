@@ -44,10 +44,9 @@ public class CommunicationPartyDocDomUtil {
 		// write back type is communication party
 		List<Item> items = new ArrayList<>();
 		items.add(new Item("$Main_Name", "ADDITIONALIDENTIFIERSSAP"));
-		items.add(new Item("$CPID_Value", partyID));
+		// items.add(new Item("$CPID_Value", partyID));
 
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_ADDITIONALIDENTIFIER, items, "COMMUNICATIONPARTY",
-				true);
+		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_SENDER_ADDITIONALIDENTIFIER, items, "COMMUNICATIONPARTY", true);
 
 		// generate domGroup file of additional identifier
 		// write back type is communication party
@@ -58,7 +57,9 @@ public class CommunicationPartyDocDomUtil {
 			communicationPartyItems.add(new Item("$Main_Name", "COMMUNICATIONPARTYSAP"));
 			communicationPartyItems.add(new Item("$PartyID_Value", partyID));
 
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONPARTY, items, type, move2dom);
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_SENDER_COMMUNICATIONPARTY,
+					communicationPartyItems, type,
+					move2dom);
 		}
 
 		// external receiver rule communication party
@@ -66,7 +67,8 @@ public class CommunicationPartyDocDomUtil {
 			communicationPartyItems.add(new Item("$Main_Name", "EXTCOMMUNICATIONPARTYSAP"));
 			communicationPartyItems.add(new Item("$PartyID_Value", partyID));
 
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTCOMMUNICATIONPARTY, items, type, move2dom);
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_EXTCOMMUNICATIONPARTY, communicationPartyItems,
+					type, move2dom);
 
 		}
 	}

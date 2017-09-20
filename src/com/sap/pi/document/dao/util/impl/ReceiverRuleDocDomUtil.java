@@ -48,7 +48,7 @@ public class ReceiverRuleDocDomUtil {
 					conditionValue = OtherUtil.getValue(OtherUtil.getCondition(condition));
 				}
 
-				// for receiverDao
+				// generate dom/ domGroup file of receiverDao
 				List<ReceiverDao> receiverDao = receiverRuleDao.getReceiverDao();
 				if (receiverDao != null && receiverDao.size() > 0) {
 					ReceiverDaoDocDomUtil receiverDaoDocDomUtil = new ReceiverDaoDocDomUtil();
@@ -60,9 +60,10 @@ public class ReceiverRuleDocDomUtil {
 				// receiverrules
 				List<Item> items = new ArrayList<>();
 				items.add(new Item("$Main_Name", "RECEIVERRULESAP"));
+				items.add(new Item("$ReceiverRuleTitle_Value", "RECEIVERRULE  " + (i + 1)));
 				items.add(new Item("$Condition_Value", conditionValue));
 
-				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULE, items, "RECEIVERRULES_" + i,
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RECEIVERRULE, items, "RECEIVERRULES_" + i,
 						true);
 			}
 
@@ -70,7 +71,7 @@ public class ReceiverRuleDocDomUtil {
 			// target type is RD (Receiver Determination)
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "RECEIVERRULESSAP"));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RECEIVERRULES, items, "RECEIVERDETERMINATION",
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RECEIVERRULES, items, "RECEIVERDETERMINATION",
 					true);
 		}
 
@@ -96,7 +97,7 @@ public class ReceiverRuleDocDomUtil {
 			List<ReceiverDao> receiverDaos = getReceiverDao(receiverRule, receiverInterfaces);
 
 			// generate receiver rule daos
-			if (condition != null && receiverDaos.size() > 0) {
+			if (receiverDaos.size() > 0) {
 				receiverRuleDaos.add(new ReceiverRuleDao(condition, receiverDaos));
 			}
 		}
@@ -128,8 +129,7 @@ public class ReceiverRuleDocDomUtil {
 				// loop interface to add interface part for each receiver
 				if (receiverInterfaces.size() > 0) {
 					// generate receiverRuleDao
-					// get receiver Interface in receiver interface
-					// part
+					// get receiver Interface in receiver interface part
 					List<ReceiverInterfaces> reInterfacesInRI = new ArrayList<>();
 					for (int l = 0; l < receiverInterfaces.size(); l++) {
 						ReceiverInterfaces receiverInterface = receiverInterfaces.get(l);

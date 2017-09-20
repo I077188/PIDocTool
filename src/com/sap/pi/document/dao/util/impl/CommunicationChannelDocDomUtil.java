@@ -48,8 +48,16 @@ public class CommunicationChannelDocDomUtil {
 			List<Item> items = new ArrayList<>();
 			items.add(new Item("$Main_Name", "LONGDESCRIPTIONSAP"));
 			items.add(new Item("$LONGDESCRIPTION_Value", language + "|" + descriptionContent));
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_LONGDESCRIPTION, items, "COMMUNICATIONCHANNEL",
-					true);
+			if (type.equalsIgnoreCase("INBOUNDPROCESSING")) {
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBLONGDESCRIPTION, items,
+						"COMMUNICATIONCHANNEL", true);
+			}
+
+			if (type.equalsIgnoreCase("OUTBOUNDPROCESSING")) {
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBLONGDESCRIPTION, items,
+						"COMMUNICATIONCHANNEL", true);
+			}
+
 		}
 
 		// generate domGroup file of parameter
@@ -72,8 +80,7 @@ public class CommunicationChannelDocDomUtil {
 
 				// filter by excluding attribute whose value is "N/A"
 				if (!OtherUtil.getValue(property.getValue()).equals("N/A")) {
-					content.append(("<" + OtherUtil.getValue(property.getName())) + "|"
-							+ OtherUtil.getValue(property.getNamespace()) + "|"
+					content.append(("<" + OtherUtil.getValue(property.getName())) + ":"
 							+ OtherUtil.getValue(property.getValue()) + ">\n");
 				}
 			}
@@ -94,7 +101,15 @@ public class CommunicationChannelDocDomUtil {
 			items.add(new Item("$MessageProtocal_Value", messageProtocal));
 			items.add(new Item("$AdapterSpecificContent_Value", adapterSpecificContent));
 
-			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_PARAMTER, items, "COMMUNICATIONCHANNEL", true);
+			if (type.equalsIgnoreCase("INBOUNDPROCESSING")) {
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBPARAMTER, items, "COMMUNICATIONCHANNEL",
+						true);
+			}
+
+			if (type.equalsIgnoreCase("OUTBOUNDPROCESSING")) {
+				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBPARAMTER, items, "COMMUNICATIONCHANNEL",
+						true);
+			}
 		}
 
 		// generate dom and domGroup file of identifier
@@ -114,8 +129,17 @@ public class CommunicationChannelDocDomUtil {
 
 			if (!(senderAgency.equals("N/A") && senderSchema.equals("N/A") && receiverAgency.equals("N/A")
 					&& receiverSchema.equals("N/A"))) {
-				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IDENTIFIER, identifierItems,
-						"COMMUNICATIONCHANNEL", true);
+
+				if (type.equalsIgnoreCase("INBOUNDPROCESSING")) {
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBIDENTIFIER, identifierItems,
+							"COMMUNICATIONCHANNEL", true);
+				}
+
+				if (type.equalsIgnoreCase("OUTBOUNDPROCESSING")) {
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBIDENTIFIER, identifierItems,
+							"COMMUNICATIONCHANNEL", true);
+				}
+
 			}
 		}
 
@@ -160,8 +184,16 @@ public class CommunicationChannelDocDomUtil {
 				List<Item> processSeqItems = new ArrayList<>();
 				processSeqItems.add(new Item("$Main_Name", "MODULEPROCESSSEQUENCEPARTSAP"));
 
-				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_MODULEPROCESSSEQUENCE, processSeqItems,
-						"MODULE", true);
+				if (type.equalsIgnoreCase("INBOUNDPROCESSING")) {
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBMODULEPROCESSSEQUENCE,
+							processSeqItems, "MODULE", true);
+				}
+
+				if (type.equalsIgnoreCase("OUTBOUNDPROCESSING")) {
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBMODULEPROCESSSEQUENCE,
+							processSeqItems, "MODULE", true);
+				}
+
 			}
 
 			if (moduleConfigurations != null) {
@@ -174,8 +206,8 @@ public class CommunicationChannelDocDomUtil {
 					StringBuilder tempt = new StringBuilder();
 					for (int j = 0; j < parameters.size(); j++) {
 						ModuleConfigurationParameters paramter = parameters.get(j);
-						tempt.append(OtherUtil.getValue(paramter.getParameterName()) + "|\t"
-								+ OtherUtil.getValue(paramter.getParameterValue()) + "\n");
+						tempt.append("<" + OtherUtil.getValue(paramter.getParameterName()) + ":"
+								+ OtherUtil.getValue(paramter.getParameterValue()) + ">");
 					}
 
 					String parametersValue = "N/A";
@@ -195,8 +227,16 @@ public class CommunicationChannelDocDomUtil {
 				List<Item> moduleConfigItems = new ArrayList<>();
 				moduleConfigItems.add(new Item("$Main_Name", "MODULECONFIGURATIONPART"));
 
-				docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_MODULECONFIGURATION, moduleConfigItems,
-						"MODULE", true);
+				if (type.equalsIgnoreCase("INBOUNDPROCESSING")) {
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBMODULECONFIGURATION,
+							moduleConfigItems, "MODULE", true);
+				}
+
+				if (type.equalsIgnoreCase("OUTBOUNDPROCESSING")) {
+					docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBMODULECONFIGURATION,
+							moduleConfigItems, "MODULE", true);
+				}
+
 			}
 		}
 
@@ -205,7 +245,14 @@ public class CommunicationChannelDocDomUtil {
 		List<Item> moduleItems = new ArrayList<>();
 		moduleItems.add(new Item("$Main_Name", "MODULESAP"));
 
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_MODULE, moduleItems, "COMMUNICATIONCHANNEL", true);
+		if (type.equalsIgnoreCase("INBOUNDPROCESSING")) {
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBMODULE, moduleItems, "COMMUNICATIONCHANNEL",
+					true);
+		}
+		if (type.equalsIgnoreCase("OUTBOUNDPROCESSING")) {
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBMODULE, moduleItems, "COMMUNICATIONCHANNEL",
+					true);
+		}
 
 		// generate domGroup of Module
 		// write back to communication channel
@@ -214,8 +261,14 @@ public class CommunicationChannelDocDomUtil {
 		ccItems.add(new Item("$ID_Value", id));
 		ccItems.add(new Item("$ComponentID_Value", componentID));
 		ccItems.add(new Item("$PartyID_Value", partyID));
-
-		docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_COMMUNICATIONCHANNEL, ccItems, type, move2dom);
+		if (type.equalsIgnoreCase("INBOUNDPROCESSING")) {
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_IBCOMMUNICATIONCHANNEL, ccItems, type,
+					move2dom);
+		}
+		if (type.equalsIgnoreCase("OUTBOUNDPROCESSING")) {
+			docDomGroupUtilImpl.generateDomGroupFile(CONSTAINTS.DOMGROUP_OBCOMMUNICATIONCHANNEL, ccItems, type,
+					move2dom);
+		}
 	}
 
 }

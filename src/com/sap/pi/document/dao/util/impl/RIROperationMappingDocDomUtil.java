@@ -52,7 +52,7 @@ public class RIROperationMappingDocDomUtil {
 			List<Item> integerDomGroupItems = new ArrayList<>();
 			integerDomGroupItems.add(new Item("$Operation_Name", operation));
 			integerDomGroupItems.add(new Item("$Main_Name", "integersParameterSAP"));
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIROMP_INTEGER, integerDomGroupItems, "OMP", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RIROMP_INTEGER, integerDomGroupItems, "OMP", true);
 
 			// generate String related domGroup and dom file, move required
 			for (int j = 0; j < strings.size(); j++) {
@@ -75,7 +75,7 @@ public class RIROperationMappingDocDomUtil {
 			stringDomGroupItems.add(new Item("$Operation_Name", operation));
 			stringDomGroupItems.add(new Item("$Main_Name", "stringsParameterSAP"));
 
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIROMP_STRING, stringDomGroupItems, "OMP", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RIROMP_STRING, stringDomGroupItems, "OMP", true);
 
 			// generate Chanel related domGroup and dom file, move required
 			for (int j = 0; j < channels.size(); j++) {
@@ -111,13 +111,13 @@ public class RIROperationMappingDocDomUtil {
 			List<Item> channelDomGroupItems = new ArrayList<>();
 			channelDomGroupItems.add(new Item("$Operation_Name", operation));
 			channelDomGroupItems.add(new Item("$Main_Name", "channelsParameterSAP"));
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIROMP_CHANEL, channelDomGroupItems, "OMP", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RIROMP_CHANEL, channelDomGroupItems, "OMP", true);
 
 			// generate domGroup and dom file of operation Mapping parameter
 			List<Item> drrIMPItems = new ArrayList<>();
 			drrIMPItems.add(new Item("$Operation_Name", operation));
 			drrIMPItems.add(new Item("$Main_Name", "ompParameterSAP"));
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIROMP, drrIMPItems, "OM", true);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RIROMP, drrIMPItems, "OM", true);
 		}
 
 		if (!(mapping == null)) {
@@ -132,7 +132,7 @@ public class RIROperationMappingDocDomUtil {
 			omDomGroupItems.add(new Item("$NameSpace_Value", mappingNameSpace));
 			omDomGroupItems.add(new Item("$ComponentID_Value", mappingSWCV));
 			// write back to receiver determination
-			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RIROM, omDomGroupItems, type, move2dom);
+			domGroupUtil.generateDomGroupFile(CONSTAINTS.DOMGROUP_RR_RIROM, omDomGroupItems, type, move2dom);
 		}
 	}
 }
