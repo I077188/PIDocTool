@@ -56,7 +56,7 @@ public class Entry {
 
 		int count = 0;
 		int count1 = 0;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < number; i++) {
 			MessageHeaderID messageHeaderID = messageHeaderIDs.get(i);
 
 			integratedConfiguration = webServiceOperation.getIntegrationConfiguration(messageHeaderID);
