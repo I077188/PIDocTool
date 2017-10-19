@@ -1,8 +1,8 @@
 package com.sap.pi.document.test;
 
-import com.sap.pi.document.dao.util.impl.ICODocUtil;
-import com.sap.pi.document.util.dao.CONSTAINTS;
+import com.sap.pi.document.model.util.impl.ICODocUtil;
 import com.sap.pi.document.util.impl.WebServiceOperationImpl;
+import com.sap.pi.document.util.model.CONSTAINTS;
 import com.sap.xi.basis.IntegratedConfiguration;
 import com.sap.xi.basis.MessageHeaderID;
 

@@ -21,8 +21,8 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.xmlbeans.XmlException;
 
 import com.sap.pi.document.util.DocDomGroupUtil;
-import com.sap.pi.document.util.dao.CONSTAINTS;
-import com.sap.pi.document.util.dao.Item;
+import com.sap.pi.document.util.model.CONSTAINTS;
+import com.sap.pi.document.util.model.Item;
 
 public class DocDomGroupUtilImpl implements DocDomGroupUtil {
 

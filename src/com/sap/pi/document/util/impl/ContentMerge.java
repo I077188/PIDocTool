@@ -14,7 +14,7 @@ import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
 
-import com.sap.pi.document.util.dao.CONSTAINTS;
+import com.sap.pi.document.util.model.CONSTAINTS;
 
 /**
  * Only support text/ table

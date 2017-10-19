@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.sap.pi.document.util.dao.CONSTAINTS;
+import com.sap.pi.document.util.model.CONSTAINTS;
 
 public class HttpOperation {
 	public List<String[]> sendPostRequestWithParameters(List<NameValuePair> vPairs) {

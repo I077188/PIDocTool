@@ -6,10 +6,10 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.sap.pi.document.dao.SoftwareComponent;
+import com.sap.pi.document.model.SoftwareComponent;
 import com.sap.pi.document.util.EasyQueryOperation;
-import com.sap.pi.document.util.dao.CONSTAINTS;
-import com.sap.pi.document.util.dao.Item;
+import com.sap.pi.document.util.model.CONSTAINTS;
+import com.sap.pi.document.util.model.Item;
 
 public class EasyQueryOperationImpl implements EasyQueryOperation {
 

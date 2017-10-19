@@ -18,8 +18,8 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 import com.sap.pi.document.util.DocDomUtil;
-import com.sap.pi.document.util.dao.CONSTAINTS;
-import com.sap.pi.document.util.dao.Item;
+import com.sap.pi.document.util.model.CONSTAINTS;
+import com.sap.pi.document.util.model.Item;
 
 public class DocDomUtilImpl implements DocDomUtil {
 
